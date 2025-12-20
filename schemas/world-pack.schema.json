@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interessence.dev/schemas/world-pack.schema.json",
+  "title": "World Pack",
+  "$comment": "Authoring-time content: entities, relations, initial state, and rule toggles.",
+  "type": "object",
+  "required": ["schemaVersion", "metadata", "entities", "relations"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "metadata": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "rngSeed": { "type": ["string", "integer"] },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "kind": { "type": "string" },
+          "label": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "rp": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "P1_identity": { "type": "number", "minimum": 0, "maximum": 1 },
+              "P2_dynamics": { "type": "number", "minimum": 0, "maximum": 1 },
+              "P3_geometry": { "type": "number", "minimum": 0, "maximum": 1 },
+              "P4_constraints": { "type": "number", "minimum": 0, "maximum": 1 },
+              "P5_epistemic": { "type": "number", "minimum": 0, "maximum": 1 },
+              "P6_meta": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          },
+          "state": {
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                { "type": "number" },
+                { "type": "string" },
+                { "type": "boolean" },
+                { "type": "null" }
+              ]
+            }
+          },
+          "position": {
+            "type": "object",
+            "required": ["x", "y"],
+            "additionalProperties": false,
+            "properties": {
+              "x": { "type": "number" },
+              "y": { "type": "number" },
+              "z": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["primitive", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "primitive": {
+            "type": "string",
+            "enum": ["ONTOLOGY", "GEOMETRY", "CONSTRAINT", "EPISTEMIC", "DYNAMICS", "META"]
+          },
+          "source": { "type": "string" },
+          "target": { "type": "string" },
+          "weight": { "type": "number" },
+          "payload": {
+            "oneOf": [
+              { "type": "object" },
+              { "type": "number" },
+              { "type": "string" },
+              { "type": "boolean" },
+              { "type": "null" }
+            ]
+          },
+          "enabled": { "type": "boolean" }
+        }
+      }
+    },
+    "rules": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "array", "items": { "type": "string" } },
+        "gco": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "resolveOrder": { "type": "array", "items": { "type": "string" } },
+            "pruneDuplicates": { "type": "boolean" },
+            "conflictPolicy": { "type": "string", "enum": ["first", "last", "priority"] }
+          }
+        }
+      }
+    },
+    "toggles": {
+      "$comment": "High-level system toggles; detailed parameters live in the other packs.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plantEcology": { "type": "boolean" },
+        "adaptiveReward": { "type": "boolean" },
+        "scentGradient": { "type": "boolean" },
+        "mitosis": { "type": "boolean" },
+        "decay": { "type": "boolean" },
+        "signalField": { "type": "boolean" },
+        "participation": { "type": "boolean" },
+        "learning": { "type": "boolean" },
+        "autonomy": { "type": "boolean" },
+        "rendering": { "type": "boolean" }
+      }
+    },
+    "geometry": {
+      "$comment": "Spatial scales and radii.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resourceRadius": { "type": "number" },
+        "trailCell": { "type": "number" },
+        "fertilityCell": { "type": "number" },
+        "patchRadius": { "type": "number" },
+        "harvestRadius": { "type": "number" },
+        "pressureRadius": { "type": "number" },
+        "opportunityRadius": { "type": "number" },
+        "scentMaxRange": { "type": "number" },
+        "participationRadiusResource": { "type": "number" },
+        "participationRadiusDistress": { "type": "number" },
+        "participationRadiusBond": { "type": "number" },
+        "linkRadius": { "type": "number" },
+        "wallAvoidMargin": { "type": "number" },
+        "sampleDistance": { "type": "number" },
+        "orbitBand": { "type": "number" }
+      }
+    },
+    "constraints": {
+      "$comment": "Caps, cooldowns, and safety bounds.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "maxAgents": { "type": "integer" },
+        "maxAliveAgents": { "type": "integer" },
+        "respectCarryingCapacity": { "type": "boolean" },
+        "carryingCapacityMultiplier": { "type": "number" },
+        "resourceStableMin": { "type": "number" },
+        "resourceStableMax": { "type": "number" },
+        "resourceScaleMinimum": { "type": "number" },
+        "resourceScaleMaximum": { "type": "number" },
+        "resourceRespawnCooldown": { "type": "number" },
+        "trailCooldownTicks": { "type": "integer" },
+        "ownTrailGraceAge": { "type": "integer" },
+        "adaptiveRewardMin": { "type": "number" },
+        "adaptiveRewardMax": { "type": "number" },
+        "activationThreshold": { "type": "number" },
+        "memoryLength": { "type": "integer" },
+        "minStrength": { "type": "number" },
+        "minRange": { "type": "number" },
+        "minVitality": { "type": "number" },
+        "depletionThreshold": { "type": "number" }
+      }
+    },
+    "ecology": {
+      "$comment": "Initial conditions and resource/plant dynamics.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resourceDynamicCount": { "type": "boolean" },
+        "resourceInitialMin": { "type": "number" },
+        "resourceInitialMax": { "type": "number" },
+        "resourceStableMin": { "type": "number" },
+        "resourceStableMax": { "type": "number" },
+        "resourceDepletionRate": { "type": "number" },
+        "resourceRecoveryChance": { "type": "number" },
+        "resourceCount": { "type": "number" },
+        "resourceScaleWithAgents": { "type": "boolean" },
+        "resourceBaseAbundance": { "type": "number" },
+        "resourceCompetition": { "type": "number" },
+        "resourceScaleMinimum": { "type": "number" },
+        "resourceScaleMaximum": { "type": "number" },
+        "plantEcology": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "initialFertility": { "type": "number" },
+            "fertilityVariation": { "type": "number" },
+            "seedChance": { "type": "number" },
+            "seedDistance": { "type": "number" },
+            "growthFertilityThreshold": { "type": "number" },
+            "growthChance": { "type": "number" },
+            "patchCount": { "type": "number" },
+            "patchRadius": { "type": "number" },
+            "patchFertility": { "type": "number" },
+            "harvestDepletion": { "type": "number" },
+            "harvestRadius": { "type": "number" },
+            "fertilityRecovery": { "type": "number" },
+            "maxFertility": { "type": "number" },
+            "populationPressure": { "type": "boolean" },
+            "pressurePerAgent": { "type": "number" },
+            "pressureThreshold": { "type": "number" },
+            "spawnPressure": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "startAgents": { "type": "number" },
+                "maxAgents": { "type": "number" },
+                "minSeedMultiplier": { "type": "number" },
+                "minGrowthMultiplier": { "type": "number" },
+                "minResourceMultiplier": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "reproduction": {
+      "$comment": "Population structure and hard limits.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "maxAgents": { "type": "integer" },
+        "maxAliveAgents": { "type": "integer" },
+        "respectCarryingCapacity": { "type": "boolean" },
+        "carryingCapacityMultiplier": { "type": "number" }
+      }
+    }
+  }
+}

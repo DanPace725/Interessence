@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interessence Authoring</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>Interessence Authoring</h1>
+        <div class="actions">
+          <button id="load-sample">Load Sample</button>
+          <button id="load-packs">Load Packs</button>
+          <button id="save-packs">Export</button>
+          <button id="validate">Validate</button>
+          <button id="sim-start">Start</button>
+          <button id="sim-stop">Stop</button>
+          <button id="sim-step">Step</button>
+        </div>
+      </header>
+      <main>
+        <section id="packs-panel">
+          <div class="pack-group">
+            <h2>World Pack</h2>
+            <textarea id="world-pack" spellcheck="false"></textarea>
+          </div>
+          <div class="pack-group">
+            <h2>Heuristics Pack</h2>
+            <textarea id="heuristics-pack" spellcheck="false"></textarea>
+          </div>
+          <div class="pack-group">
+            <h2>Signal Pack</h2>
+            <textarea id="signal-pack" spellcheck="false"></textarea>
+          </div>
+        </section>
+        <section id="forms-panel">
+          <div class="form-group">
+            <h2>World Form</h2>
+            <div id="world-form"></div>
+          </div>
+          <div class="form-group">
+            <h2>Heuristics Form</h2>
+            <div id="heuristics-form"></div>
+          </div>
+          <div class="form-group">
+            <h2>Signal Form</h2>
+            <div id="signal-form"></div>
+          </div>
+        </section>
+        <section id="visuals">
+          <canvas id="graph-view"></canvas>
+          <canvas id="signal-view"></canvas>
+        </section>
+        <section id="log"></section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+  </html>

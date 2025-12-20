@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neo Noise Explorer</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --panel-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #f59e0b; /* Amber for 'Magma' feel */
+            --accent-glow: rgba(245, 158, 11, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(to right, #f59e0b, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+        }
+
+        .main-layout {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .controls {
+            flex: 1;
+            min-width: 300px;
+            background: var(--panel-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .display-area {
+            flex: 2;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        canvas {
+            background: #000;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            image-rendering: pixelated; /* Raw look */
+            width: 512px;
+            height: 512px;
+            max-width: 100%;
+        }
+
+        input[type="text"] {
+            background: rgba(0,0,0,0.3);
+            border: 2px solid #334155;
+            color: white;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+            outline: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .spectrum-bar {
+            height: 20px;
+            width: 100%;
+            border-radius: 10px;
+            background: linear-gradient(to right, 
+                #000003 0%,   /* Void */
+                #420a68 25%,  /* Flux */
+                #dd2603 50%,  /* Flow */
+                #fcba03 75%,  /* Form */
+                #fcffa4 100%  /* Singularity */
+            );
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        button {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        
+        button:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Neo Noise Explorer</h1>
+        <div class="subtitle">Semantic Interference Pattern Visualizer</div>
+    </header>
+
+    <div class="main-layout">
+        <div class="controls">
+            <div>
+                <label style="color:var(--text-secondary); font-size: 0.9rem;">INSCRIPTION</label>
+                <input type="text" id="inscriptionInput" value="FIRE" placeholder="Enter word...">
+            </div>
+
+            <div>
+                <label style="color:var(--text-secondary); font-size: 0.9rem;">RESOLUTION</label>
+                <div style="display:flex; gap:10px; margin-top:5px;">
+                    <button onclick="changeRes(64)">64</button>
+                    <button onclick="changeRes(128)">128</button>
+                    <button onclick="changeRes(256)">256</button>
+                </div>
+            </div>
+
+            <div class="stats-grid" id="semanticAxes">
+                <!-- Populated by JS -->
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="stat-label">Intensity Spectrum</div>
+                <div class="spectrum-bar"></div>
+                <div class="legend">
+                    <span>VOID</span>
+                    <span>FLUX</span>
+                    <span>FLOW</span>
+                    <span>FORM</span>
+                    <span>SINGULARITY</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="display-area">
+            <canvas id="noiseCanvas" width="256" height="256"></canvas>
+            <div class="subtitle" id="seedDisplay">Seed: 0</div>
+        </div>
+    </div>
+
+<script>
+    // --- CORE LOGIC PORT ---
+    // Replicating neo_noise_core.py
+
+    const TYPE_INTERACTIONS = {
+        'left_right': -1.5, 'right_left': -1.5,
+        'left_left': 2.0, 'right_right': 2.0,
+        'cross_cross': 3.0,
+        'cross_diagonal': 4.0, 'diagonal_cross': 4.0,
+        'cross_backslash': 5.0, 'backslash_cross': 5.0,
+        'diagonal_diagonal': 1.5,
+        'diagonal_backslash': 3.5, 'backslash_diagonal': 3.5,
+        'backslash_backslash': 6.0
+    };
+
+    // Simple Jenkins-like hash for strings
+    function stringHash(str) {
+        let hash = 0;
+        if (str.length === 0) return hash;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        return hash;
+    }
+
+    function getGlyphProps(seed, x, y) {
+        // h = (x * 374761393 ^ y * 668265263 ^ inscription_seed)
+        // Use Math.imul for 32-bit multiplication emulation
+        const h1 = Math.imul(x, 374761393);
+        const h2 = Math.imul(y, 668265263);
+        const h = (h1 ^ h2 ^ seed);
+        
+        // Ensure positive modulo
+        const absH = Math.abs(h);
+        
+        const types = ['left', 'right', 'cross', 'diagonal', 'backslash'];
+        const g_type = types[absH % 5];
+        const g_mag = ((absH >> 8) % 5) + 1;
+        
+        return { type: g_type, mag: g_mag };
+    }
+
+    function calculateIntensity(seed, x, y) {
+        const neighbors = [];
+        // 3x3 Neighborhood
+        for(let dy=-1; dy<=1; dy++){
+            for(let dx=-1; dx<=1; dx++){
+                neighbors.push(getGlyphProps(seed, x+dx, y+dy));
+            }
+        }
+
+        let score = 0;
+        let count = 0;
+
+        for(let i=0; i<neighbors.length; i++){
+            for(let j=i+1; j<neighbors.length; j++){
+                const n1 = neighbors[i];
+                const n2 = neighbors[j];
+
+                // Interaction Key
+                let key = n1.type + '_' + n2.type;
+                let val = TYPE_INTERACTIONS[key];
+                if(val === undefined) {
+                    // Try reverse
+                    key = n2.type + '_' + n1.type;
+                    val = TYPE_INTERACTIONS[key] || 0.5; // Default neutral
+                }
+                
+                const delta = Math.abs(n1.mag - n2.mag);
+                score += val + (delta * 0.25);
+                count++;
+            }
+        }
+        return score / count;
+    }
+
+    // Inferno-like Colormap
+    function getColor(t) {
+        // t is 0.0 to 1.0
+        // Simple interpolation: Black -> Purple -> Red -> Yellow -> White
+        // Stops: 0.0, 0.25, 0.5, 0.75, 1.0
+        
+        const stops = [
+            {t:0.0, r:0, g:0, b:3},      // Black/Deep Blue
+            {t:0.25, r:66, g:10, b:104}, // Purple
+            {t:0.5, r:221, g:38, b:3},   // Red/Orange
+            {t:0.75, r:252, g:186, b:3}, // Yellow
+            {t:1.0, r:252, g:255, b:164} // White/Pale
+        ];
+
+        // Find primitive generic lerp
+        for(let i=0; i<stops.length-1; i++){
+            if(t >= stops[i].t && t <= stops[i+1].t){
+                const t1 = stops[i].t;
+                const t2 = stops[i+1].t;
+                const f = (t - t1) / (t2 - t1); // local 0-1
+                const c1 = stops[i];
+                const c2 = stops[i+1];
+                return [
+                    Math.floor(c1.r + f*(c2.r - c1.r)),
+                    Math.floor(c1.g + f*(c2.g - c1.g)),
+                    Math.floor(c1.b + f*(c2.b - c1.b))
+                ];
+            }
+        }
+        return [255,255,255];
+    }
+
+    // --- APP LOGIC ---
+
+    const canvas = document.getElementById('noiseCanvas');
+    const ctx = canvas.getContext('2d');
+    const input = document.getElementById('inscriptionInput');
+    const seedDisplay = document.getElementById('seedDisplay');
+    const axesContainer = document.getElementById('semanticAxes');
+    
+    let currentRes = 128; // Default resolution
+
+    async function generate() {
+        const text = input.value.toUpperCase();
+        const seed = stringHash(text);
+        seedDisplay.innerText = `Seed: ${seed}`;
+
+        canvas.width = currentRes;
+        canvas.height = currentRes;
+
+        const imgData = ctx.createImageData(currentRes, currentRes);
+        const data = imgData.data;
+
+        // Theoretical bounds for normalization (from core)
+        const MIN_BOUND = -1.5;
+        const MAX_BOUND = 7.5;
+        const RANGE = MAX_BOUND - MIN_BOUND;
+
+        const field = new Float32Array(currentRes * currentRes);
+        let sum = 0;
+        let sumSq = 0;
+        let min = Infinity;
+        let max = -Infinity;
+
+        // Generate Frame
+        // Note: For huge layouts this blocks UI. For 256x256 it's fine (~65k pixels).
+        let idx = 0;
+        for(let y=0; y<currentRes; y++){
+            for(let x=0; x<currentRes; x++){
+                const raw = calculateIntensity(seed, x, y);
+                // Normalize
+                let norm = (raw - MIN_BOUND) / RANGE;
+                if(norm < 0) norm = 0;
+                if(norm > 1) norm = 1;
+
+                field[idx] = norm;
+                
+                // Stats
+                sum += norm;
+                sumSq += norm * norm;
+                if(norm < min) min = norm;
+                if(norm > max) max = norm;
+
+                // Color
+                const rgb = getColor(norm);
+                const pIdx = idx * 4;
+                data[pIdx] = rgb[0];
+                data[pIdx+1] = rgb[1];
+                data[pIdx+2] = rgb[2];
+                data[pIdx+3] = 255; // Alpha
+
+                idx++;
+            }
+        }
+        
+        ctx.putImageData(imgData, 0, 0);
+
+        // Calc Axes
+        const N = currentRes * currentRes;
+        const mean = sum / N;
+        const variance = (sumSq / N) - (mean * mean);
+        const std = Math.sqrt(variance);
+
+        // Simple Axes
+        const axes = {
+            'DENSITY': mean,
+            'STABILITY': 1.0 - std, // Approx
+            'FLOW': 'TBD', // Gradient calc is expensive in simple loop, skipping for speed or could add later
+            'CONTINUITY': 'TBD'
+        };
+
+        renderAxes(axes);
+    }
+
+    function renderAxes(axes) {
+        axesContainer.innerHTML = '';
+        
+        const makeCard = (label, val) => {
+            let color = 'var(--text-primary)';
+            if(typeof val === 'number') val = val.toFixed(3);
+            
+            return `
+            <div class="stat-card">
+                <div class="stat-label">${label}</div>
+                <div class="stat-value" style="color:${color}">${val}</div>
+            </div>`;
+        };
+
+        axesContainer.innerHTML += makeCard("Density (Mean)", axes.DENSITY);
+        axesContainer.innerHTML += makeCard("Stability (InVar)", axes.STABILITY);
+        axesContainer.innerHTML += makeCard("Min Value", 0.0); // Fixed bounds
+        axesContainer.innerHTML += makeCard("Max Value", 1.0); // Fixed bounds
+    }
+
+    function changeRes(res) {
+        currentRes = res;
+        generate();
+    }
+
+    // Init
+    input.addEventListener('input', generate); // Realtime typing!
+    input.addEventListener('keyup', (e) => { if(e.key==='Enter') generate(); });
+    
+    // Initial run
+    generate();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "0.1.0",
+  "metadata": {
+    "name": "Forest Slice Signal",
+    "description": "Sample signal configuration and routing for the forest slice.",
+    "version": "0.1"
+  },
+  "field": {
+    "cellSize": 10,
+    "decayPerSec": 0.06,
+    "diffusePerSec": 0.12,
+    "channels": 3,
+    "memoryLength": 12,
+    "activationThreshold": 0.08,
+    "channelSettings": {
+      "resource": { "sensitivity": 1.0, "decay": 0.08, "weight": 1.0 },
+      "distress": { "sensitivity": 1.0, "decay": 0.1, "weight": 1.0 },
+      "bond": { "sensitivity": 1.0, "decay": 0.06, "weight": 1.0 }
+    }
+  },
+  "compute": [
+    { "id": "grad_resource", "lens": "graph", "kind": "gradient", "parameters": { "channel": "resource" } },
+    { "id": "snr_resource", "lens": "information", "kind": "snr", "parameters": { "channel": "resource" } },
+    { "id": "coherence_local", "lens": "localization", "kind": "coherence", "parameters": { "window": 3 } }
+  ],
+  "feeds": {
+    "ruleBiases": [
+      { "rule": "seek_resource", "metric": "grad_resource", "weight": 1.0 },
+      { "rule": "avoid_distress", "metric": "snr_resource", "weight": -0.5 }
+    ],
+    "gcoThresholds": [
+      { "target": "resource_closure", "metric": "coherence_local", "threshold": 0.2 }
+    ],
+    "agentObservation": [
+      { "scope": "agent", "metric": "grad_resource", "key": "sig_grad_res" },
+      { "scope": "agent", "metric": "snr_resource", "key": "sig_snr_res" }
+    ],
+    "overlays": [
+      { "metric": "grad_resource", "channel": "resource" },
+      { "metric": "coherence_local", "channel": "distress" }
+    ],
+    "steering": [
+      { "metric": "grad_resource", "weight": 0.6 },
+      { "metric": "coherence_local", "weight": -0.3 }
+    ]
+  },
+  "participation": {
+    "enabled": true,
+    "maxForceFraction": 0.35,
+    "modes": {
+      "resource": { "strength": 8.0, "decay": 1.0, "radius": 80 },
+      "distress": { "strength": 12.0, "decay": 1.2, "radius": 100 },
+      "bond": { "strength": 6.0, "decay": 0.9, "radius": 70 }
+    }
+  }
+}

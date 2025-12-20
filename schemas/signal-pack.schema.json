@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interessence.dev/schemas/signal-pack.schema.json",
+  "title": "Signal Pack",
+  "$comment": "Declares the signal field configuration, what to compute, and how to route it into biases/overlays.",
+  "type": "object",
+  "required": ["schemaVersion", "metadata", "field", "compute"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "metadata": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "field": {
+      "$comment": "Signal engine configuration (channels, decay/diffuse, activation).",
+      "type": "object",
+      "required": ["cellSize", "channels", "decayPerSec", "diffusePerSec"],
+      "additionalProperties": false,
+      "properties": {
+        "cellSize": { "type": "number" },
+        "decayPerSec": { "type": "number" },
+        "diffusePerSec": { "type": "number" },
+        "channels": { "type": "integer", "minimum": 1 },
+        "memoryLength": { "type": "integer", "minimum": 1 },
+        "activationThreshold": { "type": "number" },
+        "channelSettings": {
+          "$comment": "Optional per-channel overrides keyed by channel name/id.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "sensitivity": { "type": "number" },
+              "decay": { "type": "number" },
+              "weight": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "compute": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "lens", "kind"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "lens": { "type": "string", "enum": ["graph", "dynamical", "information", "localization"] },
+          "kind": { "type": "string", "enum": ["gradient", "snr", "coherence", "resonance", "eigenmode"] },
+          "enabled": { "type": "boolean", "default": true },
+          "parameters": { "type": "object", "additionalProperties": { "type": ["number", "string", "boolean"] } }
+        }
+      }
+    },
+    "feeds": {
+      "$comment": "How computed metrics influence the runtime.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ruleBiases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["rule", "metric", "weight"],
+            "additionalProperties": false,
+            "properties": {
+              "rule": { "type": "string" },
+              "metric": { "type": "string" },
+              "weight": { "type": "number" }
+            }
+          }
+        },
+        "gcoThresholds": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["target", "metric", "threshold"],
+            "additionalProperties": false,
+            "properties": {
+              "target": { "type": "string" },
+              "metric": { "type": "string" },
+              "threshold": { "type": "number" }
+            }
+          }
+        },
+        "agentObservation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["scope", "metric", "key"],
+            "additionalProperties": false,
+            "properties": {
+              "scope": { "type": "string", "enum": ["agent", "faction", "global"] },
+              "metric": { "type": "string" },
+              "key": { "type": "string" }
+            }
+          }
+        },
+        "overlays": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["metric", "channel"],
+            "additionalProperties": false,
+            "properties": {
+              "metric": { "type": "string" },
+              "channel": { "type": "string" }
+            }
+          }
+        },
+        "steering": {
+          "$comment": "Couplings into agent steering/decision weights.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["metric", "weight"],
+            "additionalProperties": false,
+            "properties": {
+              "metric": { "type": "string" },
+              "weight": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "participation": {
+      "$comment": "Optional participation modes treated as signal emission channels.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "maxForceFraction": { "type": "number" },
+        "modes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "strength": { "type": "number" },
+              "decay": { "type": "number" },
+              "radius": { "type": "number" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

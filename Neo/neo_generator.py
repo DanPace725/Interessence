@@ -1,0 +1,892 @@
+#!/usr/bin/env python3
+"""
+NEO (NeOgham) Glyph Generator
+Generates all 25 glyphs as SVG files and provides transliteration utilities
+"""
+
+import os
+
+# NEO Alphabet Mapping (Latin → NEO position/count)
+NEO_ALPHABET = {
+    # Right marks (B group) - Marks on right (V) or down (H)
+    'B': ('right', 1, 'beith'),
+    'L': ('right', 2, 'luis'),
+    'F': ('right', 3, 'fearn'),
+    'S': ('right', 4, 'sail'),
+    'P': ('right', 5, 'peith'),  # Replaces Nion
+    
+    # Left marks (H group) - Marks on left (V) or up (H)
+    'H': ('left', 1, 'huath'),
+    'D': ('left', 2, 'duir'),
+    'T': ('left', 3, 'tinne'),
+    'C': ('left', 4, 'coll'),
+    'W': ('left', 5, 'ceirt'),  # Functions as W/Q
+    
+    # Cross marks (M group - moved from diagonal)
+    'M': ('cross', 1, 'muin'),
+    'G': ('cross', 2, 'gort'),
+    'N': ('cross', 3, 'ngeadal'),
+    'Z': ('cross', 4, 'straif'),
+    'R': ('cross', 5, 'ruis'),
+    
+    # Diagonal marks (vowels)
+    'A': ('diagonal', 1, 'ailm'),
+    'O': ('diagonal', 2, 'onn'),
+    'U': ('diagonal', 3, 'ur'),
+    'E': ('diagonal', 4, 'eadhadh'),
+    'I': ('diagonal', 5, 'idad'),
+    
+    # Backslash marks (new vowel dipthongs)
+    'AE': ('backslash', 1, 'ae'),
+    'OI': ('backslash', 2, 'oi'),
+    'UI': ('backslash', 3, 'ui'),
+    'EA': ('backslash', 4, 'ea'),
+    'IO': ('backslash', 5, 'io'),
+}
+
+# Signal Definitions (from Glyph_Signal_Compendium.md)
+NEO_SIGNALS = {
+    'beith': {'fingerprint': 'Atomic Initiation', 'dynamic': 'Small, sharp seed perturbation.', 'closure': 'Requires support to hold.'},
+    'luis': {'fingerprint': 'Weak Coupling', 'dynamic': 'Gentle directional wave.', 'closure': 'Links easily but breaks easily.'},
+    'fearn': {'fingerprint': 'Median Assertion', 'dynamic': 'Stable, consistent pressure.', 'closure': 'Standard closure strength.'},
+    'sail': {'fingerprint': 'Strong Enforcement', 'dynamic': 'Deep, distinct channel.', 'closure': 'Resists deviation; guides flow.'},
+    'peith': {'fingerprint': 'Maximal Drive', 'dynamic': 'Heavy, overriding forcing function.', 'closure': 'Forces closure; dominates local field.'},
+    
+    'huath': {'fingerprint': 'Atomic Reaction', 'dynamic': 'Small inverse perturbation.', 'closure': 'Anti-seed; opens space for response.'},
+    'duir': {'fingerprint': 'Weak Resistance', 'dynamic': 'Gentle counter-wave.', 'closure': 'Filters low-intensity signals.'},
+    'tinne': {'fingerprint': 'Median Balance', 'dynamic': 'Stable counter-pressure.', 'closure': 'Balances B-Group inputs.'},
+    'coll': {'fingerprint': 'Strong Barrier', 'dynamic': 'Deep absorbing channel.', 'closure': 'Blocks or redirects specific flows.'},
+    'ceirt': {'fingerprint': 'Maximal Opposition', 'dynamic': 'Heavy, dampening field.', 'closure': 'Negates/grounds local energy.'},
+    
+    'muin': {'fingerprint': 'Atomic Bind', 'dynamic': 'A "staple" or single stitch.', 'closure': 'Connects two weak signals.'},
+    'gort': {'fingerprint': 'Loose Knot', 'dynamic': 'Flexible joint.', 'closure': 'Allows play/movement between sides.'},
+    'ngeadal': {'fingerprint': 'Median Lock', 'dynamic': 'Standard structural rivet.', 'closure': 'Creates rigid dependency.'},
+    'straif': {'fingerprint': 'Strong Anchor', 'dynamic': 'Heavy, immobile weight.', 'closure': 'Prevents separation of faces.'},
+    'ruis': {'fingerprint': 'Maximal Fusion', 'dynamic': 'Total collapse of boundary.', 'closure': 'Merges Left/Right into singular point.'},
+    
+    'ailm': {'fingerprint': 'Atomic Flow', 'dynamic': 'A leak or trickle.', 'closure': 'Allows slow state bleed.'},
+    'onn': {'fingerprint': 'Weak Current', 'dynamic': 'Directional drift.', 'closure': 'Biases wandering trajectories.'},
+    'ur': {'fingerprint': 'Median Stream', 'dynamic': 'Steady pipeline.', 'closure': 'Reliable transport layer.'},
+    'eadhadh': {'fingerprint': 'Strong Torrent', 'dynamic': 'High-velocity channel.', 'closure': 'Scours unstable states; forces movement.'},
+    'idad': {'fingerprint': 'Maximal Jet', 'dynamic': 'Ballistic trajectory.', 'closure': 'Shoots signal past local stops.'},
+    
+    'ae': {'fingerprint': 'Atomic Twist', 'dynamic': 'A spin or wobble.', 'closure': 'Destabilizes generic closures.'},
+    'oi': {'fingerprint': 'Weak Vortex', 'dynamic': 'Local turbulence.', 'closure': 'Mixes adjacent signals.'},
+    'ui': {'fingerprint': 'Median Shift', 'dynamic': 'Phase shift or refraction.', 'closure': 'Alters signal properties.'},
+    'ea': {'fingerprint': 'Strong Warp', 'dynamic': 'Manifold distortion.', 'closure': 'Bends geometry around the point.'},
+    'io': {'fingerprint': 'Maximal Chaos', 'dynamic': 'Singularity/Inversion.', 'closure': 'Inverts field polarity locally.'},
+}
+
+# Interaction Logic (from Pairwise_Interference_Logic.md)
+AICME_INTERACTIONS = {
+    'right': {'right': 'Reinforce', 'left': 'Opposition', 'cross': 'Anchor', 'diagonal': 'Propel', 'backslash': 'Distort'},
+    'left': {'right': 'Opposition', 'left': 'Reinforce', 'cross': 'Anchor', 'diagonal': 'Dampen', 'backslash': 'Invert'},
+    'cross': {'right': 'Anchor', 'left': 'Anchor', 'cross': 'Crystalize', 'diagonal': 'Gate', 'backslash': 'Fracture'},
+    'diagonal': {'right': 'Propel', 'left': 'Dampen', 'cross': 'Gate', 'diagonal': 'Stream', 'backslash': 'Turbulence'},
+    'backslash': {'right': 'Distort', 'left': 'Invert', 'cross': 'Fracture', 'diagonal': 'Turbulence', 'backslash': 'Phase Shift'},
+}
+
+
+def generate_glyph_svg(position, count, width=60, height=120, show_stem=True, orientation='vertical'):
+    """
+    Generate a single NEO glyph as SVG string.
+    
+    Args:
+        position: 'left', 'right', 'cross', 'diagonal', or 'backslash'
+        count: 1-5 (number of marks)
+        width: SVG canvas width (for vertical)
+        height: SVG canvas height (for vertical)
+        show_stem: whether to show the central stem line
+        orientation: 'vertical' or 'horizontal'
+    
+    Returns:
+        SVG string
+    """
+    if orientation == 'horizontal':
+        # Swap width and height for horizontal
+        width, height = height, width
+        
+    stem_center = 30 # Half of the narrow dimension
+    mark_length = 15
+    spacing = 18
+    start_pos = 20
+    stroke_width = 2.5
+    
+    svg_parts = [
+        f'<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}">'
+    ]
+    
+    # Draw stem
+    if show_stem:
+        if orientation == 'vertical':
+            svg_parts.append(
+                f'<line x1="{stem_center}" y1="0" x2="{stem_center}" y2="{height}" '
+                f'stroke="#333" stroke-width="{stroke_width}" stroke-linecap="butt"/>'
+            )
+        else:
+            svg_parts.append(
+                f'<line x1="0" y1="{stem_center}" x2="{width}" y2="{stem_center}" '
+                f'stroke="#333" stroke-width="{stroke_width}" stroke-linecap="butt"/>'
+            )
+    
+    # Draw marks based on position
+    for i in range(count):
+        curr_step = start_pos + (i * spacing)
+        
+        if orientation == 'vertical':
+            # Vertical coordinates (Stem is X=30)
+            y = curr_step
+            if position == 'left':
+                x1, y1, x2, y2 = stem_center, y, stem_center - mark_length, y
+            elif position == 'right':
+                x1, y1, x2, y2 = stem_center, y, stem_center + mark_length, y
+            elif position == 'cross':
+                x1, y1, x2, y2 = stem_center - mark_length, y, stem_center + mark_length, y
+            elif position == 'diagonal': # \
+                x1, y1, x2, y2 = stem_center - mark_length, y - (mark_length * 0.6), stem_center + mark_length, y + (mark_length * 0.6)
+            elif position == 'backslash': # /
+                x1, y1, x2, y2 = stem_center - mark_length, y + (mark_length * 0.6), stem_center + mark_length, y - (mark_length * 0.6)
+        else:
+            # Horizontal coordinates (Stem is Y=30)
+            x = curr_step
+            if position == 'left': # Vertical 'Left' becomes Horizontal 'Top'
+                x1, y1, x2, y2 = x, stem_center, x, stem_center - mark_length
+            elif position == 'right': # Vertical 'Right' becomes Horizontal 'Bottom'
+                x1, y1, x2, y2 = x, stem_center, x, stem_center + mark_length
+            elif position == 'cross':
+                x1, y1, x2, y2 = x, stem_center - mark_length, x, stem_center + mark_length
+            elif position == 'diagonal': # \
+                x1, y1, x2, y2 = x - (mark_length * 0.6), stem_center - mark_length, x + (mark_length * 0.6), stem_center + mark_length
+            elif position == 'backslash': # /
+                x1, y1, x2, y2 = x - (mark_length * 0.6), stem_center + mark_length, x + (mark_length * 0.6), stem_center - mark_length
+
+        svg_parts.append(
+            f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
+            f'stroke="black" stroke-width="{stroke_width}" stroke-linecap="round"/>'
+        )
+    
+    svg_parts.append('</svg>')
+    return '\n'.join(svg_parts)
+
+def save_all_glyphs(output_dir='neo_glyphs'):
+    """
+    Generate and save all 25 NEO glyphs as individual SVG files in both orientations.
+    """
+    os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(os.path.join(output_dir, 'vertical'), exist_ok=True)
+    os.makedirs(os.path.join(output_dir, 'horizontal'), exist_ok=True)
+    
+    print(f"Generating NEO glyphs in {output_dir}/")
+    
+    for letter, (position, count, name) in NEO_ALPHABET.items():
+        # Vertical
+        svg_v = generate_glyph_svg(position, count, orientation='vertical')
+        filename_v = f"{name}_{letter}_{position}_{count}.svg"
+        with open(os.path.join(output_dir, 'vertical', filename_v), 'w') as f:
+            f.write(svg_v)
+            
+        # Horizontal
+        svg_h = generate_glyph_svg(position, count, orientation='horizontal')
+        filename_h = f"{name}_{letter}_{position}_{count}.svg"
+        with open(os.path.join(output_dir, 'horizontal', filename_h), 'w') as f:
+            f.write(svg_h)
+        
+        print(f"  Created: {filename_v} (V/H)")
+    
+    print(f"\nGenerated {len(NEO_ALPHABET) * 2} glyphs successfully!")
+
+def latin_to_neo(text):
+    """
+    Convert Latin text to NEO glyph sequence.
+    
+    Args:
+        text: Latin text string
+    
+    Returns:
+        List of (position, count, name, letter) tuples
+    """
+    text = text.upper()
+    glyphs = []
+    
+    i = 0
+    while i < len(text):
+        # Skip spaces and punctuation
+        if text[i] in ' .,!?;:-':
+            i += 1
+            continue
+        
+        # Check for two-letter glyphs first (NG, AE, OI, UI, EA, IO)
+        if i < len(text) - 1:
+            two_char = text[i:i+2]
+            if two_char in NEO_ALPHABET:
+                position, count, name = NEO_ALPHABET[two_char]
+                glyphs.append((position, count, name, two_char))
+                i += 2
+                continue
+        
+        # Single character
+        char = text[i]
+        if char in NEO_ALPHABET:
+            position, count, name = NEO_ALPHABET[char]
+            glyphs.append((position, count, name, char))
+        else:
+            print(f"Warning: No NEO mapping for '{char}'")
+        
+        i += 1
+    
+    return glyphs
+
+def render_word_svg(word, glyph_size=120, glyph_spacing=0, orientation='vertical'):
+    """
+    Render a complete word as a single SVG.
+    Vertical reads bottom-to-top. Horizontal reads left-to-right.
+    """
+    glyphs = latin_to_neo(word)
+    
+    if not glyphs:
+        return '<svg xmlns="http://www.w3.org/2000/svg"><text x="10" y="20">No valid NEO glyphs</text></svg>'
+    
+    narrow_dim = 60
+    total_long_dim = len(glyphs) * (glyph_size + glyph_spacing)
+    
+    if orientation == 'vertical':
+        width, height = narrow_dim, total_long_dim
+        # Vertical: bottom to top, so reverse glyphs
+        display_glyphs = list(reversed(glyphs))
+    else:
+        width, height = total_long_dim, narrow_dim
+        # Horizontal: left to right
+        display_glyphs = glyphs
+        
+    svg_parts = [
+        f'<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">',
+        f'<rect width="{width}" height="{height}" fill="white"/>'
+    ]
+    
+    for idx, (position, count, name, letter) in enumerate(display_glyphs):
+        offset = idx * (glyph_size + glyph_spacing)
+        
+        glyph_svg = generate_glyph_svg(position, count, orientation=orientation)
+        
+        # Extract content between <svg> tags
+        start = glyph_svg.find('>') + 1
+        end = glyph_svg.rfind('</svg>')
+        glyph_content = glyph_svg[start:end]
+        
+        if orientation == 'vertical':
+            transform = f'translate(0, {offset})'
+        else:
+            transform = f'translate({offset}, 0)'
+            
+        svg_parts.append(f'<g transform="{transform}">')
+        svg_parts.append(glyph_content)
+        svg_parts.append(f'<!-- {letter}: {name} -->')
+        svg_parts.append('</g>')
+    
+    svg_parts.append('</svg>')
+    return '\n'.join(svg_parts)
+
+def create_test_page(output_file='neo_viewer.html'):
+    """
+    Create a premium interactive HTML viewer for testing NEO transliteration.
+    This viewer contains its own JS implementation of the rendering engine
+    AND FLIGHT-TESTED SIGNAL LOGIC.
+    """
+    import json
+    alphabet_json = json.dumps(NEO_ALPHABET)
+    signals_json = json.dumps(NEO_SIGNALS)
+    interactions_json = json.dumps(AICME_INTERACTIONS)
+    
+    html_content = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEO (NeOgham) Signal Analyzer</title>
+    <style>
+        :root {{
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            --stem-color: #475569;
+            --mark-color: #f8fafc;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }}
+        
+        body {{
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }}
+
+        .container {{
+            max-width: 1100px;
+            width: 100%;
+        }}
+
+        header {{
+            text-align: center;
+            margin-bottom: 40px;
+        }}
+
+        h1 {{
+            font-size: 3rem;
+            margin: 0;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }}
+
+        .subtitle {{
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }}
+
+        .input-section {{
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }}
+
+        input {{
+            width: 100%;
+            background: rgba(0,0,0,0.2);
+            border: 2px solid #334155;
+            padding: 15px 20px;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            border-radius: 12px;
+            outline: none;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }}
+
+        input:focus {{
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }}
+
+        .outputs {{
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }}
+
+        .output-card {{
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 300px;
+            max-height: 600px;
+            overflow: hidden;
+        }}
+
+        .output-card h3 {{
+            margin-top: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #334155;
+            width: 100%;
+            padding-bottom: 10px;
+            text-align: center;
+        }}
+
+        .svg-container {{
+            flex-grow: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            overflow: auto;
+        }}
+        
+        /* STREAM STYLES */
+        .stream-container {{
+            width: 100%;
+            overflow-y: auto;
+            padding-right: 10px;
+        }}
+        
+        .signal-card {{
+            background: rgba(0,0,0,0.2);
+            border-left: 3px solid var(--accent);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+            display: grid;
+            grid-template-columns: 50px 1fr;
+            gap: 15px;
+            align-items: center;
+        }}
+        
+        .signal-icon {{
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--accent);
+            text-align: center;
+        }}
+        
+        .signal-data {{
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }}
+        
+        .signal-name {{
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: bold;
+        }}
+        
+        .signal-fingerprint {{
+            color: var(--text-primary);
+            font-weight: bold;
+        }}
+        
+        .signal-desc {{
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }}
+
+        
+        /* ANALYZER STYLES */
+        .analyzer-section {{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }}
+        
+        .analyzer-card {{
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }}
+        
+        .slot-container {{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }}
+        
+        .glyph-slot {{
+            width: 80px;
+            height: 140px;
+            border: 2px dashed #475569;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }}
+
+        .glyph-slot:hover, .glyph-slot.active {{
+            border-color: var(--accent);
+            background: rgba(56, 189, 248, 0.1);
+        }}
+        
+        .glyph-slot.selected {{
+            border-style: solid;
+            background: rgba(56, 189, 248, 0.05);
+        }}
+        
+        .analysis-result {{
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }}
+        
+        .result-row {{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+        }}
+        
+        .result-label {{ color: var(--text-secondary); }}
+        .result-value {{ color: var(--accent); font-weight: bold; text-align: right; }}
+        
+        .interaction-box {{
+            text-align: center;
+            padding: 15px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            color: #34d399;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 15px;
+        }}
+        
+        .interaction-box.dominance {{
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #f87171;
+        }}
+        
+        .glyph-grid {{
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 12px;
+        }}
+        
+        .glyph-btn {{
+            background: var(--card-bg);
+            border: 1px solid #334155;
+            color: var(--text-primary);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }}
+        
+        .glyph-btn:hover {{
+            border-color: var(--accent);
+            background: rgba(56, 189, 248, 0.1);
+        }}
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Neo Signal Analyzer</h1>
+            <p class="subtitle">Structural Bias & Interference Calculator</p>
+        </header>
+
+        <section class="input-section">
+            <input type="text" id="input" placeholder="TYPE TO GENERATE..." value="INTERESSENCE">
+        </section>
+
+        <section class="outputs">
+            <div class="output-card">
+                <h3>Inscription</h3>
+                <div id="v-output" class="svg-container"></div>
+            </div>
+            <div class="output-card">
+                <h3>Signal Stream</h3>
+                <div id="signal-stream" class="stream-container">
+                    <!-- Stream items go here -->
+                </div>
+            </div>
+        </section>
+        
+        <h2 style="text-align: center; margin-bottom: 20px; color: var(--text-secondary);">Pairwise Interference Lab</h2>
+        
+        <section class="analyzer-section">
+            <div class="analyzer-card">
+                <h3>Select Glyphs</h3>
+                <div class="glyph-grid" id="glyph-selector"></div>
+            </div>
+            
+            <div class="analyzer-card">
+                <h3>Interaction Result</h3>
+                <div class="slot-container">
+                    <div class="glyph-slot" id="slot-1" onclick="setActive(1)">
+                        <span style="opacity:0.3">A</span>
+                    </div>
+                    <div style="display:flex; align-items:center; font-size: 2rem; color:var(--text-secondary)">+</div>
+                    <div class="glyph-slot" id="slot-2" onclick="setActive(2)">
+                        <span style="opacity:0.3">B</span>
+                    </div>
+                </div>
+                
+                <div class="analysis-result" id="analysis-output">
+                    <div style="text-align:center; opacity:0.5">Select two glyphs to analyze interaction</div>
+                </div>
+            </div>
+        </section>
+        
+        <div style="height: 100px"></div>
+    </div>
+
+    <script>
+        const ALPHABET = {alphabet_json};
+        const SIGNALS = {signals_json};
+        const MATRIX = {interactions_json};
+        
+        const input = document.getElementById('input');
+        const vOutput = document.getElementById('v-output');
+        const signalStream = document.getElementById('signal-stream');
+        
+        // State
+        let activeSlot = 1;
+        let slot1Glyph = null;
+        let slot2Glyph = null;
+
+        function generateGlyph(position, count, orientation, width=60, height=120) {{
+            const stemCenter = width/2;
+            const markLength = 15;
+            const spacing = 18;
+            const startPos = 20;
+            
+            let paths = '';
+            
+            // Stem
+            if (orientation === 'vertical') {{
+                paths += `<line x1="${{stemCenter}}" y1="0" x2="${{stemCenter}}" y2="${{height}}" stroke="var(--stem-color)" stroke-width="2.5" stroke-linecap="butt"/>`;
+            }} else {{
+                paths += `<line x1="0" y1="${{stemCenter}}" x2="${{width}}" y2="${{stemCenter}}" stroke="var(--stem-color)" stroke-width="2.5" stroke-linecap="butt"/>`;
+            }}
+            
+            // Marks
+            for (let i = 0; i < count; i++) {{
+                const step = startPos + (i * spacing);
+                let x1, y1, x2, y2;
+                
+                if (orientation === 'vertical') {{
+                    const y = step;
+                    switch(position) {{
+                        case 'left': x1=stemCenter; y1=y; x2=stemCenter-markLength; y2=y; break;
+                        case 'right': x1=stemCenter; y1=y; x2=stemCenter+markLength; y2=y; break;
+                        case 'cross': x1=stemCenter-markLength; y1=y; x2=stemCenter+markLength; y2=y; break;
+                        case 'diagonal': x1=stemCenter-markLength; y1=y-(markLength*0.6); x2=stemCenter+markLength; y2=y+(markLength*0.6); break;
+                        case 'backslash': x1=stemCenter-markLength; y1=y+(markLength*0.6); x2=stemCenter+markLength; y2=y-(markLength*0.6); break;
+                    }}
+                }} else {{
+                    const x = step;
+                    switch(position) {{
+                        case 'left': x1=x; y1=stemCenter; x2=x; y2=stemCenter-markLength; break;
+                        case 'right': x1=x; y1=stemCenter; x2=x; y2=stemCenter+markLength; break;
+                        case 'cross': x1=x; y1=stemCenter-markLength; x2=x; y2=stemCenter+markLength; break;
+                        case 'diagonal': x1=x-(markLength*0.6); y1=stemCenter-markLength; x2=x+(markLength*0.6); y2=stemCenter+markLength; break;
+                        case 'backslash': x1=x-(markLength*0.6); y1=stemCenter+markLength; x2=x+(markLength*0.6); y2=stemCenter-markLength; break;
+                    }}
+                }}
+                paths += `<line x1="${{x1}}" y1="${{y1}}" x2="${{x2}}" y2="${{y2}}" stroke="var(--mark-color)" stroke-width="2.5" stroke-linecap="round"/>`;
+            }}
+            
+            return `<svg width="${{width}}" height="${{height}}">${{paths}}</svg>`;
+        }}
+
+        function transliterate(text) {{
+            const chars = text.toUpperCase().replace(/[^A-Z]/g, '');
+            const result = [];
+            let i = 0;
+            while(i < chars.length) {{
+                if (i < chars.length - 1) {{
+                    const two = chars.substr(i, 2);
+                    if (ALPHABET[two]) {{ result.push({{...ALPHABET[two], char: two}}); i += 2; continue; }}
+                }}
+                if (ALPHABET[chars[i]]) {{ result.push({{...ALPHABET[chars[i]], char: chars[i]}}); }}
+                i++;
+            }}
+            return result;
+        }}
+        
+        function updateSignalStream(glyphs) {{
+            signalStream.innerHTML = '';
+            
+            glyphs.forEach(g => {{
+                const name = g[2];
+                const sig = SIGNALS[name.toLowerCase()];
+                if(!sig) return;
+                
+                const card = document.createElement('div');
+                card.className = 'signal-card';
+                card.innerHTML = `
+                    <div class="signal-icon">${{g.char}}</div>
+                    <div class="signal-data">
+                        <div class="signal-name">${{name}}</div>
+                        <div class="signal-fingerprint">${{sig.fingerprint}}</div>
+                        <div class="signal-desc">${{sig.dynamic}}</div>
+                    </div>
+                `;
+                signalStream.appendChild(card);
+            }});
+        }}
+
+        function render() {{
+            const glyphs = transliterate(input.value);
+            const size = 120;
+            const total = glyphs.length * size;
+            
+            // Vertical
+            let vSvg = `<svg width="100%" height="${{total}}" viewBox="0 0 60 ${{total}}" preserveAspectRatio="xMidYMin meet">`;
+            [...glyphs].reverse().forEach((g, i) => {{
+                const y = i * size;
+                vSvg += `<g transform="translate(0, ${{y}})">
+                            ${{generateGlyph(g[0], g[1], 'vertical')}}
+                         </g>`;
+            }});
+            vSvg += `</svg>`;
+            vOutput.innerHTML = vSvg;
+            
+            // Update Stream
+            updateSignalStream(glyphs);
+        }}
+        
+        // --- ANALYZER LOGIC ---
+        
+        function initSelector() {{
+            const grid = document.getElementById('glyph-selector');
+            // Sort by Aicme for cleanliness
+            const sorted = Object.entries(ALPHABET).sort((a,b) => {{
+                // Custom sort order based on Group then Count
+                return 0; 
+            }});
+            
+            for(let [char, data] of Object.entries(ALPHABET)) {{
+                const btn = document.createElement('div');
+                btn.className = 'glyph-btn';
+                btn.innerHTML = `<strong>${{char}}</strong><br><small>${{data[2]}}</small>`;
+                btn.onclick = () => selectGlyph(data, char);
+                grid.appendChild(btn);
+            }}
+        }}
+        
+        function setActive(slot) {{
+            activeSlot = slot;
+            document.querySelectorAll('.glyph-slot').forEach(el => el.classList.remove('active'));
+            document.getElementById(`slot-${{slot}}`).classList.add('active');
+        }}
+        
+        function selectGlyph(data, char) {{
+            const svg = generateGlyph(data[0], data[1], 'vertical');
+            const slotEl = document.getElementById(`slot-${{activeSlot}}`);
+            
+            slotEl.innerHTML = svg;
+            slotEl.classList.add('selected');
+            
+            if(activeSlot === 1) slot1Glyph = {{...data, char}};
+            else slot2Glyph = {{...data, char}};
+            
+            calculateInterference();
+            
+            // Auto switch slot for convenience
+            if(activeSlot === 1) setActive(2);
+        }}
+        
+        function calculateInterference() {{
+            if (!slot1Glyph || !slot2Glyph) return;
+            
+            const g1 = slot1Glyph;
+            const g2 = slot2Glyph;
+            const output = document.getElementById('analysis-output');
+            
+            // 1. Magnitude Logic
+            const m1 = g1[1];
+            const m2 = g2[1];
+            const diff = Math.abs(m1 - m2);
+            let magResult = '';
+            
+            if (diff === 0) magResult = 'Resonance (Amplification)';
+            else if (diff === 1) magResult = 'Modulation (Flavoring)';
+            else magResult = 'Dominance (Overwrite)';
+            
+            // 2. Matrix Logic
+            const p1 = g1[0]; // 'right', 'left', etc
+            const p2 = g2[0];
+            const interaction = MATRIX[p1][p2];
+            
+            // Determine Color Class
+            let boxClass = 'interaction-box';
+            if(magResult.includes('Dominance') || interaction === 'Opposition' || interaction === 'Fracture') {{
+                boxClass += ' dominance';
+            }}
+            
+            const s1 = SIGNALS[g1[2].toLowerCase()];
+            const s2 = SIGNALS[g2[2].toLowerCase()];
+
+            output.innerHTML = `
+                <div class="result-row">
+                    <span class="result-label">Structure Match</span>
+                    <span class="result-value">${{p1.toUpperCase()}} + ${{p2.toUpperCase()}}</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Magnitude Delta</span>
+                    <span class="result-value">${{m1}} vs ${{m2}} (Δ${{diff}})</span>
+                </div>
+                
+                <div class="${{boxClass}}">
+                    ${{interaction.toUpperCase()}}<br>
+                    <span style="font-size:0.9rem; font-weight:normal; opacity:0.8">${{magResult}}</span>
+                </div>
+                
+                <div style="margin-top:20px; font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary)">
+                    <strong>Resultant Field:</strong><br>
+                    ${{interaction}} between <em>"${{s1.fingerprint}}"</em> and <em>"${{s2.fingerprint}}"</em>.
+                </div>
+            `;
+        }}
+
+        initSelector();
+        setActive(1);
+        input.addEventListener('input', render);
+        render(); // Initial render
+    </script>
+</body>
+</html>'''
+    
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    print(f"\nCreated/Updated test viewer: {output_file}")
+
+def main():
+    """
+    Main function - generate all glyphs and create test files.
+    """
+    print("=" * 60)
+    print("NEO (NeOgham) Glyph Generator")
+    print("=" * 60)
+    
+    # Generate all glyphs
+    save_all_glyphs('neo_glyphs')
+    
+    # Generate test word renderings
+    test_word = "INTERESSENCE"
+    print(f"\nGenerating test renderings for: {test_word}")
+    
+    v_svg = render_word_svg(test_word, orientation='vertical')
+    with open('neo_glyphs/test_vertical_INTERESSENCE.svg', 'w') as f:
+        f.write(v_svg)
+        
+    h_svg = render_word_svg(test_word, orientation='horizontal')
+    with open('neo_glyphs/test_horizontal_INTERESSENCE.svg', 'w') as f:
+        f.write(h_svg)
+    
+    # Create HTML test page
+    create_test_page('neo_viewer.html')
+    
+    print("\n" + "=" * 60)
+    print("Done! Check 'neo_glyphs/' for all SVG assets.")
+    print("=" * 60)
+
+if __name__ == "__main__":
+    main()
