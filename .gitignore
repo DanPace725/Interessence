@@ -22,7 +22,6 @@ obj/
 *.dll
 *.lib
 *.pdb
-*.obj
 *.out
 
 # --- Python ---
