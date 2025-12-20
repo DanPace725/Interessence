@@ -50,16 +50,21 @@ class GlobalClosureOperator:
     def __init__(self, context: ClosureContext):
         self.ctx = context
         
-    def run(self) -> ClosureResult:
+    def run(self, enable_hydraulic_erosion: bool = True) -> ClosureResult:
         """
         Execute the full Closure Pipeline in Stages:
+        0. Hydraulic Erosion (Optional - sculpts terrain, generates water accumulation)
         1. Hydrology (Rivers, Lakes)
         2. Hydration Feedback (Water -> Vitality)
         3. Ecology (Forests)
-        4. Commitment (Erosion)
+        4. Commitment (Final erosion)
         """
         print("    Running Sequential Closure Pipeline...")
         all_committed = []
+        
+        # --- Stage 0: Hydraulic Erosion (Pre-Pass) ---
+        if enable_hydraulic_erosion:
+            self.run_hydraulic_erosion()
         
         # --- Stage 1: Hydrology ---
         hydro_candidates = []
@@ -94,6 +99,36 @@ class GlobalClosureOperator:
         overlay = self.generate_overlay(all_committed)
         
         return ClosureResult(all_committed, overlay)
+    
+    def run_hydraulic_erosion(self):
+        """
+        Run particle-based hydraulic erosion on the Structure layer.
+        This sculpts the terrain realistically and generates a water accumulation map.
+        """
+        from neo_hydrology import HydraulicSimulator, HydroParams
+        
+        # Use subtle erosion parameters
+        params = HydroParams(
+            num_droplets=50000,
+            erosion_rate=0.01,      # Subtle erosion
+            deposition_rate=0.02,
+            evaporation_rate=0.01,
+            inertia=0.3
+        )
+        
+        simulator = HydraulicSimulator(
+            self.ctx.layers['Structure'],
+            params,
+            seed=self.ctx.seed
+        )
+        
+        result = simulator.simulate()
+        
+        # Update Structure with eroded heightmap
+        self.ctx.layers['Structure'] = result.heightmap
+        
+        # Store water accumulation for river detection
+        self.ctx.layers['WaterAccumulation'] = result.accumulation
 
     def apply_hydration(self, features: List[FeatureCandidate]):
         """
@@ -207,20 +242,29 @@ class GlobalClosureOperator:
 
     def detect_rivers(self) -> List[FeatureCandidate]:
         """
-        River logic: High Flow + Low Constraint (Smooth).
+        River logic: High Water Accumulation or Flow + Low Constraint.
+        When hydraulic erosion has run, uses WaterAccumulation for watershed-based detection.
         Hierarchical detection:
-        1. Major Rivers: High Flow start, long path.
-        2. Minor Rivers: Medium Flow start, shorter path OK.
+        1. Major Rivers: High accumulation start, long path.
+        2. Minor Rivers: Medium accumulation start, shorter path OK.
         """
-        flow = self.ctx.layers['Flow']
+        # Use WaterAccumulation if available (from hydraulic erosion)
+        # Otherwise fall back to Flow layer
+        if 'WaterAccumulation' in self.ctx.layers:
+            flow = self.ctx.layers['WaterAccumulation']
+            print("    Using WaterAccumulation for river detection (watershed-based)")
+        else:
+            flow = self.ctx.layers['Flow']
+            print("    Using Flow layer for river detection (gradient-based)")
+            
         constraint = self.ctx.layers['Constraint']
         
         candidates = []
         
-        # Configuration for Tiers
+        # Configuration for Tiers - adjusted for accumulation values
         TIERS = [
-            {'name': 'major', 'flow_thresh': 0.5, 'constraint_max': 0.6, 'min_len': 15, 'weight': 1.0},
-            {'name': 'minor', 'flow_thresh': 0.25, 'constraint_max': 0.5, 'min_len': 8, 'weight': 0.5}
+            {'name': 'major', 'flow_thresh': 0.4, 'constraint_max': 0.6, 'min_len': 15, 'weight': 1.0},
+            {'name': 'minor', 'flow_thresh': 0.2, 'constraint_max': 0.5, 'min_len': 8, 'weight': 0.5}
         ]
         
         flat_flow = flow.flatten()
