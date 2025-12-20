@@ -96,41 +96,155 @@ def calculate_local_intensity(seed, x, y):
             
     return score / count
 
-def generate_field(inscription, width=100, height=100, normalize=True):
+def _bilinear_upsample(grid, target_h, target_w):
     """
-    Generate the full 2D noise field.
-    Returns: field (numpy array), seed (int)
+    Simple bilinear upsampling for numpy grids.
+    """
+    h, w = grid.shape
+    # If same size, return
+    if h == target_h and w == target_w:
+        return grid
+        
+    # Create coordinate grid
+    x = np.linspace(0, w - 1, target_w)
+    y = np.linspace(0, h - 1, target_h)
+    
+    # Get floor and ceil indices
+    x0 = np.floor(x).astype(int)
+    x1 = np.minimum(x0 + 1, w - 1)
+    y0 = np.floor(y).astype(int)
+    y1 = np.minimum(y0 + 1, h - 1)
+    
+    # Calculate weights
+    wx = x - x0
+    wy = y - y0
+    
+    # Reshape weights for broadcasting
+    # We want result[r, c]
+    # We can do this separately for X and Y to save memory (two passes) or broadcasting
+    
+    # Interpolate along X first for each Row
+    # Better: Use simple loop if size is small, or broadcasting
+    # Broadcast:
+    # We need to construct the full 2D indices. 
+    # This might be slow if we do full meshgrid.
+    # Check scipy availability? No, sticking to numpy.
+    
+    # Optimization: 1D interpolation twice
+    # 1. Resize Rows (Width)
+    tmp = np.zeros((h, target_w))
+    for r in range(h):
+        row = grid[r, :]
+        tmp[r, :] = row[x0] * (1 - wx) + row[x1] * wx
+        
+    # 2. Resize Cols (Height)
+    result = np.zeros((target_h, target_w))
+    for c in range(target_w):
+        col = tmp[:, c]
+        result[:, c] = col[y0] * (1 - wy) + col[y1] * wy
+        
+    return result
+
+def generate_field(inscription, width=100, height=100, normalize=True, octaves=4, persistence=0.5, lacunarity=2.0):
+    """
+    Generate the full 2D noise field using Multi-Scale Fractal Noise.
+    
+    Args:
+        inscription: Seed string.
+        width, height: Output resolution.
+        normalize: Whether to normalize output 0-1.
+        octaves: Number of layers of detail.
+        persistence: How much amplitude decreases per octave (0.5 = half).
+        lacunarity: How much frequency increases per octave (2.0 = double).
     """
     # Create deterministic seed from string
     if isinstance(inscription, str):
-        seed = hash(inscription.upper()) & 0xFFFFFFFF
+        base_seed = hash(inscription.upper()) & 0xFFFFFFFF
     else:
-        seed = int(inscription) # Allow passing raw seed
+        base_seed = int(inscription)
     
-    field = np.zeros((height, width))
+    final_field = np.zeros((height, width))
+    total_amplitude = 0
+    amplitude = 1.0
     
-    for y in range(height):
-        for x in range(width):
-            field[y, x] = calculate_local_intensity(seed, x, y)
+    # Determine base scale
+    # We want the HIGHEST frequency octave to match the pixel grid? 
+    # Or start coarse and go up.
+    # Standard Perlin: Octave 0 = Coarse.
+    
+    # We need to determine the size of Octave 0.
+    # If Octaves=4, and Octave 3 is 1:1, then:
+    # Oct 3: 256x256
+    # Oct 2: 128x128
+    # Oct 1: 64x64
+    # Oct 0: 32x32
+    
+    # Calculate base size
+    # current_w = width // (lacunarity ** (octaves - 1))
+    # current_h = height // (lacunarity ** (octaves - 1))
+    
+    # Floating point size? No, needs to be grid.
+    if octaves < 1: octaves = 1
+    
+    freq = 1.0
+    
+    # Generate Octaves
+    # We generate from Coarse to Fine
+    
+    # Start freq so that largest octave IS coarse?
+    # Actually, let's just loop.
+    # Typically, we sum: Noise(x*freq) * amp.
+    # Since our 'Noise' is generating a grid of size (w,h), 
+    # we simulate frequency by changing the grid size and upscaling.
+    
+    # Start with the smallest grid (Coarse)
+    # Divider for the first octave
+    divider = lacunarity ** (octaves - 1)
+    
+    current_w = max(4, int(width / divider))
+    current_h = max(4, int(height / divider))
+    
+    for i in range(octaves):
+        # Unique seed per octave to prevent correlation
+        octave_seed = base_seed + (i * 54321)
+        
+        # Generate raw noise at this lower resolution
+        layer = np.zeros((current_h, current_w))
+        for y in range(current_h):
+            for x in range(current_w):
+                layer[y, x] = calculate_local_intensity(octave_seed, x, y)
+                
+        # Upscale to target resolution
+        if current_w != width or current_h != height:
+            layer = _bilinear_upsample(layer, height, width)
+        
+        # Accumulate
+        final_field += layer * amplitude
+        total_amplitude += amplitude
+        
+        # Prepare for next octave
+        amplitude *= persistence
+        current_w = int(min(width, current_w * lacunarity))
+        current_h = int(min(height, current_h * lacunarity))
+        
+        # Correction for rounding or max cap
+        if i == octaves - 2: # Ensure last one is exact
+            current_w = width
+            current_h = height
+    
+    field = final_field
     
     # FIX: Resolution-Aware Normalization
-    # Previous implementation normalized strictly Min-Max locally, which shifts the semantic baseline.
-    # We should normalize against GLBAL THEORETICAL BOUNDS to preserve semantic meaning across scales.
-    # Min theoretical: -1.5 (Opposition) * Count
-    # Max theoretical: 6.0 (Phase Shift) + 1.25 (Delta 5*0.25) ~ 7.25 * Count
-    
-    # Actually, calculate_local_intensity divides by count.
-    # So bounds are roughly -1.5 to 7.25.
-    
-    THEORETICAL_MIN = -1.5
-    THEORETICAL_MAX = 7.5 
+    # Bounds logic might need update for fractal sum.
+    # Theoretical Min/Max scales with sum(amplitudes)
+    THEORETICAL_MIN = -1.5 * total_amplitude
+    THEORETICAL_MAX = 7.5 * total_amplitude
     
     if normalize:
-        # Scale to 0-1 based on fixed bounds, NOT local min/max
         field = (field - THEORETICAL_MIN) / (THEORETICAL_MAX - THEORETICAL_MIN)
         field = np.clip(field, 0.0, 1.0)
             
-    return field, seed
+    return field, base_seed
 
 def evolve_field(field, steps=1, decay=0.01, diffusion=0.1, feed_rate=0.005):
     """
