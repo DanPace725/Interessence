@@ -108,7 +108,7 @@ def visualize_closure_overlay(closure_result, layers, inscription):
         ax.axis('off')
 
     plt.tight_layout()
-    filename = os.path.join(OUTPUT_DIR, f"closure_phase4_{inscription}.png")
+    filename = os.path.join(OUTPUT_DIR, f"closure_phase6_{inscription}.png")
     plt.savefig(filename, facecolor=fig.get_facecolor())
     plt.close()
     print(f"Saved Closure Analysis: {filename}")
