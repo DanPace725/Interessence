@@ -198,3 +198,55 @@ def get_semantic_axes(field):
         "Flow": np.clip(flow, 0, 1),
         "Continuity": np.clip(continuity, 0, 1)
     }
+
+def normalize_field(field):
+    """
+    Safely normalize a field to 0-1 range.
+    """
+    f_min = field.min()
+    f_max = field.max()
+    if f_max - f_min < 1e-8:
+        return np.zeros_like(field)
+    return (field - f_min) / (f_max - f_min)
+
+def generate_semantic_layers(field, seed=None):
+    """
+    Derive the 4 Neo Semantic Layers from the base Structure field.
+    
+    Args:
+        field: The base Structure field (2D numpy array), usually normalized.
+        seed: Optional seed for deterministic noise injections if needed.
+        
+    Returns:
+        Dict[str, np.ndarray]: {
+            'Structure': The base field,
+            'Flow': Gradient magnitude (Movement potential),
+            'Constraint': Laplacian magnitude (barriers/edges),
+            'Vitality': Evolved life potential (Anti-Entropy)
+        }
+    """
+    # 1. Structure (Base)
+    structure = field
+    
+    # 2. Flow (Gradient Magnitude)
+    grad_y, grad_x = np.gradient(structure)
+    flow_mag = np.sqrt(grad_x**2 + grad_y**2)
+    flow = normalize_field(flow_mag)
+    
+    # 3. Constraint (Laplacian / 2nd Derivative)
+    # Measures "Edge-ness" or sudden change.
+    laplacian = np.abs(np.gradient(grad_x, axis=1) + np.gradient(grad_y, axis=0))
+    constraint = normalize_field(laplacian)
+    
+    # 4. Vitality (Anti-Entropy Evolution)
+    # We evolve the field to find stable "life" pools.
+    # We use a copy so we don't mutate structure
+    vitality_raw = evolve_field(structure, steps=15, feed_rate=0.012, decay=0.01)
+    vitality = np.clip(vitality_raw, 0, 1)
+    
+    return {
+        "Structure": structure,
+        "Flow": flow,
+        "Constraint": constraint,
+        "Vitality": vitality
+    }
