@@ -13,13 +13,16 @@ OUTPUT_DIR = "samples/3d"
 if not os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
 
-def export_obj(inscription, size=256, height_scale=40.0):
-    print(f"Generating 3D GCO Terrain for '{inscription}'...")
+def export_obj(inscription, size=256, height_scale=40.0, octaves=4, persistence=0.5, lacunarity=2.0):
+    print(f"Generating 3D GCO Terrain for '{inscription}' (Octaves: {octaves})...")
     
     # 1. Generate Layers using Core
     # This gives us {Structure, Flow, Constraint, Vitality}
     # Initial raw state.
-    base_structure, seed = core.generate_field(inscription, size, size, normalize=True)
+    base_structure, seed = core.generate_field(
+        inscription, size, size, normalize=True,
+        octaves=octaves, persistence=persistence, lacunarity=lacunarity
+    )
     layers = core.generate_semantic_layers(base_structure, seed)
     
     # 2. Run GCO Pipeline
