@@ -52,29 +52,91 @@ class GlobalClosureOperator:
         
     def run(self) -> ClosureResult:
         """
-        Execute the full Closure Pipeline:
-        1. Detect Candidates
-        2. Resolve Competition
-        3. Commit (Feedback)
+        Execute the full Closure Pipeline in Stages:
+        1. Hydrology (Rivers, Lakes)
+        2. Hydration Feedback (Water -> Vitality)
+        3. Ecology (Forests)
+        4. Commitment (Erosion)
         """
-        # 1. Detection
-        candidates = self.detect_candidates()
+        print("    Running Sequential Closure Pipeline...")
+        all_committed = []
         
-        # 2. Composition/Competition
-        # For this prototype, we just verify they don't overlap blindly, 
-        # or we just accept top N.
-        # Let's simple filter by score for now.
-        committed = self.resolve_competition(candidates)
+        # --- Stage 1: Hydrology ---
+        hydro_candidates = []
+        rivers = self.detect_rivers()
+        hydro_candidates.extend(rivers)
+        # Lakes depend on rivers
+        lakes = self.detect_lakes(rivers)
+        hydro_candidates.extend(lakes)
         
-        # 3. Commit (Feedback)
-        self.apply_feedback(committed)
+        # Resolve Hydro competition
+        hydro_committed = self.resolve_competition(hydro_candidates)
+        all_committed.extend(hydro_committed)
         
-        # 4. Visualization
-        # We generate overlay AFTER feedback, though detecting features was done on PRE-feedback layers.
-        # This is fine.
-        overlay = self.generate_overlay(committed)
+        # --- Stage 2: Feedback (Hydration & Erosion) ---
+        # 1. Erosion: Rivers carve the land (physically)
+        self.apply_feedback(hydro_committed)
         
-        return ClosureResult(committed, overlay)
+        # 2. Hydration: Water boosts Vitality (ecologically)
+        self.apply_hydration(hydro_committed)
+        
+        # --- Stage 3: Ecology ---
+        # Now that Vitality is boosted near rivers, detecting forests will find 'Oases'.
+        eco_candidates = self.detect_forests()
+        
+        # Resolve Eco competition (Forests usually don't overlap rivers due to logic, but good to check)
+        eco_committed = self.resolve_competition(eco_candidates)
+        all_committed.extend(eco_committed)
+        
+        # --- Stage 4: Final Output ---
+        
+        # We generate overlay from ALL features
+        overlay = self.generate_overlay(all_committed)
+        
+        return ClosureResult(all_committed, overlay)
+
+    def apply_hydration(self, features: List[FeatureCandidate]):
+        """
+        Boost Vitality layer near water features.
+        """
+        vitality = self.ctx.layers['Vitality']
+        w, h = self.ctx.width, self.ctx.height
+        
+        print(f"    Applying Hydration to {len(features)} water features...")
+        
+        # Create a hydration mask
+        hydration_boost = np.zeros_like(vitality)
+        
+        # Parameters
+        RIVER_BOOST = 0.4
+        LAKE_BOOST = 0.5
+        RADIUS = 3 # Pixel radius for hydration
+        
+        for feat in features:
+            boost_val = 0.0
+            if feat.type == 'river': boost_val = RIVER_BOOST
+            elif feat.type == 'lake': boost_val = LAKE_BOOST
+            else: continue
+            
+            for x, y in feat.coordinates:
+                # Simple box blur / radius spread
+                for dy in range(-RADIUS, RADIUS+1):
+                    for dx in range(-RADIUS, RADIUS+1):
+                        ny, nx = y+dy, x+dx
+                        if 0 <= ny < h and 0 <= nx < w:
+                            # Distance falloff?
+                            dist = np.sqrt(dx*dx + dy*dy)
+                            if dist <= RADIUS:
+                                factor = 1.0 - (dist / (RADIUS + 1))
+                                current = hydration_boost[ny, nx]
+                                # Keep max hydration
+                                hydration_boost[ny, nx] = max(current, boost_val * factor)
+        
+        # Apply mask to Vitality
+        # Clip to 1.0
+        # self.ctx.layers['Vitality'] = np.clip(vitality + hydration_boost, 0, 1) # In-place update?
+        # Actually numpy add is distinct.
+        self.ctx.layers['Vitality'] = np.clip(vitality + hydration_boost, 0.0, 1.0)
 
     def apply_feedback(self, features: List[FeatureCandidate]):
         """
