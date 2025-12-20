@@ -127,8 +127,8 @@ def export_obj(inscription, size=256, height_scale=40.0):
 
 def main():
     # Test High Density Region
-    export_obj("FIRE", size=256, height_scale=40.0)
-    export_obj("MAGIC", size=256, height_scale=40.0)
+    export_obj("Sheep", size=256, height_scale=40.0)
+    export_obj("Cat", size=256, height_scale=40.0)
 
 if __name__ == "__main__":
     main()
