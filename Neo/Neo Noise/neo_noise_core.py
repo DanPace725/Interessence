@@ -48,6 +48,157 @@ TYPE_INTERACTIONS = {
     ('backslash', 'backslash'): 6.0, # Phase Shift
 }
 
+# ============================================================================
+# SEQUENTIAL FIELD PROPAGATION (Multiglyph Composition)
+# ============================================================================
+# This module implements left-fold composition for multi-glyph inscriptions.
+# Each glyph modifies a 4D field vector: [Action, Structure, Modulation, Transform]
+
+def glyph_to_field_vector(glyph):
+    """
+    Convert a glyph dict to a 4D field vector.
+    
+    Returns:
+        np.ndarray: [action, structure, modulation, transform]
+    """
+    vector = np.zeros(4)  # [action, structure, modulation, transform]
+    
+    glyph_type = glyph['type']
+    magnitude = glyph['mag']
+    
+    if glyph_type == 'left':
+        vector[0] = -magnitude  # Negative action
+    elif glyph_type == 'right':
+        vector[0] = magnitude   # Positive action
+    elif glyph_type == 'cross':
+        vector[1] = magnitude   # Structure
+    elif glyph_type == 'diagonal':
+        vector[2] = magnitude   # Modulation
+    elif glyph_type == 'backslash':
+        vector[3] = magnitude   # Transform
+    
+    return vector
+
+def pairwise_interference(state, glyph):
+    """
+    Calculate interference between accumulated state and new glyph.
+    
+    Args:
+        state: Current 4D state vector (or glyph dict for initial)
+        glyph: New glyph dict to incorporate
+        
+    Returns:
+        np.ndarray: New 4D field state
+    """
+    # If state is a glyph dict, convert to field vector first
+    if isinstance(state, dict):
+        state = glyph_to_field_vector(state)
+    
+    # Convert new glyph to field contribution
+    g_vector = glyph_to_field_vector(glyph)
+    
+    # Determine interaction modifier based on dominant dimensions
+    dominant_dim = np.argmax(np.abs(state)) if np.any(state != 0) else 0
+    
+    interaction_modifier = 1.0
+    
+    # Check if they reinforce or oppose based on dominant dimensions
+    if dominant_dim == np.argmax(np.abs(g_vector)):
+        interaction_modifier = 1.5  # Reinforce same dimension
+    elif np.abs(state[dominant_dim]) > 0 and np.sign(state[dominant_dim]) != np.sign(g_vector[dominant_dim]):
+        interaction_modifier = 0.5  # Opposition
+    
+    # Combine: decay old state, add new contribution with modifier
+    new_state = state * 0.7 + g_vector * interaction_modifier
+    
+    return new_state
+
+def sequential_composition(inscription):
+    """
+    Compose glyphs sequentially using left fold.
+    
+    S₀ = G₁
+    S₁ = pairwise_interference(S₀, G₂)
+    S₂ = pairwise_interference(S₁, G₃)
+    ...
+    
+    Args:
+        inscription: The inscription string
+        
+    Returns:
+        tuple: (final_state, history) where final_state is 4D vector
+               and history is list of (glyph, state) tuples
+    """
+    inscription = inscription.upper()
+    glyphs = [NEO_GLYPHS.get(char) for char in inscription if char in NEO_GLYPHS]
+    
+    if not glyphs:
+        return np.zeros(4), []
+    
+    # Initialize with first glyph
+    state = glyph_to_field_vector(glyphs[0])
+    history = [(glyphs[0], state.copy())]
+    
+    # Sequentially fold remaining glyphs
+    for glyph in glyphs[1:]:
+        state = pairwise_interference(state, glyph)
+        history.append((glyph, state.copy()))
+    
+    return state, history
+
+def get_inscription_bias(inscription):
+    """
+    Compute semantic bias weights from sequential composition.
+    
+    Returns a dict of normalized weights (0-1) for each dimension.
+    These can be used to modulate TYPE_INTERACTIONS.
+    
+    Args:
+        inscription: The inscription string
+        
+    Returns:
+        dict: {
+            'action': float,      # Absolute normalized action bias
+            'structure': float,   # Normalized structure bias  
+            'modulation': float,  # Normalized modulation bias
+            'transform': float,   # Normalized transform bias
+            'raw_vector': np.ndarray,  # The raw 4D state vector
+            'magnitude': float    # Overall magnitude (word "power")
+        }
+    """
+    final_state, _ = sequential_composition(inscription)
+    
+    # Compute magnitude
+    magnitude = np.linalg.norm(final_state)
+    
+    # Normalize to get relative contributions
+    abs_state = np.abs(final_state)
+    total = np.sum(abs_state)
+    
+    if total < 1e-8:
+        # No valid glyphs, return neutral bias
+        return {
+            'action': 0.25,
+            'structure': 0.25,
+            'modulation': 0.25,
+            'transform': 0.25,
+            'raw_vector': final_state,
+            'magnitude': 0.0
+        }
+    
+    normalized = abs_state / total
+    
+    return {
+        'action': float(normalized[0]),
+        'structure': float(normalized[1]),
+        'modulation': float(normalized[2]),
+        'transform': float(normalized[3]),
+        'raw_vector': final_state,
+        'magnitude': float(magnitude)
+    }
+
+
+
 def get_glyph_props(inscription_seed, x, y):
     """
     Deterministically retrieve the latent glyph at (x,y) based on the seed.
@@ -62,9 +213,14 @@ def get_glyph_props(inscription_seed, x, y):
     
     return g_type, g_mag
 
-def calculate_local_intensity(seed, x, y):
+def calculate_local_intensity(seed, x, y, bias=None):
     """
     Calculate the semantic intensity at (x,y) by observing the neighborhood.
+    
+    Args:
+        seed: The inscription seed
+        x, y: Coordinates
+        bias: Optional dict from get_inscription_bias() to modulate interactions
     """
     # 3x3 Neighborhood
     neighbors = []
@@ -77,6 +233,16 @@ def calculate_local_intensity(seed, x, y):
     score = 0
     count = 0
     
+    # Compute bias modifiers if provided
+    # Map glyph types to bias dimensions
+    type_to_bias_key = {
+        'left': 'action',
+        'right': 'action', 
+        'cross': 'structure',
+        'diagonal': 'modulation',
+        'backslash': 'transform'
+    }
+    
     # Pairwise interaction of all neighbors
     for i in range(len(neighbors)):
         for j in range(i + 1, len(neighbors)):
@@ -88,7 +254,17 @@ def calculate_local_intensity(seed, x, y):
             if base is None:
                 base = TYPE_INTERACTIONS.get((t2, t1), 0.5)
             
-            # 2. Magnitude Modulation
+            # 2. Apply semantic bias modulation if provided
+            if bias is not None:
+                # Average the bias weights for both types involved
+                b1 = bias.get(type_to_bias_key.get(t1, 'action'), 0.25)
+                b2 = bias.get(type_to_bias_key.get(t2, 'action'), 0.25)
+                # Bias modifies the interaction strength
+                # Higher bias for these types = stronger contribution
+                bias_factor = (b1 + b2) / 0.5  # Normalize so 0.25+0.25=1.0 is neutral
+                base *= bias_factor
+            
+            # 3. Magnitude Modulation
             delta = abs(m1 - m2)
             
             score += base + (delta * 0.25)
@@ -145,7 +321,7 @@ def _bilinear_upsample(grid, target_h, target_w):
         
     return result
 
-def generate_field(inscription, width=100, height=100, normalize=True, octaves=4, persistence=0.5, lacunarity=2.0):
+def generate_field(inscription, width=100, height=100, normalize=True, octaves=4, persistence=0.5, lacunarity=2.0, semantic_bias_strength=0.3):
     """
     Generate the full 2D noise field using Multi-Scale Fractal Noise.
     
@@ -156,12 +332,31 @@ def generate_field(inscription, width=100, height=100, normalize=True, octaves=4
         octaves: Number of layers of detail.
         persistence: How much amplitude decreases per octave (0.5 = half).
         lacunarity: How much frequency increases per octave (2.0 = double).
+        semantic_bias_strength: How strongly the sequential glyph composition
+                               affects the field (0.0 = none, 1.0 = full).
+                               Default 0.3 for moderate influence.
     """
     # Create deterministic seed from string
     if isinstance(inscription, str):
         base_seed = hash(inscription.upper()) & 0xFFFFFFFF
+        # Compute semantic bias from sequential glyph composition
+        raw_bias = get_inscription_bias(inscription)
     else:
         base_seed = int(inscription)
+        raw_bias = None
+    
+    # Apply bias strength scaling
+    # semantic_bias_strength of 0.0 means no bias (all weights = 0.25)
+    # semantic_bias_strength of 1.0 means full bias as computed
+    if raw_bias is not None and semantic_bias_strength > 0:
+        scaled_bias = {
+            'action': 0.25 + (raw_bias['action'] - 0.25) * semantic_bias_strength,
+            'structure': 0.25 + (raw_bias['structure'] - 0.25) * semantic_bias_strength,
+            'modulation': 0.25 + (raw_bias['modulation'] - 0.25) * semantic_bias_strength,
+            'transform': 0.25 + (raw_bias['transform'] - 0.25) * semantic_bias_strength,
+        }
+    else:
+        scaled_bias = None
     
     final_field = np.zeros((height, width))
     total_amplitude = 0
@@ -212,7 +407,7 @@ def generate_field(inscription, width=100, height=100, normalize=True, octaves=4
         layer = np.zeros((current_h, current_w))
         for y in range(current_h):
             for x in range(current_w):
-                layer[y, x] = calculate_local_intensity(octave_seed, x, y)
+                layer[y, x] = calculate_local_intensity(octave_seed, x, y, scaled_bias)
                 
         # Upscale to target resolution
         if current_w != width or current_h != height:
