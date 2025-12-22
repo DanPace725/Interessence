@@ -84,45 +84,16 @@ def export_obj(inscription, size=256, height_scale=40.0, octaves=4, persistence=
         f.write("Kd 1.0 1.0 1.0\n")
         f.write(f"map_Kd {tex_filename}\n")
 
-    # 6. Generate Texture Map
-    print("  Synthesizing GCO Texture...")
-    rgb = np.zeros((size, size, 3))
+    # 6. Generate Texture Map using Biome Classification
+    print("  Classifying Biomes...")
+    import neo_biomes as biomes
     
-    # Pre-calculate base terrain color (Summit vs Valley)
-    # Simple gradient from dark dirt to snow
-    for y in range(size):
-        for x in range(size):
-            h = structure[y, x]
-            
-            # Base Biome
-            if h < 0.3: col = [0.2, 0.18, 0.15] # Dark Dirt
-            elif h < 0.6: col = [0.3, 0.28, 0.25] # Dirt
-            elif h < 0.8: col = [0.4, 0.4, 0.45] # Rock
-            else: col = [0.95, 0.95, 1.0] # Snow
-            
-            val = np.array(col)
-            
-            # GCO Overlay Features
-            # 1.0 = Major River (Cyan)
-            # 0.8 = Minor River (Teal)
-            # 0.6 = Lake (Blue)
-            # 0.3 = Forest (Green)
-            
-            feat = overlay[y, x]
-            
-            if feat >= 0.9: # Major River
-                val = [0.0, 1.0, 1.0] # Cyan
-            elif feat >= 0.7: # Minor River
-                val = [0.0, 0.7, 0.9] # Teal
-                # Mix slightly with base to fade edges? No, distinct is better for debugging.
-            elif feat >= 0.5: # Lake
-                val = [0.0, 0.4, 1.0] # Deep Blue
-            elif feat >= 0.2: # Forest
-                # Mix Green with base
-                forest_col = np.array([0.1, 0.5, 0.1])
-                val = (val * 0.4) + (forest_col * 0.6)
-            
-            rgb[y, x] = np.clip(val, 0, 1)
+    classifier = biomes.BiomeClassifier(n_biomes=6, seed=seed)
+    biome_map = classifier.fit_predict(layers)
+    classifier.print_biome_summary()
+    
+    print("  Synthesizing Biome Texture...")
+    rgb = biomes.generate_biome_texture(biome_map, classifier, overlay)
             
     tex_path = os.path.join(OUTPUT_DIR, tex_filename)
     plt.imsave(tex_path, rgb)
@@ -130,8 +101,8 @@ def export_obj(inscription, size=256, height_scale=40.0, octaves=4, persistence=
 
 def main():
     # Test High Density Region
-    export_obj("Sheep", size=256, height_scale=40.0)
-    export_obj("Cat", size=256, height_scale=40.0)
+    export_obj("FLAME", size=256, height_scale=40.0)
+    export_obj("WATER", size=256, height_scale=40.0)
 
 if __name__ == "__main__":
     main()
