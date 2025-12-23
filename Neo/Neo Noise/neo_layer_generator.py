@@ -43,7 +43,7 @@ def generate_multi_layer_map(inscription, size=256, enable_erosion=True):
 def visualize_layers(layers, inscription, seed):
     # Check if we have 5 layers (with WaterAccumulation) or 4
     n_layers = len(layers)
-    fig, axes = plt.subplots(1, n_layers, figsize=(5 * n_layers, 5))
+    fig, axes = plt.subplots(1, n_layers, figsize=(4 * n_layers, 5))
     fig.suptitle(f"Neo Semantic Layers: {inscription} (Seed: {seed})", fontsize=16, color='white')
     fig.patch.set_facecolor('#0f172a')
     
@@ -59,18 +59,23 @@ def visualize_layers(layers, inscription, seed):
         ax = axes[i] if n_layers > 1 else axes
         cmap = cmaps.get(name, "inferno")
         im = ax.imshow(field, cmap=cmap, interpolation='bicubic')
-        ax.set_title(name.upper(), color='white', fontsize=12)
+        ax.set_title(name.upper(), color='white', fontsize=11)
         ax.axis('off')
+        
+        # Add colorbar
+        cbar = fig.colorbar(im, ax=ax, orientation='horizontal', pad=0.05, shrink=0.8)
+        cbar.ax.tick_params(labelsize=8, colors='white')
         
     plt.tight_layout()
     filename = os.path.join(OUTPUT_DIR, f"layers_{inscription}.png")
-    plt.savefig(filename, facecolor=fig.get_facecolor())
+    plt.savefig(filename, facecolor=fig.get_facecolor(), dpi=120)
     plt.close()
     print(f"Saved: {filename}")
 
 def visualize_biomes(layers, inscription, seed):
     """Visualize discovered biomes using the BiomeClassifier."""
     import neo_biomes as biomes
+    from matplotlib.patches import Patch
     
     classifier = biomes.BiomeClassifier(n_biomes=6, seed=seed)
     biome_map = classifier.fit_predict(layers)
@@ -79,14 +84,27 @@ def visualize_biomes(layers, inscription, seed):
     # Generate biome texture
     rgb = biomes.generate_biome_texture(biome_map, classifier)
     
-    fig, ax = plt.subplots(figsize=(8, 8))
+    fig, ax = plt.subplots(figsize=(10, 8))
     fig.patch.set_facecolor('#0f172a')
     ax.imshow(rgb)
     ax.set_title(f"Biomes: {inscription}", color='white', fontsize=14)
     ax.axis('off')
     
+    # Create legend
+    legend_elements = []
+    for info in classifier.biome_info:
+        pct = info.pixel_count / sum(b.pixel_count for b in classifier.biome_info) * 100
+        legend_elements.append(
+            Patch(facecolor=info.color, edgecolor='white', 
+                  label=f"{info.name} ({pct:.0f}%)")
+        )
+    
+    legend = ax.legend(handles=legend_elements, loc='lower right', 
+                       facecolor='#1e293b', edgecolor='white', 
+                       fontsize=9, labelcolor='white')
+    
     filename = os.path.join(OUTPUT_DIR, f"biomes_{inscription}.png")
-    plt.savefig(filename, facecolor=fig.get_facecolor())
+    plt.savefig(filename, facecolor=fig.get_facecolor(), dpi=120, bbox_inches='tight')
     plt.close()
     print(f"Saved: {filename}")
 

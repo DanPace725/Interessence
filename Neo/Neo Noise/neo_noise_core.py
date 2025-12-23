@@ -429,14 +429,17 @@ def generate_field(inscription, width=100, height=100, normalize=True, octaves=4
     
     field = final_field
     
-    # FIX: Resolution-Aware Normalization
-    # Bounds logic might need update for fractal sum.
-    # Theoretical Min/Max scales with sum(amplitudes)
-    THEORETICAL_MIN = -1.5 * total_amplitude
-    THEORETICAL_MAX = 7.5 * total_amplitude
-    
+    # ACTUAL BOUNDS NORMALIZATION
+    # Use observed field range instead of theoretical bounds.
+    # This is the "honest" approach - rare extreme values will map to extremes,
+    # and the natural signal distribution is preserved.
     if normalize:
-        field = (field - THEORETICAL_MIN) / (THEORETICAL_MAX - THEORETICAL_MIN)
+        field_min = field.min()
+        field_max = field.max()
+        if field_max - field_min > 1e-8:
+            field = (field - field_min) / (field_max - field_min)
+        else:
+            field = np.full_like(field, 0.5)
         field = np.clip(field, 0.0, 1.0)
             
     return field, base_seed
