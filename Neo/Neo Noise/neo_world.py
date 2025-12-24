@@ -58,13 +58,15 @@ class ContinentalMap:
     biome_ids: np.ndarray      # Macro-biome classification
     
 
-def generate_continental_map(inscription: str, width: int = 512, height: int = 256) -> ContinentalMap:
+def generate_continental_map(inscription: str, width: int = 512, height: int = 256,
+                              semantic_bias_strength: float = 0.3) -> ContinentalMap:
     """
     Generate a continental-scale world map using low-frequency Neo Noise.
     
     Args:
         inscription: World seed string (e.g., "INTERESSENCE")
         width, height: World map resolution (default 512x256 for 2:1 aspect)
+        semantic_bias_strength: How strongly glyph composition affects noise (0-1)
         
     Returns:
         ContinentalMap with elevation, moisture, temperature, and biome data
@@ -76,13 +78,15 @@ def generate_continental_map(inscription: str, width: int = 512, height: int = 2
     
     # 1. ELEVATION: Low-frequency noise for landmasses
     # Only 2 octaves = very smooth, continental-scale features
+    # Use inscription string (not seed) to enable semantic bias
     elevation_raw, _ = core.generate_field(
-        base_seed,
+        inscription,  # Pass string to enable semantic composition
         width, height,
         normalize=True,
         octaves=2,
         persistence=0.5,
-        lacunarity=2.0
+        lacunarity=2.0,
+        semantic_bias_strength=semantic_bias_strength
     )
     
     # STRETCH to full 0-1 range for dramatic continental features
@@ -96,16 +100,17 @@ def generate_continental_map(inscription: str, width: int = 512, height: int = 2
     # Apply contrast curve (S-curve) for more distinct land/water
     elevation = np.clip(elevation * 1.2 - 0.1, 0, 1)
     
-    # 2. MOISTURE: Different seed, also low frequency
+    # 2. MOISTURE: Different inscription variant for different pattern
     # Represents precipitation patterns
-    moisture_seed = base_seed ^ 0xDEADBEEF
+    moisture_inscription = inscription + "_MOISTURE"
     moisture_raw, _ = core.generate_field(
-        moisture_seed,
+        moisture_inscription,
         width, height,
         normalize=True,
         octaves=2,
         persistence=0.6,
-        lacunarity=2.0
+        lacunarity=2.0,
+        semantic_bias_strength=semantic_bias_strength
     )
     
     # STRETCH moisture to full range
@@ -272,7 +277,7 @@ def visualize_continental_map(world_map: ContinentalMap, show_layers: bool = Tru
 
 
 def generate_region_tile(world_map: ContinentalMap, region_x: int, region_y: int,
-                         tile_size: int = 256) -> Dict:
+                         tile_size: int = 256, semantic_bias_strength: float = 0.3) -> Dict:
     """
     Generate a regional tile (256x256) biased by continental context.
     
@@ -281,17 +286,18 @@ def generate_region_tile(world_map: ContinentalMap, region_x: int, region_y: int
     # Get continental context
     ctx = get_region_context(world_map, region_x, region_y)
     
-    # Create unique seed for this region
-    region_seed = hash(f"{world_map.inscription}_{region_x}_{region_y}") & 0xFFFFFFFF
+    # Create unique inscription for this region (enables semantic bias)
+    region_inscription = f"{world_map.inscription}_R{region_x}_{region_y}"
     
     # Generate base structure with regional detail
     structure, seed = core.generate_field(
-        region_seed,
+        region_inscription,  # Pass string to enable semantic composition
         tile_size, tile_size,
         normalize=True,
         octaves=4,  # More detail than continental
         persistence=0.5,
-        lacunarity=2.0
+        lacunarity=2.0,
+        semantic_bias_strength=semantic_bias_strength
     )
     
     # BIAS by continental context

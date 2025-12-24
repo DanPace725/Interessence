@@ -27,7 +27,7 @@ def generate_multi_layer_map(inscription, size=256, enable_erosion=True):
         from neo_hydrology import HydraulicSimulator, HydroParams
         
         params = HydroParams(
-            num_droplets=50000,
+            num_droplets=10000,  # Reduced for faster generation
             erosion_rate=0.01,
             deposition_rate=0.02
         )

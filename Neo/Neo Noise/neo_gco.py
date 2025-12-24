@@ -242,52 +242,59 @@ class GlobalClosureOperator:
 
     def detect_rivers(self) -> List[FeatureCandidate]:
         """
-        River logic: High Water Accumulation or Flow + Low Constraint.
-        When hydraulic erosion has run, uses WaterAccumulation for watershed-based detection.
-        Hierarchical detection:
-        1. Major Rivers: High accumulation start, long path.
-        2. Minor Rivers: Medium accumulation start, shorter path OK.
+        River logic: Combine Flow AND WaterAccumulation for best results.
+        - Flow provides gradient direction (where water would go)
+        - WaterAccumulation provides magnitude (how much water collects)
         """
-        # Use WaterAccumulation if available (from hydraulic erosion)
-        # Otherwise fall back to Flow layer
-        if 'WaterAccumulation' in self.ctx.layers:
-            flow = self.ctx.layers['WaterAccumulation']
-            print("    Using WaterAccumulation for river detection (watershed-based)")
-        else:
-            flow = self.ctx.layers['Flow']
-            print("    Using Flow layer for river detection (gradient-based)")
-            
+        flow = self.ctx.layers['Flow']
         constraint = self.ctx.layers['Constraint']
+        
+        # Combine Flow with WaterAccumulation if available
+        if 'WaterAccumulation' in self.ctx.layers:
+            accum = self.ctx.layers['WaterAccumulation']
+            # Normalize both to 0-1 range
+            flow_norm = (flow - flow.min()) / (flow.max() - flow.min() + 1e-8)
+            accum_norm = (accum - accum.min()) / (accum.max() - accum.min() + 1e-8)
+            # Combined score: weighted sum
+            river_score = flow_norm * 0.4 + accum_norm * 0.6
+            print("    Using combined Flow + WaterAccumulation for river detection")
+        else:
+            river_score = (flow - flow.min()) / (flow.max() - flow.min() + 1e-8)
+            print("    Using Flow layer only for river detection")
+            
+        # Phase 1 tuning v2: Middle ground (98% was too tight)
+        major_thresh = np.percentile(river_score, 96)  # Top 4%
+        minor_thresh = np.percentile(river_score, 88)  # Top 12%
         
         candidates = []
         
-        # Configuration for Tiers - adjusted for accumulation values
+        # Configuration for Tiers - balanced constraints
         TIERS = [
-            {'name': 'major', 'flow_thresh': 0.4, 'constraint_max': 0.6, 'min_len': 15, 'weight': 1.0},
-            {'name': 'minor', 'flow_thresh': 0.2, 'constraint_max': 0.5, 'min_len': 8, 'weight': 0.5}
+            {'name': 'major', 'flow_thresh': major_thresh, 'constraint_max': 0.55, 'min_len': 30, 'weight': 1.0},
+            {'name': 'minor', 'flow_thresh': minor_thresh, 'constraint_max': 0.45, 'min_len': 15, 'weight': 0.5}
         ]
         
-        flat_flow = flow.flatten()
-        # Scan way more points to find tributaries
-        # Top 300 flow points
-        top_indices = np.argpartition(flat_flow, -300)[-300:]
+        flat_flow = river_score.flatten()
+        # Scan top 500 flow points to find more river starts
+        n_candidates = min(500, len(flat_flow) - 1)
+        top_indices = np.argpartition(flat_flow, -n_candidates)[-n_candidates:]
         
         potential_starts = 0
         traced_rivers = 0
         
         # Keep track of pixels occupied by rivers to avoid dupes/bundling nearby lines too much
-        occupied = np.zeros_like(flow, dtype=bool)
+        occupied = np.zeros_like(river_score, dtype=bool)
         
-        # Sort indices by flow (highest first)
+        # Sort indices by river_score (highest first)
         sorted_indices = top_indices[np.argsort(flat_flow[top_indices])[::-1]]
         
         for idx in sorted_indices:
-            y, x = np.unravel_index(idx, flow.shape)
+            y, x = np.unravel_index(idx, river_score.shape)
             
             # Skip if already part of a river
             if occupied[y, x]: continue
             
-            f_val = flow[y, x]
+            f_val = river_score[y, x]
             c_val = constraint[y, x]
             
             # Determine Tier
@@ -305,8 +312,8 @@ class GlobalClosureOperator:
             path = self._trace_river_downhill(x, y)
             
             if len(path) >= tier['min_len']:
-                # Calculate score
-                score = np.mean([flow[py, px] for px, py in path])
+                # Calculate score based on river_score along path
+                score = np.mean([river_score[py, px] for px, py in path])
                 
                 # Create Candidate
                 cand = FeatureCandidate('river', float(score), path)
@@ -453,82 +460,105 @@ class GlobalClosureOperator:
 
     def _trace_river_downhill(self, start_x, start_y) -> List[Tuple[int, int]]:
         """
-        Gradient descent tracer using continuous particle physics to overcome
-        pixel-grid local minima.
+        Realistic river tracer: follow gradient downhill until reaching sea level
+        or a true local minimum (basin). No arbitrary loop detection.
         """
         structure = self.ctx.layers['Structure']
         h, w = structure.shape
         
-        # Calculate gradients lazily (or cache them in context if expensive)
+        # Calculate gradients once
         gy, gx = np.gradient(structure)
         
         path = []
-        visited = set()
         
-        # Continuous position
+        # Continuous position for sub-pixel movement
         px, py = float(start_x), float(start_y)
         
-        # Momentum
+        # Momentum for coasting through minor flat areas
         vx, vy = 0.0, 0.0
-        inertia = 0.7 # 0.0 = no momentum, 1.0 = infinite slide
-        gravity = 0.5 
+        inertia = 0.85  # High inertia = rivers meander
+        gravity = 0.4
+        
+        # Track last few positions to detect true stagnation (not loops)
+        last_height = structure[int(py), int(px)]
+        stagnant_steps = 0
         
         path.append((int(px), int(py)))
-        visited.add((int(px), int(py)))
         
-        max_steps = 300
+        max_steps = 1000  # Generous limit for long rivers
+        sea_level = 0.08  # Rivers end at coastline
         
-        for _ in range(max_steps):
+        for step in range(max_steps):
             ix, iy = int(px), int(py)
             
+            # Boundary check
             if not (0 <= ix < w and 0 <= iy < h):
-                break
+                break  # Flowed off map edge
                 
-            # Sample gradient at current integer position
-            # (Inverting because gradient points UPHILL, we want DOWNHILL)
+            current_height = structure[iy, ix]
+            
+            # Stop at sea level (coastline)
+            if current_height < sea_level:
+                break
+            
+            # Get gradient (downhill direction)
             dx = -gx[iy, ix]
             dy = -gy[iy, ix]
             
-            # Normalize gradient force
             mag = np.sqrt(dx*dx + dy*dy)
-            if mag < 1e-4:
-                # Flat area / Local Minima
-                # If we have momentum, we might coast through
-                # If momentum is also low, we stop (Lake)
-                speed = np.sqrt(vx*vx + vy*vy)
-                if speed < 0.1:
-                    break
-            else:
+            
+            if mag > 1e-8:
+                # Normalize gradient
                 dx /= mag
                 dy /= mag
+            else:
+                # True flat area - check if this is a local minimum (basin)
+                # A basin is lower than all 8 neighbors
+                is_basin = True
+                for ndy in [-1, 0, 1]:
+                    for ndx in [-1, 0, 1]:
+                        if ndx == 0 and ndy == 0:
+                            continue
+                        nix, niy = ix + ndx, iy + ndy
+                        if 0 <= nix < w and 0 <= niy < h:
+                            if structure[niy, nix] < current_height:
+                                is_basin = False
+                                break
+                    if not is_basin:
+                        break
+                
+                if is_basin:
+                    break  # True basin - river ends here (becomes lake)
             
-            # Update velocity
-            vx = (vx * inertia) + (dx * gravity)
-            vy = (vy * inertia) + (dy * gravity)
+            # Update velocity with momentum
+            vx = vx * inertia + dx * gravity
+            vy = vy * inertia + dy * gravity
             
-            # Update position
+            # Move
             px += vx
             py += vy
             
-            # Digitize
             nx, ny = int(px), int(py)
             
+            # Did we actually move to a new cell?
             if (nx, ny) != (ix, iy):
-                # We moved to a new cell
                 if not (0 <= nx < w and 0 <= ny < h):
-                    break # Flowed off map
-                    
-                if (nx, ny) in visited:
-                    # Loop detected or merging into self
-                    break
-                    
-                path.append((nx, ny))
-                visited.add((nx, ny))
+                    break  # Off map
                 
-                # Check height (Sea Level)
-                if structure[ny, nx] < 0.2:
-                    break
-                    
+                new_height = structure[ny, nx]
+                
+                # Check if we're making downhill progress
+                if new_height >= last_height:
+                    stagnant_steps += 1
+                    if stagnant_steps > 50:  # Increased from 20 - allow more flat traversal
+                        # Not going downhill - stuck
+                        break
+                else:
+                    stagnant_steps = 0
+                    last_height = new_height
+                
+                path.append((nx, ny))
+                
         return path
 
     def resolve_competition(self, candidates: List[FeatureCandidate]) -> List[FeatureCandidate]:
