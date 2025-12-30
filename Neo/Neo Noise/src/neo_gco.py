@@ -105,7 +105,12 @@ class GlobalClosureOperator:
         Run particle-based hydraulic erosion on the Structure layer.
         This sculpts the terrain realistically and generates a water accumulation map.
         """
-        from neo_hydrology import HydraulicSimulator, HydroParams
+        try:
+            from . import neo_hydrology
+        except ImportError:
+            import neo_hydrology
+        HydraulicSimulator = neo_hydrology.HydraulicSimulator
+        HydroParams = neo_hydrology.HydroParams
         
         # Use subtle erosion parameters
         params = HydroParams(
@@ -242,33 +247,68 @@ class GlobalClosureOperator:
 
     def detect_rivers(self) -> List[FeatureCandidate]:
         """
-        River logic: Combine Flow AND WaterAccumulation for best results.
-        - Flow provides gradient direction (where water would go)
-        - WaterAccumulation provides magnitude (how much water collects)
-        """
-        flow = self.ctx.layers['Flow']
-        constraint = self.ctx.layers['Constraint']
+        River detection using consolidated hydrology system.
         
-        # Combine Flow with WaterAccumulation if available
-        if 'WaterAccumulation' in self.ctx.layers:
-            accum = self.ctx.layers['WaterAccumulation']
-            # Normalize both to 0-1 range
-            flow_norm = (flow - flow.min()) / (flow.max() - flow.min() + 1e-8)
-            accum_norm = (accum - accum.min()) / (accum.max() - accum.min() + 1e-8)
-            # Combined score: weighted sum
-            river_score = flow_norm * 0.4 + accum_norm * 0.6
-            print("    Using combined Flow + WaterAccumulation for river detection")
-        else:
-            river_score = (flow - flow.min()) / (flow.max() - flow.min() + 1e-8)
-            print("    Using Flow layer only for river detection")
-            
-        # Phase 1 tuning v2: Middle ground (98% was too tight)
+        Uses hydro_utils for physics-based water network:
+        - D8 flow direction from heightmap
+        - Flow accumulation with infiltration losses
+        - Percentile-based river thresholds
+        """
+        # Import hydro utils (support both package and direct import)
+        try:
+            from . import neo_hydro_utils as hydro
+        except ImportError:
+            import neo_hydro_utils as hydro
+        
+        structure = self.ctx.layers['Structure']
+        constraint = self.ctx.layers['Constraint']
+        vitality = self.ctx.layers['Vitality']
+        
+        print("    Computing physics-based river network...")
+        
+        # Step 1: Compute flow directions from heightmap (D8)
+        flow_dir = hydro.compute_flow_direction(structure)
+        
+        # Step 2: Compute net runoff with infiltration losses
+        # (low constraint = soil = absorbs water; high vitality = more rain)
+        net_runoff = hydro.compute_net_runoff(
+            vitality, 
+            constraint,
+            rainfall_base=0.15,
+            infiltration_rate=0.25
+        )
+        
+        # Step 3: Compute flow accumulation (water budget along flow graph)
+        accumulation = hydro.compute_flow_accumulation(flow_dir, moisture_weight=net_runoff)
+        
+        # Store for later use (lakes, visualization)
+        self.ctx.layers['ComputedAccumulation'] = accumulation
+        
+        # Step 4: Normalize for thresholding
+        log_accum = np.log1p(accumulation)
+        accum_norm = (log_accum - log_accum.min()) / (log_accum.max() - log_accum.min() + 1e-8)
+        
+        # Combine with Flow layer for gradient awareness
+        flow = self.ctx.layers['Flow']
+        flow_norm = (flow - flow.min()) / (flow.max() - flow.min() + 1e-8)
+        
+        # River score: 70% accumulation, 30% gradient
+        river_score = accum_norm * 0.7 + flow_norm * 0.3
+        
+        # Step 5: Thresholds (tuned for balanced coverage)
         major_thresh = np.percentile(river_score, 96)  # Top 4%
         minor_thresh = np.percentile(river_score, 88)  # Top 12%
         
+        # Step 6: Exclude ocean areas (edge-connected)
+        ocean_mask = hydro.compute_ocean_mask(structure, sea_level=0.08)
+        river_score[ocean_mask] = 0  # No rivers in ocean
+        
+        print(f"      Major threshold: {major_thresh:.4f}, Minor: {minor_thresh:.4f}")
+        print(f"      Ocean cells excluded: {np.sum(ocean_mask)}")
+        
         candidates = []
         
-        # Configuration for Tiers - balanced constraints
+        # Configuration for Tiers
         TIERS = [
             {'name': 'major', 'flow_thresh': major_thresh, 'constraint_max': 0.55, 'min_len': 30, 'weight': 1.0},
             {'name': 'minor', 'flow_thresh': minor_thresh, 'constraint_max': 0.45, 'min_len': 15, 'weight': 0.5}

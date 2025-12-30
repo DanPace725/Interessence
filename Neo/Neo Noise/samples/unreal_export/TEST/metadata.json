@@ -1,0 +1,33 @@
+{
+  "neo_noise_export": {
+    "version": "1.0",
+    "inscription": "TEST",
+    "seed": 596126521
+  },
+  "unreal_settings": {
+    "heightmap_size": 505,
+    "z_scale_recommended": 100.0,
+    "compatible_ue_versions": [
+      "5.5",
+      "5.6",
+      "5.7"
+    ]
+  },
+  "layer_mapping": {
+    "splatmap_format": "RGB",
+    "channels": {
+      "R": "Ground",
+      "G": "Rock",
+      "B": "Organic"
+    },
+    "import_settings": {
+      "sRGB": false,
+      "Compression": "Masks"
+    }
+  },
+  "files": {
+    "heightmap": "heightmap.png",
+    "splatmap": "splatmap.png",
+    "water_mask": "water_mask.png"
+  }
+}

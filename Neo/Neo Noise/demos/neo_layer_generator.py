@@ -6,10 +6,15 @@ Now includes Biome Classification and optional Hydraulic Erosion.
 
 import numpy as np
 import matplotlib.pyplot as plt
-import neo_noise_core as core
 import os
+import sys
 
-OUTPUT_DIR = "samples/layers"
+# Add src/ to path for imports
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+
+import neo_noise_core as core
+
+OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "samples", "layers")
 if not os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
 
@@ -24,15 +29,15 @@ def generate_multi_layer_map(inscription, size=256, enable_erosion=True):
     
     # 3. Optional: Run Hydraulic Erosion (adds WaterAccumulation layer)
     if enable_erosion:
-        from neo_hydrology import HydraulicSimulator, HydroParams
+        import neo_hydrology
         
-        params = HydroParams(
+        params = neo_hydrology.HydroParams(
             num_droplets=10000,  # Reduced for faster generation
             erosion_rate=0.01,
             deposition_rate=0.02
         )
         
-        simulator = HydraulicSimulator(layers['Structure'], params, seed=seed)
+        simulator = neo_hydrology.HydraulicSimulator(layers['Structure'], params, seed=seed)
         result = simulator.simulate()
         
         layers['Structure'] = result.heightmap
