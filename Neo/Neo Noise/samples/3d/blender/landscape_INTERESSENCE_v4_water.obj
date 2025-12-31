@@ -1,0 +1,14 @@
+# Neo Noise Water Plane: INTERESSENCE v4
+# Sea Level: 0.22 -> Height: 8.8
+mtllib landscape_INTERESSENCE_v4.mtl
+o water_INTERESSENCE
+v -128.0000 8.8000 -128.0000
+v 128.0000 8.8000 -128.0000
+v 128.0000 8.8000 128.0000
+v -128.0000 8.8000 128.0000
+vt 0.0 0.0
+vt 1.0 0.0
+vt 1.0 1.0
+vt 0.0 1.0
+usemtl water_material
+f 1/1 2/2 3/3 4/4

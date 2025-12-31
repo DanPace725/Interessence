@@ -1,0 +1,22 @@
+# Neo Noise Landscape Materials
+
+newmtl terrain_material
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.1 0.1 0.1
+Ns 10.0
+map_Kd landscape_INTERESSENCE_v4_diffuse.png
+
+newmtl river_material
+Ka 0.05 0.08 0.1
+Kd 0.15 0.25 0.35
+Ks 0.4 0.4 0.4
+Ns 50.0
+
+newmtl water_material
+Ka 0.0 0.1 0.2
+Kd 0.1 0.3 0.6
+Ks 0.8 0.8 0.8
+Ns 100.0
+d 0.7
+illum 2

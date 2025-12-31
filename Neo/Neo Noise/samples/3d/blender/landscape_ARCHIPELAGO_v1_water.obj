@@ -1,0 +1,14 @@
+# Neo Noise Water Plane: ARCHIPELAGO v1
+# Sea Level: 0.3 -> Height: 12.0
+mtllib landscape_ARCHIPELAGO_v1.mtl
+o water_ARCHIPELAGO
+v -128.0000 12.0000 -128.0000
+v 128.0000 12.0000 -128.0000
+v 128.0000 12.0000 128.0000
+v -128.0000 12.0000 128.0000
+vt 0.0 0.0
+vt 1.0 0.0
+vt 1.0 1.0
+vt 0.0 1.0
+usemtl water_material
+f 1/1 2/2 3/3 4/4

@@ -104,6 +104,10 @@ class GlobalClosureOperator:
         """
         Run particle-based hydraulic erosion on the Structure layer.
         This sculpts the terrain realistically and generates a water accumulation map.
+        
+        Uses the Constraint layer as bedrock: high constraint = hard rock (shallow erosion),
+        low constraint = soft soil (deeper erosion). This forces water to spread laterally
+        when hitting bedrock, creating longer river networks.
         """
         try:
             from . import neo_hydrology
@@ -112,19 +116,24 @@ class GlobalClosureOperator:
         HydraulicSimulator = neo_hydrology.HydraulicSimulator
         HydroParams = neo_hydrology.HydroParams
         
-        # Use subtle erosion parameters
+        # Use subtle erosion parameters (reduced for faster iteration)
         params = HydroParams(
-            num_droplets=50000,
+            num_droplets=15000,         # Reduced from 50k for faster iteration
             erosion_rate=0.01,      # Subtle erosion
             deposition_rate=0.02,
             evaporation_rate=0.01,
-            inertia=0.3
+            inertia=0.3,
+            bedrock_depth_factor=0.3  # Max erosion depth in soft areas
         )
+        
+        # Pass constraint layer for bedrock calculation
+        constraint = self.ctx.layers.get('Constraint', None)
         
         simulator = HydraulicSimulator(
             self.ctx.layers['Structure'],
             params,
-            seed=self.ctx.seed
+            seed=self.ctx.seed,
+            constraint_layer=constraint  # NEW: Bedrock awareness
         )
         
         result = simulator.simulate()

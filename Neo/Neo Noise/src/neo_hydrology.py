@@ -23,6 +23,9 @@ class HydroParams:
     gravity: float = 10.0           # Downhill acceleration
     sediment_capacity_factor: float = 4.0  # Multiplier for sediment carrying capacity
     erosion_radius: int = 2         # Radius of erosion/deposition brush
+    # Bedrock constraint (NEW)
+    bedrock_depth_factor: float = 0.3  # How deep below initial surface bedrock sits (0-1)
+                                        # Low constraint = deep bedrock (0.4), High constraint = shallow (0.1)
 
 
 @dataclass
@@ -60,11 +63,39 @@ class HydraulicSimulator:
     5. Water evaporates, droplet eventually dies
     """
     
-    def __init__(self, heightmap: np.ndarray, params: HydroParams = None, seed: int = None):
+    def __init__(self, heightmap: np.ndarray, params: HydroParams = None, seed: int = None,
+                 constraint_layer: np.ndarray = None):
+        """
+        Initialize hydraulic erosion simulator.
+        
+        Args:
+            heightmap: Initial terrain heights (0-1 normalized)
+            params: Erosion parameters
+            seed: Random seed for reproducibility
+            constraint_layer: Optional constraint layer (0-1). High values = hard rock,
+                              low values = soft soil. Used to compute bedrock floor.
+        """
         self.heightmap = heightmap.copy().astype(np.float64)
+        self.original_heightmap = heightmap.copy().astype(np.float64)  # For bedrock calc
         self.params = params or HydroParams()
         self.seed = seed
         self.h, self.w = heightmap.shape
+        
+        # Compute bedrock floor from constraint layer
+        # Bedrock = original_surface - depth_factor * (1 - constraint)
+        # High constraint = hard rock = shallow bedrock (can't erode much)
+        # Low constraint = soft soil = deep bedrock (can erode more)
+        if constraint_layer is not None:
+            # Constraint-aware bedrock: soft areas allow deeper erosion
+            softness = 1.0 - np.clip(constraint_layer, 0, 1)
+            max_erosion_depth = self.params.bedrock_depth_factor * softness
+            self.bedrock = self.original_heightmap - max_erosion_depth
+        else:
+            # Default: uniform minimum depth (15% below surface)
+            self.bedrock = self.original_heightmap - 0.15
+        
+        # Ensure bedrock doesn't go below 0
+        self.bedrock = np.maximum(self.bedrock, 0.0)
         
         # Tracking maps
         self.accumulation = np.zeros_like(heightmap, dtype=np.float64)
@@ -120,14 +151,21 @@ class HydraulicSimulator:
         """
         Erode terrain at position using erosion brush.
         Returns actual amount eroded (may be less if hitting bedrock).
+        
+        Bedrock constraint: Cannot erode below the bedrock floor, which is
+        computed from the constraint layer. This forces water to spread
+        laterally when hitting hard rock, creating longer river networks.
         """
         ix, iy = int(x), int(y)
         if not (0 <= ix < self.w and 0 <= iy < self.h):
             return 0.0
-            
-        # Don't erode below 0
+        
         current = self.heightmap[iy, ix]
-        actual_erosion = min(amount, max(0, current))
+        bedrock_floor = self.bedrock[iy, ix]
+        
+        # Can only erode down to bedrock, not below
+        max_possible_erosion = max(0, current - bedrock_floor)
+        actual_erosion = min(amount, max_possible_erosion)
         
         self.heightmap[iy, ix] -= actual_erosion
         self.erosion_map[iy, ix] += actual_erosion
