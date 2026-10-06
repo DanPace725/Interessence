@@ -1,0 +1,494 @@
+{
+  "schema_version": "0.2.0",
+  "seeds": [
+    7319,
+    15238,
+    29011,
+    41047,
+    88421
+  ],
+  "decision_windows": 12,
+  "note": "Five deterministic mechanics trials. The observation-led controller is a fixed public-cue policy, not five independent LLM conversations.",
+  "controllers": [
+    {
+      "id": "passive",
+      "label": "No action",
+      "runs": [
+        {
+          "seed": 7319,
+          "summary": {
+            "attention_spent": 0,
+            "most_trusting": "Luma",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": -0.03400000000000003,
+            "average_observer_fear": -0.027199999999999846,
+            "average_bond": 0.20019999999999913,
+            "depleted_sites": 2,
+            "interventions": 0,
+            "average_energy": 0.5549650083379609,
+            "resource_vitality": 0.28838747999999975,
+            "resource_recovered": 1.3155499199999994,
+            "resource_consumed": 3.1620000000000017,
+            "hazard_exposure_beats": 23,
+            "witnessed_memories": 0,
+            "causal_events": 6
+          }
+        },
+        {
+          "seed": 15238,
+          "summary": {
+            "attention_spent": 0,
+            "most_trusting": "Luma",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": -0.03400000000000003,
+            "average_observer_fear": -0.027199999999999846,
+            "average_bond": 0.3015199999999988,
+            "depleted_sites": 3,
+            "interventions": 0,
+            "average_energy": 0.5323711519034626,
+            "resource_vitality": 0.32677808000000047,
+            "resource_recovered": 1.265112320000002,
+            "resource_consumed": 2.958000000000002,
+            "hazard_exposure_beats": 26,
+            "witnessed_memories": 0,
+            "causal_events": 5
+          }
+        },
+        {
+          "seed": 29011,
+          "summary": {
+            "attention_spent": 0,
+            "most_trusting": "Luma",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": -0.03400000000000003,
+            "average_observer_fear": -0.027199999999999846,
+            "average_bond": 0.28217999999999893,
+            "depleted_sites": 3,
+            "interventions": 0,
+            "average_energy": 0.6244744800221509,
+            "resource_vitality": 0.19076491999999967,
+            "resource_recovered": 1.3330596799999985,
+            "resource_consumed": 3.570000000000002,
+            "hazard_exposure_beats": 48,
+            "witnessed_memories": 0,
+            "causal_events": 6
+          }
+        },
+        {
+          "seed": 41047,
+          "summary": {
+            "attention_spent": 0,
+            "most_trusting": "Luma",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": -0.03400000000000003,
+            "average_observer_fear": -0.027199999999999846,
+            "average_bond": 0.1486333333333328,
+            "depleted_sites": 3,
+            "interventions": 0,
+            "average_energy": 0.6857732000000024,
+            "resource_vitality": 0.1310812399999994,
+            "resource_recovered": 1.3663249599999983,
+            "resource_consumed": 3.8420000000000027,
+            "hazard_exposure_beats": 21,
+            "witnessed_memories": 0,
+            "causal_events": 6
+          }
+        },
+        {
+          "seed": 88421,
+          "summary": {
+            "attention_spent": 0,
+            "most_trusting": "Luma",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": -0.03400000000000003,
+            "average_observer_fear": -0.027199999999999846,
+            "average_bond": 0.2931599999999988,
+            "depleted_sites": 3,
+            "interventions": 0,
+            "average_energy": 0.6623033163921022,
+            "resource_vitality": 0.2084183999999984,
+            "resource_recovered": 1.3016735999999938,
+            "resource_consumed": 3.468000000000002,
+            "hazard_exposure_beats": 27,
+            "witnessed_memories": 0,
+            "causal_events": 7
+          }
+        }
+      ],
+      "mean": {
+        "interventions": 0,
+        "resource_vitality": 0.22908602399999953,
+        "average_energy": 0.6119774313311359,
+        "hazard_exposure_beats": 29,
+        "witnessed_memories": 0,
+        "average_observer_trust": -0.03400000000000003,
+        "average_observer_fear": -0.027199999999999846,
+        "average_bond": 0.24513866666666573
+      },
+      "range": {
+        "interventions": {
+          "min": 0,
+          "max": 0
+        },
+        "resource_vitality": {
+          "min": 0.1310812399999994,
+          "max": 0.32677808000000047
+        },
+        "average_energy": {
+          "min": 0.5323711519034626,
+          "max": 0.6857732000000024
+        },
+        "hazard_exposure_beats": {
+          "min": 21,
+          "max": 48
+        },
+        "witnessed_memories": {
+          "min": 0,
+          "max": 0
+        },
+        "average_observer_trust": {
+          "min": -0.03400000000000003,
+          "max": -0.03400000000000003
+        },
+        "average_observer_fear": {
+          "min": -0.027199999999999846,
+          "max": -0.027199999999999846
+        },
+        "average_bond": {
+          "min": 0.1486333333333328,
+          "max": 0.3015199999999988
+        }
+      }
+    },
+    {
+      "id": "caretaker",
+      "label": "Reactive caretaker",
+      "runs": [
+        {
+          "seed": 7319,
+          "summary": {
+            "attention_spent": 4,
+            "most_trusting": "Luma",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": 0.04410559999999995,
+            "average_observer_fear": -0.05919999999999981,
+            "average_bond": 0.20019999999999913,
+            "depleted_sites": 2,
+            "interventions": 4,
+            "average_energy": 0.5549650083379609,
+            "resource_vitality": 0.28838747999999975,
+            "resource_recovered": 1.3155499199999994,
+            "resource_consumed": 3.1620000000000017,
+            "hazard_exposure_beats": 23,
+            "witnessed_memories": 1,
+            "causal_events": 11
+          }
+        },
+        {
+          "seed": 15238,
+          "summary": {
+            "attention_spent": 4,
+            "most_trusting": "Luma",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": 0.04895679999999995,
+            "average_observer_fear": -0.05919999999999981,
+            "average_bond": 0.3015199999999988,
+            "depleted_sites": 3,
+            "interventions": 4,
+            "average_energy": 0.5323711519034626,
+            "resource_vitality": 0.32677808000000047,
+            "resource_recovered": 1.265112320000002,
+            "resource_consumed": 2.958000000000002,
+            "hazard_exposure_beats": 26,
+            "witnessed_memories": 2,
+            "causal_events": 11
+          }
+        },
+        {
+          "seed": 29011,
+          "summary": {
+            "attention_spent": 6,
+            "most_trusting": "Tilt",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0.005525473968652198,
+            "average_observer_trust": 0.07326959999999996,
+            "average_observer_fear": -0.05919999999999981,
+            "average_bond": 0.3121599999999989,
+            "depleted_sites": 2,
+            "interventions": 5,
+            "average_energy": 0.620047319247004,
+            "resource_vitality": 0.29723816,
+            "resource_recovered": 1.4189526400000005,
+            "resource_consumed": 3.230000000000002,
+            "hazard_exposure_beats": 40,
+            "witnessed_memories": 3,
+            "causal_events": 15
+          }
+        },
+        {
+          "seed": 41047,
+          "summary": {
+            "attention_spent": 4,
+            "most_trusting": "Luma",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": 0.04406239999999996,
+            "average_observer_fear": -0.05919999999999981,
+            "average_bond": 0.1486333333333328,
+            "depleted_sites": 3,
+            "interventions": 4,
+            "average_energy": 0.6857732000000024,
+            "resource_vitality": 0.1310812399999994,
+            "resource_recovered": 1.3663249599999983,
+            "resource_consumed": 3.8420000000000027,
+            "hazard_exposure_beats": 21,
+            "witnessed_memories": 1,
+            "causal_events": 11
+          }
+        },
+        {
+          "seed": 88421,
+          "summary": {
+            "attention_spent": 4,
+            "most_trusting": "Luma",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": 0.05288399999999995,
+            "average_observer_fear": -0.05919999999999981,
+            "average_bond": 0.2931599999999988,
+            "depleted_sites": 3,
+            "interventions": 4,
+            "average_energy": 0.6623033163921022,
+            "resource_vitality": 0.2084183999999984,
+            "resource_recovered": 1.3016735999999938,
+            "resource_consumed": 3.468000000000002,
+            "hazard_exposure_beats": 27,
+            "witnessed_memories": 3,
+            "causal_events": 14
+          }
+        }
+      ],
+      "mean": {
+        "interventions": 4.2,
+        "resource_vitality": 0.2503806719999996,
+        "average_energy": 0.6110919991761063,
+        "hazard_exposure_beats": 27.4,
+        "witnessed_memories": 2,
+        "average_observer_trust": 0.05265567999999995,
+        "average_observer_fear": -0.05919999999999981,
+        "average_bond": 0.25113466666666573
+      },
+      "range": {
+        "interventions": {
+          "min": 4,
+          "max": 5
+        },
+        "resource_vitality": {
+          "min": 0.1310812399999994,
+          "max": 0.32677808000000047
+        },
+        "average_energy": {
+          "min": 0.5323711519034626,
+          "max": 0.6857732000000024
+        },
+        "hazard_exposure_beats": {
+          "min": 21,
+          "max": 40
+        },
+        "witnessed_memories": {
+          "min": 1,
+          "max": 3
+        },
+        "average_observer_trust": {
+          "min": 0.04406239999999996,
+          "max": 0.07326959999999996
+        },
+        "average_observer_fear": {
+          "min": -0.05919999999999981,
+          "max": -0.05919999999999981
+        },
+        "average_bond": {
+          "min": 0.1486333333333328,
+          "max": 0.3121599999999989
+        }
+      }
+    },
+    {
+      "id": "deliberative",
+      "label": "Observation-led policy",
+      "runs": [
+        {
+          "seed": 7319,
+          "summary": {
+            "attention_spent": 6,
+            "most_trusting": "Luma",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": 0.04719999999999998,
+            "average_observer_fear": -0.027199999999999846,
+            "average_bond": 0.2951999999999989,
+            "depleted_sites": 2,
+            "interventions": 3,
+            "average_energy": 0.682841113786863,
+            "resource_vitality": 0.35262328,
+            "resource_recovered": 1.3684931200000001,
+            "resource_consumed": 2.958000000000002,
+            "hazard_exposure_beats": 40,
+            "witnessed_memories": 2,
+            "causal_events": 12
+          }
+        },
+        {
+          "seed": 15238,
+          "summary": {
+            "attention_spent": 8,
+            "most_trusting": "Bracken",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0.004451804767207288,
+            "average_observer_trust": 0.06919999999999997,
+            "average_observer_fear": -0.027199999999999846,
+            "average_bond": 0.35631999999999914,
+            "depleted_sites": 2,
+            "interventions": 4,
+            "average_energy": 0.6016364557707088,
+            "resource_vitality": 0.4212121200000008,
+            "resource_recovered": 1.1668484800000047,
+            "resource_consumed": 2.482000000000001,
+            "hazard_exposure_beats": 32,
+            "witnessed_memories": 7,
+            "causal_events": 16
+          }
+        },
+        {
+          "seed": 29011,
+          "summary": {
+            "attention_spent": 12,
+            "most_trusting": "Silt",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": 0.1292000000000003,
+            "average_observer_fear": -0.027199999999999846,
+            "average_bond": 0.326919999999999,
+            "depleted_sites": 1,
+            "interventions": 6,
+            "average_energy": 0.7554812000000023,
+            "resource_vitality": 0.43499003999999974,
+            "resource_recovered": 1.4599601599999998,
+            "resource_consumed": 2.7200000000000015,
+            "hazard_exposure_beats": 16,
+            "witnessed_memories": 7,
+            "causal_events": 18
+          }
+        },
+        {
+          "seed": 41047,
+          "summary": {
+            "attention_spent": 12,
+            "most_trusting": "Silt",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": 0.12440000000000029,
+            "average_observer_fear": -0.027199999999999846,
+            "average_bond": 0.345139999999999,
+            "depleted_sites": 1,
+            "interventions": 6,
+            "average_energy": 0.900402524509549,
+            "resource_vitality": 0.25468595999999966,
+            "resource_recovered": 1.4187438399999999,
+            "resource_consumed": 3.400000000000002,
+            "hazard_exposure_beats": 25,
+            "witnessed_memories": 9,
+            "causal_events": 23
+          }
+        },
+        {
+          "seed": 88421,
+          "summary": {
+            "attention_spent": 2,
+            "most_trusting": "Silt",
+            "most_wary": "Silt",
+            "strongest_bond": "Luma + Vesper",
+            "average_strain": 0,
+            "average_observer_trust": -0.01040000000000003,
+            "average_observer_fear": -0.027199999999999846,
+            "average_bond": 0.3466399999999988,
+            "depleted_sites": 2,
+            "interventions": 1,
+            "average_energy": 0.6412144000000037,
+            "resource_vitality": 0.28115179999999845,
+            "resource_recovered": 1.3886071999999943,
+            "resource_consumed": 3.264000000000002,
+            "hazard_exposure_beats": 24,
+            "witnessed_memories": 1,
+            "causal_events": 11
+          }
+        }
+      ],
+      "mean": {
+        "interventions": 4,
+        "resource_vitality": 0.34893263999999974,
+        "average_energy": 0.7163151388134252,
+        "hazard_exposure_beats": 27.4,
+        "witnessed_memories": 5.2,
+        "average_observer_trust": 0.07192000000000011,
+        "average_observer_fear": -0.027199999999999846,
+        "average_bond": 0.334043999999999
+      },
+      "range": {
+        "interventions": {
+          "min": 1,
+          "max": 6
+        },
+        "resource_vitality": {
+          "min": 0.25468595999999966,
+          "max": 0.43499003999999974
+        },
+        "average_energy": {
+          "min": 0.6016364557707088,
+          "max": 0.900402524509549
+        },
+        "hazard_exposure_beats": {
+          "min": 16,
+          "max": 40
+        },
+        "witnessed_memories": {
+          "min": 1,
+          "max": 9
+        },
+        "average_observer_trust": {
+          "min": -0.01040000000000003,
+          "max": 0.1292000000000003
+        },
+        "average_observer_fear": {
+          "min": -0.027199999999999846,
+          "max": -0.027199999999999846
+        },
+        "average_bond": {
+          "min": 0.2951999999999989,
+          "max": 0.35631999999999914
+        }
+      }
+    }
+  ]
+}

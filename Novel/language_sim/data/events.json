@@ -1,0 +1,70 @@
+{
+  "events": [
+    {
+      "id": "child_saved",
+      "domain": "biology",
+      "likely_biases": ["resistance", "binding"],
+      "description": "A child survives because a sound, gesture, or taboo prevents escalation."
+    },
+    {
+      "id": "hunter_killed",
+      "domain": "biology",
+      "likely_biases": ["action", "mutation"],
+      "description": "A failed signal or misread posture leads to death."
+    },
+    {
+      "id": "crystal_cracked",
+      "domain": "crystals",
+      "likely_biases": ["mutation", "action"],
+      "description": "A crystal fractures after mishandling, overload, or a wrong sequence."
+    },
+    {
+      "id": "cave_answered",
+      "domain": "place",
+      "likely_biases": ["resistance", "flow", "binding"],
+      "description": "A cave responds to breath, echo, posture, or proximity."
+    },
+    {
+      "id": "fire_started",
+      "domain": "crystals",
+      "likely_biases": ["action", "flow"],
+      "description": "A material emits or conducts enough force to ignite."
+    },
+    {
+      "id": "wound_healed",
+      "domain": "biology",
+      "likely_biases": ["flow", "binding"],
+      "description": "A wound stabilizes through correct handling, song, pressure, or material contact."
+    },
+    {
+      "id": "metal_rang_wrong",
+      "domain": "metals",
+      "likely_biases": ["resistance", "mutation"],
+      "description": "A metal gives a dangerous or false resonance."
+    },
+    {
+      "id": "burial_phrase_preserved",
+      "domain": "language",
+      "likely_biases": ["binding", "resistance"],
+      "description": "A mourning form survives because omission is socially or materially dangerous."
+    },
+    {
+      "id": "trade_misunderstanding",
+      "domain": "language",
+      "likely_biases": ["flow", "mutation"],
+      "description": "A word crosses groups and changes because the receiving group maps it differently."
+    },
+    {
+      "id": "purification_succeeded",
+      "domain": "metals",
+      "likely_biases": ["resistance", "flow", "binding"],
+      "description": "Washing, sorting, heat, or sequence separates mixed matter into a safer state."
+    },
+    {
+      "id": "portal_like_accident",
+      "domain": "place",
+      "likely_biases": ["flow", "mutation", "binding"],
+      "description": "A threshold-like effect appears before anyone understands it as technical."
+    }
+  ]
+}

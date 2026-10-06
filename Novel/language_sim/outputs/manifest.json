@@ -1,0 +1,59 @@
+{
+  "root_count": 28,
+  "proto_word_count": 66,
+  "name_candidate_count": 140,
+  "name_route_count": 5,
+  "phrase_probe_count": 23,
+  "alphabet_attractor_count": 13,
+  "provisional_letter_count": 33,
+  "stable_letter_name_count": 33,
+  "vowel_grid_onset_count": 19,
+  "vowel_grid_probe_count": 475,
+  "phonetic_function_onset_count": 19,
+  "phonetic_analogy_count": 8,
+  "later_consonant_family_count": 10,
+  "later_vowel_family_count": 5,
+  "complete_later_alphabet_letter_count": 15,
+  "lexicon_first_batch_entry_count": 89,
+  "lexicon_review_status_counts": {
+    "promote": 77,
+    "watch": 11,
+    "ritual-only": 1
+  },
+  "later_missing_consonant_families": [],
+  "later_missing_vowel_families": [],
+  "growth_plan": {
+    "current_target": 28,
+    "prototype_floor": 20,
+    "regional_ecology_target": 50,
+    "naming_system_target": 100,
+    "notes": [
+      "Twenty roots were sufficient for testing drift, register, and Neo-bridge mechanics.",
+      "The 28-root batch adds targeted SZ, TH, CHSH, and H pressure so the later mouth-family alphabet has stronger ancestors.",
+      "Around fifty roots would support one regional naming ecology with less repetition.",
+      "Around one hundred roots would begin to support personal, place, material, role, ritual, and technical naming without overusing the same ancestors."
+    ]
+  },
+  "outputs": [
+    "root_ledger.md",
+    "name_candidates.md",
+    "proto_neo_bridge.md",
+    "root_quality_report.md",
+    "sound_taste_report.md",
+    "phrase_samples.md",
+    "evolution_fastforward.md",
+    "provisional_alphabet.md",
+    "proto_words.md",
+    "proto_word_collapse.md",
+    "stable_letter_names_experiment.md",
+    "vowel_combination_grid.md",
+    "phonetic_function_matrix.md",
+    "neo_phonetic_analogy_matrix.md",
+    "later_alphabet_compression_audit.md",
+    "complete_later_alphabet.md",
+    "word_combination_ruleset.md",
+    "lexicon_first_batch.md",
+    "lexicon_review.md",
+    "lexicon_expansion_report.md"
+  ]
+}

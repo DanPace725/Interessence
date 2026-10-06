@@ -1,0 +1,119 @@
+corpus_id,collection,item_type,concept_id,concept,language,phrase,provenance,status,notes
+seed_001,seed,phrase,project_name,project name,NEO,INTERESSENCE,user,working,
+seed_002,seed,phrase,care_bends_friction,care bends friction towards freedom,EN,CARE BENDS FRICTION TOWARDS FREEDOM,user,working,
+seed_003,seed,phrase,care_bends_friction,care bends friction towards freedom,LA,CURA FRICTIONEM AD LIBERTATEM FLECTIT,user,working,
+seed_004,seed,phrase,war_breaks_gate,war breaks the gate,EN,WAR BREAKS THE GATE,user,working,
+seed_005,seed,phrase,war_breaks_gate,war breaks the gate,LA,BELLUM PORTA FRANGIT,user,working,
+seed_006,seed,phrase,war_breaks_gate,war breaks the gate,GA,BRISEANN COGADH AN GEATA,user,working,
+seed_007,seed,phrase,friction_place,friction place,GA,AIT FHRITHCHUIMILTE,user,working,
+seed_008,seed,phrase,knot_seeks_care,knot seeks care,GA,SNAIDHM A IARRANN CURAM,user,working,
+seed_009,seed,phrase,mundane_control,pizza on tuesday,EN,PIZZA ON TUESDAY,user,control,
+seed_010,seed,phrase,color_statement,the sky is blue,EN,THE SPEIR IS BLUE,user,working,
+seed_011,seed,phrase,animal_control,the fox and the hound,EN,THE FOCS AND THE HOUND,user,control,
+expanded_001,expanded,phrase,memory_holds_stone,memory holds the stone / river remembers,EN,THE RIVER REMEMBERS THE STONE,user,working,
+expanded_002,expanded,phrase,memory_opens_gate,memory opens the gate,EN,MEMORY OPENS A HIDDEN GATE,user,working,
+expanded_003,expanded,phrase,broken_vessel_holds_light,broken vessel holds light,EN,THE BROKEN VESSEL HOLDS LIGHT,user,working,
+expanded_004,expanded,phrase,water_teaches_fire,water/fire teaching pair,EN,FIRE TEACHES WATER TO TURN,user,working,
+expanded_005,expanded,phrase,stone_listens,stone listens under rain,EN,STONE LISTENS UNDER THE RAIN,user,working,
+expanded_006,expanded,phrase,key_opens_lock,key opens lock,EN,A SMALL KEY OPENS THE OLD LOCK,user,working,
+expanded_007,expanded,phrase,child_draws_circle,child draws circle,EN,THE CHILD DRAWS A CIRCLE,user,control,
+expanded_008,expanded,phrase,music_bends_room,music bends quiet room,EN,MUSIC BENDS THE QUIET ROOM,user,working,
+expanded_009,expanded,phrase,map_territory,map is not territory,EN,THE MAP IS NOT THE TERRITORY,user,working,
+expanded_010,expanded,phrase,chaos_finds_door,chaos finds a narrow door,EN,CHAOS FINDS A NARROW DOOR,user,working,
+expanded_011,expanded,phrase,order_dreams,order learns to dream,EN,ORDER LEARNS TO DREAM,user,working,
+expanded_012,expanded,phrase,name_changes_shape,name changes shape,EN,THE NAME CHANGES THE SHAPE,user,working,
+expanded_013,expanded,phrase,light_returns_crack,light returns through crack,EN,LIGHT RETURNS THROUGH THE CRACK,user,working,
+expanded_014,expanded,phrase,market_noon,market closes at noon,EN,THE MARKET CLOSES AT NOON,user,control,
+expanded_015,expanded,phrase,coffee_window,coffee waits beside window,EN,COFFEE WAITS BESIDE THE WINDOW,user,control,
+expanded_016,expanded,phrase,train_sunset,train arrives after sunset,EN,THE TRAIN ARRIVES AFTER SUNSET,user,control,
+expanded_017,expanded,phrase,freedom_opens_door,freedom opens the door,LA,LIBERTAS PORTAM APERIT,user,working,
+expanded_018,expanded,phrase,memory_holds_stone,memory holds the stone / river remembers,LA,MEMORIA LAPIDEM TENET,user,working,
+expanded_019,expanded,phrase,water_teaches_fire,water/fire teaching pair,LA,AQUA IGNEM DOCET,user,working,
+expanded_020,expanded,phrase,memory_opens_gate,memory opens the gate,GA,OSCLAIONN CUIMHNE AN GEATA,user,working,
+expanded_021,expanded,phrase,light_breaks_darkness,light breaks the darkness,GA,BRISEANN SOLAS AN DORCHADAS,user,working,
+expanded_022,expanded,phrase,memory_holds_stone,memory holds the stone / river remembers,GA,IS CUIMHIN LEIS AN ABHAINN,user,working,
+translation_001,translation_added,phrase,memory_opens_gate,memory opens the gate,LA,MEMORIA PORTAM ABDITAM APERIT,claude,experimental,not vetted by native speaker
+translation_002,translation_added,phrase,freedom_opens_door,freedom opens the door,EN,FREEDOM OPENS THE DOOR,claude,experimental,added for translation audit
+translation_003,translation_added,phrase,freedom_opens_door,freedom opens the door,GA,OSCLAIONN SAOIRSE AN DORAS,claude,experimental,not vetted by native speaker
+translation_004,translation_added,phrase,light_breaks_darkness,light breaks the darkness,EN,LIGHT BREAKS THE DARKNESS,claude,experimental,added for translation audit
+translation_005,translation_added,phrase,light_breaks_darkness,light breaks the darkness,LA,LUX TENEBRAS FRANGIT,claude,experimental,not vetted by native speaker
+semantic_motion_001,semantic_category,phrase,motion,motion,EN,THE BIRD FLIES SOUTH,claude,experimental,semantic category probe
+semantic_motion_002,semantic_category,phrase,motion,motion,EN,THE RIVER RUNS TO THE SEA,claude,experimental,semantic category probe
+semantic_motion_003,semantic_category,phrase,motion,motion,EN,THE ARROW SEEKS THE TREE,claude,experimental,semantic category probe
+semantic_motion_004,semantic_category,phrase,motion,motion,EN,THE WOLF CHASES THE DEER,claude,experimental,semantic category probe
+semantic_motion_005,semantic_category,phrase,motion,motion,EN,THE WIND CARRIES THE SEED,claude,experimental,semantic category probe
+semantic_containment_001,semantic_category,phrase,containment,containment,EN,THE JAR HOLDS THE HONEY,claude,experimental,semantic category probe
+semantic_containment_002,semantic_category,phrase,containment,containment,EN,THE NEST CRADLES THE EGG,claude,experimental,semantic category probe
+semantic_containment_003,semantic_category,phrase,containment,containment,EN,THE WALL KEEPS THE GARDEN,claude,experimental,semantic category probe
+semantic_containment_004,semantic_category,phrase,containment,containment,EN,THE CUP RECEIVES THE WINE,claude,experimental,semantic category probe
+semantic_containment_005,semantic_category,phrase,containment,containment,EN,THE CAVE HIDES THE BEAR,claude,experimental,semantic category probe
+semantic_breakage_001,semantic_category,phrase,breakage,breakage,EN,THE GLASS SHATTERS ON THE FLOOR,claude,experimental,semantic category probe
+semantic_breakage_002,semantic_category,phrase,breakage,breakage,EN,THE BONE SNAPS UNDER WEIGHT,claude,experimental,semantic category probe
+semantic_breakage_003,semantic_category,phrase,breakage,breakage,EN,THE BRIDGE COLLAPSES IN THE STORM,claude,experimental,semantic category probe
+semantic_breakage_004,semantic_category,phrase,breakage,breakage,EN,THE ICE CRACKS BENEATH THE BOOT,claude,experimental,semantic category probe
+semantic_breakage_005,semantic_category,phrase,breakage,breakage,EN,THE WALL CRUMBLES INTO DUST,claude,experimental,semantic category probe
+semantic_waiting_001,semantic_category,phrase,waiting,waiting,EN,THE OWL WAITS FOR THE NIGHT,claude,experimental,semantic category probe
+semantic_waiting_002,semantic_category,phrase,waiting,waiting,EN,THE STONE LIES ON THE PATH,claude,experimental,semantic category probe
+semantic_waiting_003,semantic_category,phrase,waiting,waiting,EN,THE CANDLE REMAINS UNLIT,claude,experimental,semantic category probe
+semantic_waiting_004,semantic_category,phrase,waiting,waiting,EN,THE HOUSE SLEEPS AT DAWN,claude,experimental,semantic category probe
+semantic_waiting_005,semantic_category,phrase,waiting,waiting,EN,THE LETTER RESTS ON THE TABLE,claude,experimental,semantic category probe
+semantic_opening_001,semantic_category,phrase,opening,opening,EN,THE DOOR OPENS TO THE GARDEN,claude,experimental,semantic category probe
+semantic_opening_002,semantic_category,phrase,opening,opening,EN,THE BOOK REVEALS A SECRET,claude,experimental,semantic category probe
+semantic_opening_003,semantic_category,phrase,opening,opening,EN,THE EYE OPENS TO THE SKY,claude,experimental,semantic category probe
+semantic_opening_004,semantic_category,phrase,opening,opening,EN,THE MAP UNFOLDS THE WORLD,claude,experimental,semantic category probe
+semantic_opening_005,semantic_category,phrase,opening,opening,EN,THE FLOWER OPENS AT MORNING,claude,experimental,semantic category probe
+probe_001,forfeda_probe,probe,phase_shift_min,phase shift reachability,NEO,AEUI,claude,synthetic,AE to UI single Phase Shift event
+probe_002,forfeda_probe,probe,phase_shift_chain,phase shift reachability,NEO,AEAEAE,claude,synthetic,AE to AE to AE
+probe_003,forfeda_probe,probe,phase_shift_climb,phase shift reachability,NEO,UIEAIO,claude,synthetic,UI to EA to IO
+probe_004,forfeda_probe,probe,phase_shift_walk,phase shift reachability,NEO,OIAEUIEA,claude,synthetic,OI to AE to UI to EA
+probe_005,forfeda_probe,probe,turbulence_min,turbulence reachability,NEO,AEA,claude,synthetic,AE to A
+probe_006,forfeda_probe,probe,turbulence_min_rev,turbulence reachability,NEO,AAE,claude,synthetic,A to AE
+probe_007,forfeda_probe,probe,turbulence_chain,turbulence reachability,NEO,IEAU,claude,synthetic,I to EA to U
+probe_008,forfeda_probe,probe,turbulence_oscillate,turbulence reachability,NEO,OIOOIO,claude,synthetic,OI to O to OI to O
+probe_009,forfeda_probe,probe,distort_then_phase,forfeda mixed probe,NEO,FAEUIEA,claude,synthetic,F to AE to UI to EA
+probe_010,forfeda_probe,probe,fracture_then_phase,forfeda mixed probe,NEO,RAEIO,claude,synthetic,R to AE to IO
+probe_011,forfeda_probe,probe,fracture_then_turb_phase,forfeda mixed probe,NEO,MIOAE,claude,synthetic,M to IO to AE
+probe_012,forfeda_probe,probe,distort_chain,forfeda mixed probe,NEO,BEAOIIO,claude,synthetic,B to EA to OI to IO
+probe_013,forfeda_probe,probe,phase_shift_phrase,phase shift dense tokens,NEO,AEUI EAIO OIAE,claude,synthetic,three short tokens
+probe_014,forfeda_probe,probe,mixed_natural,forfeda mixed natural-like,NEO,TAE OIO UIEA,claude,synthetic,word-like Forfeda load
+probe_015,forfeda_probe,probe,vowel_storm,vowel storm,NEO,AOEAIOU,claude,synthetic,pure vowels mixing diagonal and backslash
+controlled_opens_001,controlled_syntax,phrase,opens,controlled syntax opens,EN,THE HAND OPENS THE DOOR,codex,experimental,frame opens noun_pair hand_door
+controlled_opens_002,controlled_syntax,phrase,opens,controlled syntax opens,EN,THE STONE OPENS THE GATE,codex,experimental,frame opens noun_pair stone_gate
+controlled_opens_003,controlled_syntax,phrase,opens,controlled syntax opens,EN,THE RIVER OPENS THE ROAD,codex,experimental,frame opens noun_pair river_road
+controlled_opens_004,controlled_syntax,phrase,opens,controlled syntax opens,EN,THE FIRE OPENS THE WALL,codex,experimental,frame opens noun_pair fire_wall
+controlled_opens_005,controlled_syntax,phrase,opens,controlled syntax opens,EN,THE CHILD OPENS THE BOOK,codex,experimental,frame opens noun_pair child_book
+controlled_holds_001,controlled_syntax,phrase,holds,controlled syntax holds,EN,THE HAND HOLDS THE DOOR,codex,experimental,frame holds noun_pair hand_door
+controlled_holds_002,controlled_syntax,phrase,holds,controlled syntax holds,EN,THE STONE HOLDS THE GATE,codex,experimental,frame holds noun_pair stone_gate
+controlled_holds_003,controlled_syntax,phrase,holds,controlled syntax holds,EN,THE RIVER HOLDS THE ROAD,codex,experimental,frame holds noun_pair river_road
+controlled_holds_004,controlled_syntax,phrase,holds,controlled syntax holds,EN,THE FIRE HOLDS THE WALL,codex,experimental,frame holds noun_pair fire_wall
+controlled_holds_005,controlled_syntax,phrase,holds,controlled syntax holds,EN,THE CHILD HOLDS THE BOOK,codex,experimental,frame holds noun_pair child_book
+controlled_breaks_001,controlled_syntax,phrase,breaks,controlled syntax breaks,EN,THE HAND BREAKS THE DOOR,codex,experimental,frame breaks noun_pair hand_door
+controlled_breaks_002,controlled_syntax,phrase,breaks,controlled syntax breaks,EN,THE STONE BREAKS THE GATE,codex,experimental,frame breaks noun_pair stone_gate
+controlled_breaks_003,controlled_syntax,phrase,breaks,controlled syntax breaks,EN,THE RIVER BREAKS THE ROAD,codex,experimental,frame breaks noun_pair river_road
+controlled_breaks_004,controlled_syntax,phrase,breaks,controlled syntax breaks,EN,THE FIRE BREAKS THE WALL,codex,experimental,frame breaks noun_pair fire_wall
+controlled_breaks_005,controlled_syntax,phrase,breaks,controlled syntax breaks,EN,THE CHILD BREAKS THE BOOK,codex,experimental,frame breaks noun_pair child_book
+controlled_waits_near_001,controlled_syntax,phrase,waits_near,controlled syntax waits near,EN,THE HAND WAITS NEAR THE DOOR,codex,experimental,frame waits_near noun_pair hand_door
+controlled_waits_near_002,controlled_syntax,phrase,waits_near,controlled syntax waits near,EN,THE STONE WAITS NEAR THE GATE,codex,experimental,frame waits_near noun_pair stone_gate
+controlled_waits_near_003,controlled_syntax,phrase,waits_near,controlled syntax waits near,EN,THE RIVER WAITS NEAR THE ROAD,codex,experimental,frame waits_near noun_pair river_road
+controlled_waits_near_004,controlled_syntax,phrase,waits_near,controlled syntax waits near,EN,THE FIRE WAITS NEAR THE WALL,codex,experimental,frame waits_near noun_pair fire_wall
+controlled_waits_near_005,controlled_syntax,phrase,waits_near,controlled syntax waits near,EN,THE CHILD WAITS NEAR THE BOOK,codex,experimental,frame waits_near noun_pair child_book
+minimal_gate_001,minimal_pair,word,gate_family,GATE minimal pair family,EN,GATE,codex,experimental,base gate
+minimal_gate_002,minimal_pair,word,gate_family,GATE minimal pair family,EN,FATE,codex,experimental,one-letter onset change
+minimal_gate_003,minimal_pair,word,gate_family,GATE minimal pair family,EN,LATE,codex,experimental,one-letter onset change
+minimal_gate_004,minimal_pair,word,gate_family,GATE minimal pair family,EN,MATE,codex,experimental,one-letter onset change
+minimal_gate_005,minimal_pair,word,gate_family,GATE minimal pair family,EN,RATE,codex,experimental,one-letter onset change
+minimal_stone_001,minimal_pair,word,stone_family,STONE minimal pair family,EN,STONE,codex,experimental,base stone
+minimal_stone_002,minimal_pair,word,stone_family,STONE minimal pair family,EN,STORE,codex,experimental,one-letter coda change
+minimal_stone_003,minimal_pair,word,stone_family,STONE minimal pair family,EN,STORM,codex,experimental,two-letter coda change
+minimal_stone_004,minimal_pair,word,stone_family,STONE minimal pair family,EN,STERN,codex,experimental,two-letter medial change
+minimal_care_001,minimal_pair,word,care_family,CARE minimal pair family,EN,CARE,codex,experimental,base care
+minimal_care_002,minimal_pair,word,care_family,CARE minimal pair family,EN,CURE,codex,experimental,one-letter vowel change
+minimal_care_003,minimal_pair,word,care_family,CARE minimal pair family,EN,CORE,codex,experimental,one-letter vowel change
+minimal_care_004,minimal_pair,word,care_family,CARE minimal pair family,EN,CIRCE,codex,experimental,two-letter vowel/consonant change
+minimal_break_001,minimal_pair,word,break_family,BREAK minimal pair family,EN,BREAK,codex,experimental,base break
+minimal_break_002,minimal_pair,word,break_family,BREAK minimal pair family,EN,BREAD,codex,experimental,one-letter coda change
+minimal_break_003,minimal_pair,word,break_family,BREAK minimal pair family,EN,BREATHE,codex,experimental,extended coda change
+minimal_light_001,minimal_pair,word,light_family,LIGHT minimal pair family,EN,LIGHT,codex,experimental,base light
+minimal_light_002,minimal_pair,word,light_family,LIGHT minimal pair family,EN,NIGHT,codex,experimental,one-letter onset change
+minimal_light_003,minimal_pair,word,light_family,LIGHT minimal pair family,EN,RIGHT,codex,experimental,one-letter onset change
+minimal_light_004,minimal_pair,word,light_family,LIGHT minimal pair family,EN,SIGHT,codex,experimental,one-letter onset change

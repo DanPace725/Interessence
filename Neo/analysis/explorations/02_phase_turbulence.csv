@@ -1,0 +1,16 @@
+probe_id,phrase,intent,glyph_sequence,glyph_count,phase_shift,turbulence,fracture,distort,invert,all_interactions,dominant,entropy,chord_transform,chord_flow
+phase_shift_min,AEUI,AE to UI single Phase Shift event,AE UI,2,1,0,0,0,0,Phase Shift=1,Phase Shift,0.0,1.0,0.0
+phase_shift_chain,AEAEAE,AE to AE to AE,AE AE AE,3,2,0,0,0,0,Phase Shift=2,Phase Shift,0.0,1.0,0.0
+phase_shift_climb,UIEAIO,UI to EA to IO,UI EA IO,3,2,0,0,0,0,Phase Shift=2,Phase Shift,0.0,1.0,0.0
+phase_shift_walk,OIAEUIEA,OI to AE to UI to EA,OI AE UI EA,4,3,0,0,0,0,Phase Shift=3,Phase Shift,0.0,1.0,0.0
+turbulence_min,AEA,AE to A,AE A,2,0,1,0,0,0,Turbulence=1,Turbulence,0.0,0.5263,0.4737
+turbulence_min_rev,AAE,A to AE,A AE,2,0,1,0,0,0,Turbulence=1,Turbulence,0.0,0.4737,0.5263
+turbulence_chain,IEAU,I to EA to U,I EA U,3,0,2,0,0,0,Turbulence=2,Turbulence,0.0,0.2936,0.7064
+turbulence_oscillate,OIOOIO,OI to O to OI to O,OI O OI O,4,0,3,0,0,0,Turbulence=3,Turbulence,0.0,0.4848,0.5152
+distort_then_phase,FAEUIEA,F to AE to UI to EA,F AE UI EA,4,2,0,0,1,0,Distort=1; Phase Shift=2,Phase Shift,0.9183,0.6739,0.0
+fracture_then_phase,RAEIO,R to AE to IO,R AE IO,3,1,0,1,0,0,Fracture=1; Phase Shift=1,Fracture,1.0,0.5146,0.0
+fracture_then_turb_phase,MIOAE,M to IO to AE,M IO AE,3,1,0,1,0,0,Fracture=1; Phase Shift=1,Fracture,1.0,0.8305,0.0
+distort_chain,BEAOIIO,B to EA to OI to IO,B EA OI IO,4,2,0,0,1,0,Distort=1; Phase Shift=2,Phase Shift,0.9183,0.899,0.0
+phase_shift_phrase,AEUI EAIO OIAE,three short tokens,AE UI EA IO OI AE,6,5,0,0,0,0,Phase Shift=5,Phase Shift,0.0,1.0,0.0
+mixed_natural,TAE OIO UIEA,word-like Forfeda load,T AE OI O UI EA,6,2,2,0,0,1,Invert=1; Phase Shift=2; Turbulence=2,Phase Shift,1.5219,0.6643,0.1259
+vowel_storm,AOEAIOU,pure vowels mixing diagonal and backslash,A O EA IO U,5,1,2,0,0,0,Phase Shift=1; Stream=1; Turbulence=2,Turbulence,1.5,0.5047,0.4953

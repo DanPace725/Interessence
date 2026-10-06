@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Neo Chord Visualizations</title>
+<style>
+body {
+  margin: 0;
+  font-family: Segoe UI, Arial, sans-serif;
+  color: #172033;
+  background: #f6f8fb;
+}
+main {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 34px 24px 48px;
+}
+h1 { font-size: 30px; margin: 0 0 8px; }
+p { max-width: 850px; line-height: 1.55; }
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 18px 0 26px;
+  font-size: 14px;
+}
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #0f172a;
+}
+.grid-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+  gap: 22px;
+}
+.chart {
+  background: #ffffff;
+  border: 1px solid #d7deea;
+  border-radius: 8px;
+  padding: 16px 16px 10px;
+}
+h2 { font-size: 17px; margin: 0 0 8px; }
+svg { width: 100%; height: auto; display: block; }
+.plot-bg { fill: #fbfdff; stroke: #d5deec; }
+.grid { stroke: #e4eaf3; stroke-width: 1; }
+.axis { stroke: #334155; stroke-width: 1.4; }
+.tick { fill: #64748b; font-size: 12px; }
+.tick.x { text-anchor: middle; }
+.tick.y { text-anchor: end; }
+.axis-label { fill: #334155; font-weight: 600; font-size: 13px; text-anchor: middle; }
+</style>
+</head>
+<body>
+<main>
+<h1>Neo Chord Visualizations</h1>
+<p>Generated from <code>neo_phrase_corpus.csv</code> using the current structured natural/translation corpus (38 phrases). Points are colored by language; hover a point to see phrase, dominant interaction, and coordinates.</p>
+<div class="legend"><span><i style="background:#2563eb"></i>EN</span>
+<span><i style="background:#c2410c"></i>LA</span>
+<span><i style="background:#15803d"></i>GA</span>
+<span><i style="background:#7c3aed"></i>NEO</span>
+<span><i style="background:#64748b"></i>UNKNOWN</span></div>
+<div class="grid-wrap">
+<section class="chart"><h2>Flow vs Action</h2>
+<svg viewBox="0 0 720 480" role="img" aria-label="Flow vs Action">
+<rect class="plot-bg" x="78" y="54" width="614" height="356" />
+<line class="grid" x1="78.0" y1="54" x2="78.0" y2="410" />
+<line class="grid" x1="78" y1="54.0" x2="692" y2="54.0" />
+<text class="tick x" x="78.0" y="432">+0.16</text>
+<text class="tick y" x="66" y="58.0">+0.36</text>
+<line class="grid" x1="200.8" y1="54" x2="200.8" y2="410" />
+<line class="grid" x1="78" y1="125.2" x2="692" y2="125.2" />
+<text class="tick x" x="200.8" y="432">+0.28</text>
+<text class="tick y" x="66" y="129.2">+0.19</text>
+<line class="grid" x1="323.6" y1="54" x2="323.6" y2="410" />
+<line class="grid" x1="78" y1="196.4" x2="692" y2="196.4" />
+<text class="tick x" x="323.6" y="432">+0.39</text>
+<text class="tick y" x="66" y="200.4">+0.03</text>
+<line class="grid" x1="446.4" y1="54" x2="446.4" y2="410" />
+<line class="grid" x1="78" y1="267.6" x2="692" y2="267.6" />
+<text class="tick x" x="446.4" y="432">+0.50</text>
+<text class="tick y" x="66" y="271.6">-0.14</text>
+<line class="grid" x1="569.2" y1="54" x2="569.2" y2="410" />
+<line class="grid" x1="78" y1="338.8" x2="692" y2="338.8" />
+<text class="tick x" x="569.2" y="432">+0.61</text>
+<text class="tick y" x="66" y="342.8">-0.30</text>
+<line class="grid" x1="692.0" y1="54" x2="692.0" y2="410" />
+<line class="grid" x1="78" y1="410.0" x2="692" y2="410.0" />
+<text class="tick x" x="692.0" y="432">+0.72</text>
+<text class="tick y" x="66" y="414.0">-0.47</text>
+<line class="axis" x1="78" y1="410" x2="692" y2="410" />
+<line class="axis" x1="78" y1="54" x2="78" y2="410" />
+<text class="axis-label x-label" x="360.0" y="458">flow</text>
+<text class="axis-label y-label" transform="translate(24 240.0) rotate(-90)">action_net</text>
+<circle cx="514.9" cy="209.1" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE RIVER REMEMBERS THE STONE | EN | Gate | flow=+0.563, action_net=+0.000</title></circle>
+<circle cx="496.8" cy="181.7" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MEMORY OPENS A HIDDEN GATE | EN | Gate | flow=+0.546, action_net=+0.064</title></circle>
+<circle cx="528.1" cy="132.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE BROKEN VESSEL HOLDS LIGHT | EN | Propel | flow=+0.575, action_net=+0.178</title></circle>
+<circle cx="312.7" cy="323.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>FIRE TEACHES WATER TO TURN | EN | Dampen | flow=+0.378, action_net=-0.265</title></circle>
+<circle cx="482.5" cy="182.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>STONE LISTENS UNDER THE RAIN | EN | Gate | flow=+0.533, action_net=+0.062</title></circle>
+<circle cx="611.1" cy="164.7" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>A SMALL KEY OPENS THE OLD LOCK | EN | Propel | flow=+0.651, action_net=+0.103</title></circle>
+<circle cx="346.7" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE CHILD DRAWS A CIRCLE | EN | Dampen | flow=+0.409, action_net=-0.409</title></circle>
+<circle cx="372.4" cy="341.0" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MUSIC BENDS THE QUIET ROOM | EN | Gate | flow=+0.433, action_net=-0.306</title></circle>
+<circle cx="426.8" cy="275.3" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE MAP IS NOT THE TERRITORY | EN | Dampen | flow=+0.482, action_net=-0.153</title></circle>
+<circle cx="333.5" cy="243.1" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>CHAOS FINDS A NARROW DOOR | EN | Gate | flow=+0.397, action_net=-0.079</title></circle>
+<circle cx="120.3" cy="217.6" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>ORDER LEARNS TO DREAM | EN | Anchor | flow=+0.203, action_net=-0.020</title></circle>
+<circle cx="633.7" cy="249.2" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE NAME CHANGES THE SHAPE | EN | Gate | flow=+0.671, action_net=-0.093</title></circle>
+<circle cx="230.7" cy="354.3" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LIGHT RETURNS THROUGH THE CRACK | EN | Gate | flow=+0.303, action_net=-0.337</title></circle>
+<circle cx="385.9" cy="317.2" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE MARKET CLOSES AT NOON | EN | Gate | flow=+0.445, action_net=-0.251</title></circle>
+<circle cx="587.1" cy="352.7" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>COFFEE WAITS BESIDE THE WINDOW | EN | Dampen | flow=+0.629, action_net=-0.333</title></circle>
+<circle cx="432.5" cy="181.2" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE TRAIN ARRIVES AFTER SUNSET | EN | Gate | flow=+0.488, action_net=+0.065</title></circle>
+<circle cx="395.1" cy="97.7" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LIBERTAS PORTAM APERIT | LA | Propel | flow=+0.454, action_net=+0.259</title></circle>
+<circle cx="649.7" cy="237.1" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MEMORIA LAPIDEM TENET | LA | Gate | flow=+0.686, action_net=-0.065</title></circle>
+<circle cx="404.2" cy="384.3" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>AQUA IGNEM DOCET | LA | Dampen | flow=+0.462, action_net=-0.407</title></circle>
+<circle cx="169.7" cy="267.1" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>OSCLAIONN CUIMHNE AN GEATA | GA | Fracture | flow=+0.248, action_net=-0.135</title></circle>
+<circle cx="178.5" cy="91.7" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>BRISEANN SOLAS AN DORCHADAS | GA | Propel | flow=+0.256, action_net=+0.273</title></circle>
+<circle cx="476.6" cy="154.0" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>IS CUIMHIN LEIS AN ABHAINN | GA | Propel | flow=+0.528, action_net=+0.128</title></circle>
+<circle cx="631.6" cy="198.2" r="7" fill="#7c3aed" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>INTERESSENCE | NEO | Gate | flow=+0.669, action_net=+0.025</title></circle>
+<circle cx="358.0" cy="243.8" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>CARE BENDS FRICTION TOWARDS FREEDOM | EN | Dampen | flow=+0.420, action_net=-0.080</title></circle>
+<circle cx="420.5" cy="295.5" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>CURA FRICTIONEM AD LIBERTATEM FLECTIT | LA | Dampen | flow=+0.477, action_net=-0.200</title></circle>
+<circle cx="218.7" cy="329.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>WAR BREAKS THE GATE | EN | Dampen | flow=+0.292, action_net=-0.279</title></circle>
+<circle cx="319.1" cy="106.3" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>BELLUM PORTA FRANGIT | LA | Propel | flow=+0.384, action_net=+0.239</title></circle>
+<circle cx="144.5" cy="270.5" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>BRISEANN COGADH AN GEATA | GA | Gate | flow=+0.225, action_net=-0.142</title></circle>
+<circle cx="501.7" cy="314.8" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>AIT FHRITHCHUIMILTE | GA | Dampen | flow=+0.551, action_net=-0.245</title></circle>
+<circle cx="356.1" cy="232.3" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>SNAIDHM A IARRANN CURAM | GA | Gate | flow=+0.418, action_net=-0.054</title></circle>
+<circle cx="475.8" cy="151.5" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>PIZZA ON TUESDAY | EN | Gate | flow=+0.527, action_net=+0.134</title></circle>
+<circle cx="517.8" cy="78.6" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE SPEIR IS BLUE | EN | Reinforce | flow=+0.566, action_net=+0.303</title></circle>
+<circle cx="467.6" cy="344.8" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE FOCS AND THE HOUND | EN | Dampen | flow=+0.520, action_net=-0.315</title></circle>
+<circle cx="548.8" cy="181.8" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MEMORIA PORTAM ABDITAM APERIT | LA | Gate | flow=+0.594, action_net=+0.064</title></circle>
+<circle cx="480.6" cy="160.1" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>FREEDOM OPENS THE DOOR | EN | Gate | flow=+0.532, action_net=+0.114</title></circle>
+<circle cx="195.6" cy="94.6" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>OSCLAIONN SAOIRSE AN DORAS | GA | Propel | flow=+0.271, action_net=+0.266</title></circle>
+<circle cx="381.2" cy="232.0" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LIGHT BREAKS THE DARKNESS | EN | Anchor | flow=+0.441, action_net=-0.053</title></circle>
+<circle cx="364.0" cy="138.6" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LUX TENEBRAS FRANGIT | LA | Gate | flow=+0.425, action_net=+0.164</title></circle>
+</svg></section><section class="chart"><h2>Flow vs Structure</h2>
+<svg viewBox="0 0 720 480" role="img" aria-label="Flow vs Structure">
+<rect class="plot-bg" x="78" y="54" width="614" height="356" />
+<line class="grid" x1="78.0" y1="54" x2="78.0" y2="410" />
+<line class="grid" x1="78" y1="54.0" x2="692" y2="54.0" />
+<text class="tick x" x="78.0" y="432">+0.16</text>
+<text class="tick y" x="66" y="58.0">+0.64</text>
+<line class="grid" x1="200.8" y1="54" x2="200.8" y2="410" />
+<line class="grid" x1="78" y1="125.2" x2="692" y2="125.2" />
+<text class="tick x" x="200.8" y="432">+0.28</text>
+<text class="tick y" x="66" y="129.2">+0.51</text>
+<line class="grid" x1="323.6" y1="54" x2="323.6" y2="410" />
+<line class="grid" x1="78" y1="196.4" x2="692" y2="196.4" />
+<text class="tick x" x="323.6" y="432">+0.39</text>
+<text class="tick y" x="66" y="200.4">+0.38</text>
+<line class="grid" x1="446.4" y1="54" x2="446.4" y2="410" />
+<line class="grid" x1="78" y1="267.6" x2="692" y2="267.6" />
+<text class="tick x" x="446.4" y="432">+0.50</text>
+<text class="tick y" x="66" y="271.6">+0.25</text>
+<line class="grid" x1="569.2" y1="54" x2="569.2" y2="410" />
+<line class="grid" x1="78" y1="338.8" x2="692" y2="338.8" />
+<text class="tick x" x="569.2" y="432">+0.61</text>
+<text class="tick y" x="66" y="342.8">+0.12</text>
+<line class="grid" x1="692.0" y1="54" x2="692.0" y2="410" />
+<line class="grid" x1="78" y1="410.0" x2="692" y2="410.0" />
+<text class="tick x" x="692.0" y="432">+0.72</text>
+<text class="tick y" x="66" y="414.0">-0.01</text>
+<line class="axis" x1="78" y1="410" x2="692" y2="410" />
+<line class="axis" x1="78" y1="54" x2="78" y2="410" />
+<text class="axis-label x-label" x="360.0" y="458">flow</text>
+<text class="axis-label y-label" transform="translate(24 240.0) rotate(-90)">structure</text>
+<circle cx="514.9" cy="165.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE RIVER REMEMBERS THE STONE | EN | Gate | flow=+0.563, structure=+0.437</title></circle>
+<circle cx="496.8" cy="244.0" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MEMORY OPENS A HIDDEN GATE | EN | Gate | flow=+0.546, structure=+0.294</title></circle>
+<circle cx="528.1" cy="270.2" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE BROKEN VESSEL HOLDS LIGHT | EN | Propel | flow=+0.575, structure=+0.247</title></circle>
+<circle cx="312.7" cy="248.1" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>FIRE TEACHES WATER TO TURN | EN | Dampen | flow=+0.378, structure=+0.287</title></circle>
+<circle cx="482.5" cy="183.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>STONE LISTENS UNDER THE RAIN | EN | Gate | flow=+0.533, structure=+0.404</title></circle>
+<circle cx="611.1" cy="349.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>A SMALL KEY OPENS THE OLD LOCK | EN | Propel | flow=+0.651, structure=+0.103</title></circle>
+<circle cx="346.7" cy="306.3" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE CHILD DRAWS A CIRCLE | EN | Dampen | flow=+0.409, structure=+0.181</title></circle>
+<circle cx="372.4" cy="287.0" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MUSIC BENDS THE QUIET ROOM | EN | Gate | flow=+0.433, structure=+0.216</title></circle>
+<circle cx="426.8" cy="249.2" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE MAP IS NOT THE TERRITORY | EN | Dampen | flow=+0.482, structure=+0.285</title></circle>
+<circle cx="333.5" cy="117.6" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>CHAOS FINDS A NARROW DOOR | EN | Gate | flow=+0.397, structure=+0.524</title></circle>
+<circle cx="120.3" cy="78.6" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>ORDER LEARNS TO DREAM | EN | Anchor | flow=+0.203, structure=+0.595</title></circle>
+<circle cx="633.7" cy="276.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE NAME CHANGES THE SHAPE | EN | Gate | flow=+0.671, structure=+0.236</title></circle>
+<circle cx="230.7" cy="208.1" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LIGHT RETURNS THROUGH THE CRACK | EN | Gate | flow=+0.303, structure=+0.360</title></circle>
+<circle cx="385.9" cy="238.7" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE MARKET CLOSES AT NOON | EN | Gate | flow=+0.445, structure=+0.304</title></circle>
+<circle cx="587.1" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>COFFEE WAITS BESIDE THE WINDOW | EN | Dampen | flow=+0.629, structure=+0.038</title></circle>
+<circle cx="432.5" cy="159.8" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE TRAIN ARRIVES AFTER SUNSET | EN | Gate | flow=+0.488, structure=+0.447</title></circle>
+<circle cx="395.1" cy="247.7" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LIBERTAS PORTAM APERIT | LA | Propel | flow=+0.454, structure=+0.288</title></circle>
+<circle cx="649.7" cy="269.0" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MEMORIA LAPIDEM TENET | LA | Gate | flow=+0.686, structure=+0.249</title></circle>
+<circle cx="404.2" cy="333.8" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>AQUA IGNEM DOCET | LA | Dampen | flow=+0.462, structure=+0.132</title></circle>
+<circle cx="169.7" cy="210.8" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>OSCLAIONN CUIMHNE AN GEATA | GA | Fracture | flow=+0.248, structure=+0.355</title></circle>
+<circle cx="178.5" cy="184.0" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>BRISEANN SOLAS AN DORCHADAS | GA | Propel | flow=+0.256, structure=+0.403</title></circle>
+<circle cx="476.6" cy="252.0" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>IS CUIMHIN LEIS AN ABHAINN | GA | Propel | flow=+0.528, structure=+0.280</title></circle>
+<circle cx="631.6" cy="238.1" r="7" fill="#7c3aed" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>INTERESSENCE | NEO | Gate | flow=+0.669, structure=+0.305</title></circle>
+<circle cx="358.0" cy="167.7" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>CARE BENDS FRICTION TOWARDS FREEDOM | EN | Dampen | flow=+0.420, structure=+0.433</title></circle>
+<circle cx="420.5" cy="260.5" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>CURA FRICTIONEM AD LIBERTATEM FLECTIT | LA | Dampen | flow=+0.477, structure=+0.265</title></circle>
+<circle cx="218.7" cy="214.1" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>WAR BREAKS THE GATE | EN | Dampen | flow=+0.292, structure=+0.349</title></circle>
+<circle cx="319.1" cy="198.4" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>BELLUM PORTA FRANGIT | LA | Propel | flow=+0.384, structure=+0.377</title></circle>
+<circle cx="144.5" cy="155.2" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>BRISEANN COGADH AN GEATA | GA | Gate | flow=+0.225, structure=+0.456</title></circle>
+<circle cx="501.7" cy="331.4" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>AIT FHRITHCHUIMILTE | GA | Dampen | flow=+0.551, structure=+0.136</title></circle>
+<circle cx="356.1" cy="115.1" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>SNAIDHM A IARRANN CURAM | GA | Gate | flow=+0.418, structure=+0.528</title></circle>
+<circle cx="475.8" cy="233.3" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>PIZZA ON TUESDAY | EN | Gate | flow=+0.527, structure=+0.314</title></circle>
+<circle cx="517.8" cy="333.9" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE SPEIR IS BLUE | EN | Reinforce | flow=+0.566, structure=+0.131</title></circle>
+<circle cx="467.6" cy="315.1" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE FOCS AND THE HOUND | EN | Dampen | flow=+0.520, structure=+0.165</title></circle>
+<circle cx="548.8" cy="217.5" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MEMORIA PORTAM ABDITAM APERIT | LA | Gate | flow=+0.594, structure=+0.343</title></circle>
+<circle cx="480.6" cy="211.0" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>FREEDOM OPENS THE DOOR | EN | Gate | flow=+0.532, structure=+0.354</title></circle>
+<circle cx="195.6" cy="212.8" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>OSCLAIONN SAOIRSE AN DORAS | GA | Propel | flow=+0.271, structure=+0.351</title></circle>
+<circle cx="381.2" cy="181.3" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LIGHT BREAKS THE DARKNESS | EN | Anchor | flow=+0.441, structure=+0.408</title></circle>
+<circle cx="364.0" cy="179.7" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LUX TENEBRAS FRANGIT | LA | Gate | flow=+0.425, structure=+0.411</title></circle>
+</svg></section><section class="chart"><h2>Structure vs Transform</h2>
+<svg viewBox="0 0 720 480" role="img" aria-label="Structure vs Transform">
+<rect class="plot-bg" x="78" y="54" width="614" height="356" />
+<line class="grid" x1="78.0" y1="54" x2="78.0" y2="410" />
+<line class="grid" x1="78" y1="54.0" x2="692" y2="54.0" />
+<text class="tick x" x="78.0" y="432">-0.01</text>
+<text class="tick y" x="66" y="58.0">+0.28</text>
+<line class="grid" x1="200.8" y1="54" x2="200.8" y2="410" />
+<line class="grid" x1="78" y1="125.2" x2="692" y2="125.2" />
+<text class="tick x" x="200.8" y="432">+0.12</text>
+<text class="tick y" x="66" y="129.2">+0.22</text>
+<line class="grid" x1="323.6" y1="54" x2="323.6" y2="410" />
+<line class="grid" x1="78" y1="196.4" x2="692" y2="196.4" />
+<text class="tick x" x="323.6" y="432">+0.25</text>
+<text class="tick y" x="66" y="200.4">+0.16</text>
+<line class="grid" x1="446.4" y1="54" x2="446.4" y2="410" />
+<line class="grid" x1="78" y1="267.6" x2="692" y2="267.6" />
+<text class="tick x" x="446.4" y="432">+0.38</text>
+<text class="tick y" x="66" y="271.6">+0.10</text>
+<line class="grid" x1="569.2" y1="54" x2="569.2" y2="410" />
+<line class="grid" x1="78" y1="338.8" x2="692" y2="338.8" />
+<text class="tick x" x="569.2" y="432">+0.51</text>
+<text class="tick y" x="66" y="342.8">+0.04</text>
+<line class="grid" x1="692.0" y1="54" x2="692.0" y2="410" />
+<line class="grid" x1="78" y1="410.0" x2="692" y2="410.0" />
+<text class="tick x" x="692.0" y="432">+0.64</text>
+<text class="tick y" x="66" y="414.0">-0.02</text>
+<line class="axis" x1="78" y1="410" x2="692" y2="410" />
+<line class="axis" x1="78" y1="54" x2="78" y2="410" />
+<text class="axis-label x-label" x="360.0" y="458">structure</text>
+<text class="axis-label y-label" transform="translate(24 240.0) rotate(-90)">transform</text>
+<circle cx="499.8" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE RIVER REMEMBERS THE STONE | EN | Gate | structure=+0.437, transform=+0.000</title></circle>
+<circle cx="364.2" cy="274.0" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MEMORY OPENS A HIDDEN GATE | EN | Gate | structure=+0.294, transform=+0.096</title></circle>
+<circle cx="319.1" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE BROKEN VESSEL HOLDS LIGHT | EN | Propel | structure=+0.247, transform=+0.000</title></circle>
+<circle cx="357.2" cy="304.2" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>FIRE TEACHES WATER TO TURN | EN | Dampen | structure=+0.287, transform=+0.070</title></circle>
+<circle cx="468.8" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>STONE LISTENS UNDER THE RAIN | EN | Gate | structure=+0.404, transform=+0.000</title></circle>
+<circle cx="182.6" cy="218.7" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>A SMALL KEY OPENS THE OLD LOCK | EN | Propel | structure=+0.103, transform=+0.143</title></circle>
+<circle cx="256.8" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE CHILD DRAWS A CIRCLE | EN | Dampen | structure=+0.181, transform=+0.000</title></circle>
+<circle cx="290.1" cy="333.2" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MUSIC BENDS THE QUIET ROOM | EN | Gate | structure=+0.216, transform=+0.045</title></circle>
+<circle cx="355.4" cy="293.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE MAP IS NOT THE TERRITORY | EN | Dampen | structure=+0.285, transform=+0.079</title></circle>
+<circle cx="582.4" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>CHAOS FINDS A NARROW DOOR | EN | Gate | structure=+0.524, transform=+0.000</title></circle>
+<circle cx="649.7" cy="171.9" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>ORDER LEARNS TO DREAM | EN | Anchor | structure=+0.595, transform=+0.183</title></circle>
+<circle cx="308.5" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE NAME CHANGES THE SHAPE | EN | Gate | structure=+0.236, transform=+0.000</title></circle>
+<circle cx="426.2" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LIGHT RETURNS THROUGH THE CRACK | EN | Gate | structure=+0.360, transform=+0.000</title></circle>
+<circle cx="373.5" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE MARKET CLOSES AT NOON | EN | Gate | structure=+0.304, transform=+0.000</title></circle>
+<circle cx="120.3" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>COFFEE WAITS BESIDE THE WINDOW | EN | Dampen | structure=+0.038, transform=+0.000</title></circle>
+<circle cx="509.6" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE TRAIN ARRIVES AFTER SUNSET | EN | Gate | structure=+0.447, transform=+0.000</title></circle>
+<circle cx="358.0" cy="385.4" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LIBERTAS PORTAM APERIT | LA | Propel | structure=+0.288, transform=+0.000</title></circle>
+<circle cx="321.2" cy="385.4" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MEMORIA LAPIDEM TENET | LA | Gate | structure=+0.249, transform=+0.000</title></circle>
+<circle cx="209.5" cy="385.4" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>AQUA IGNEM DOCET | LA | Dampen | structure=+0.132, transform=+0.000</title></circle>
+<circle cx="421.5" cy="78.6" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>OSCLAIONN CUIMHNE AN GEATA | GA | Fracture | structure=+0.355, transform=+0.263</title></circle>
+<circle cx="467.8" cy="305.9" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>BRISEANN SOLAS AN DORCHADAS | GA | Propel | structure=+0.403, transform=+0.068</title></circle>
+<circle cx="350.6" cy="310.8" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>IS CUIMHIN LEIS AN ABHAINN | GA | Propel | structure=+0.280, transform=+0.064</title></circle>
+<circle cx="374.4" cy="385.4" r="7" fill="#7c3aed" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>INTERESSENCE | NEO | Gate | structure=+0.305, transform=+0.000</title></circle>
+<circle cx="495.9" cy="307.3" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>CARE BENDS FRICTION TOWARDS FREEDOM | EN | Dampen | structure=+0.433, transform=+0.067</title></circle>
+<circle cx="335.9" cy="317.3" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>CURA FRICTIONEM AD LIBERTATEM FLECTIT | LA | Dampen | structure=+0.265, transform=+0.058</title></circle>
+<circle cx="415.9" cy="292.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>WAR BREAKS THE GATE | EN | Dampen | structure=+0.349, transform=+0.080</title></circle>
+<circle cx="442.9" cy="385.4" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>BELLUM PORTA FRANGIT | LA | Propel | structure=+0.377, transform=+0.000</title></circle>
+<circle cx="517.5" cy="178.7" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>BRISEANN COGADH AN GEATA | GA | Gate | structure=+0.456, transform=+0.177</title></circle>
+<circle cx="213.6" cy="306.2" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>AIT FHRITHCHUIMILTE | GA | Dampen | structure=+0.136, transform=+0.068</title></circle>
+<circle cx="586.6" cy="385.4" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>SNAIDHM A IARRANN CURAM | GA | Gate | structure=+0.528, transform=+0.000</title></circle>
+<circle cx="382.7" cy="356.2" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>PIZZA ON TUESDAY | EN | Gate | structure=+0.314, transform=+0.025</title></circle>
+<circle cx="209.2" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE SPEIR IS BLUE | EN | Reinforce | structure=+0.131, transform=+0.000</title></circle>
+<circle cx="241.7" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE FOCS AND THE HOUND | EN | Dampen | structure=+0.165, transform=+0.000</title></circle>
+<circle cx="409.9" cy="385.4" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MEMORIA PORTAM ABDITAM APERIT | LA | Gate | structure=+0.343, transform=+0.000</title></circle>
+<circle cx="421.2" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>FREEDOM OPENS THE DOOR | EN | Gate | structure=+0.354, transform=+0.000</title></circle>
+<circle cx="418.1" cy="255.1" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>OSCLAIONN SAOIRSE AN DORAS | GA | Propel | structure=+0.351, transform=+0.112</title></circle>
+<circle cx="472.4" cy="271.1" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LIGHT BREAKS THE DARKNESS | EN | Anchor | structure=+0.408, transform=+0.098</title></circle>
+<circle cx="475.1" cy="385.4" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LUX TENEBRAS FRANGIT | LA | Gate | structure=+0.411, transform=+0.000</title></circle>
+</svg></section><section class="chart"><h2>PCA Of Chord Vectors</h2>
+<svg viewBox="0 0 720 480" role="img" aria-label="PCA Of Chord Vectors">
+<rect class="plot-bg" x="78" y="54" width="614" height="356" />
+<line class="grid" x1="78.0" y1="54" x2="78.0" y2="410" />
+<line class="grid" x1="78" y1="54.0" x2="692" y2="54.0" />
+<text class="tick x" x="78.0" y="432">-0.45</text>
+<text class="tick y" x="66" y="58.0">+0.44</text>
+<line class="grid" x1="200.8" y1="54" x2="200.8" y2="410" />
+<line class="grid" x1="78" y1="125.2" x2="692" y2="125.2" />
+<text class="tick x" x="200.8" y="432">-0.28</text>
+<text class="tick y" x="66" y="129.2">+0.29</text>
+<line class="grid" x1="323.6" y1="54" x2="323.6" y2="410" />
+<line class="grid" x1="78" y1="196.4" x2="692" y2="196.4" />
+<text class="tick x" x="323.6" y="432">-0.12</text>
+<text class="tick y" x="66" y="200.4">+0.14</text>
+<line class="grid" x1="446.4" y1="54" x2="446.4" y2="410" />
+<line class="grid" x1="78" y1="267.6" x2="692" y2="267.6" />
+<text class="tick x" x="446.4" y="432">+0.05</text>
+<text class="tick y" x="66" y="271.6">-0.02</text>
+<line class="grid" x1="569.2" y1="54" x2="569.2" y2="410" />
+<line class="grid" x1="78" y1="338.8" x2="692" y2="338.8" />
+<text class="tick x" x="569.2" y="432">+0.22</text>
+<text class="tick y" x="66" y="342.8">-0.17</text>
+<line class="grid" x1="692.0" y1="54" x2="692.0" y2="410" />
+<line class="grid" x1="78" y1="410.0" x2="692" y2="410.0" />
+<text class="tick x" x="692.0" y="432">+0.39</text>
+<text class="tick y" x="66" y="414.0">-0.32</text>
+<line class="axis" x1="78" y1="410" x2="692" y2="410" />
+<line class="axis" x1="78" y1="54" x2="78" y2="410" />
+<text class="axis-label x-label" x="360.0" y="458">PCA 1</text>
+<text class="axis-label y-label" transform="translate(24 240.0) rotate(-90)">PCA 2</text>
+<circle cx="464.2" cy="267.6" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE RIVER REMEMBERS THE STONE | EN | Gate | PCA 1=+0.076, PCA 2=-0.016</title></circle>
+<circle cx="484.6" cy="297.0" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MEMORY OPENS A HIDDEN GATE | EN | Gate | PCA 1=+0.103, PCA 2=-0.080</title></circle>
+<circle cx="557.9" cy="336.7" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE BROKEN VESSEL HOLDS LIGHT | EN | Propel | PCA 1=+0.203, PCA 2=-0.166</title></circle>
+<circle cx="247.6" cy="221.3" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>FIRE TEACHES WATER TO TURN | EN | Dampen | PCA 1=-0.220, PCA 2=+0.083</title></circle>
+<circle cx="502.5" cy="270.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>STONE LISTENS UNDER THE RAIN | EN | Gate | PCA 1=+0.128, PCA 2=-0.022</title></circle>
+<circle cx="480.3" cy="385.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>A SMALL KEY OPENS THE OLD LOCK | EN | Propel | PCA 1=+0.098, PCA 2=-0.271</title></circle>
+<circle cx="126.7" cy="259.0" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE CHILD DRAWS A CIRCLE | EN | Dampen | PCA 1=-0.385, PCA 2=+0.002</title></circle>
+<circle cx="206.7" cy="259.9" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MUSIC BENDS THE QUIET ROOM | EN | Gate | PCA 1=-0.276, PCA 2=+0.000</title></circle>
+<circle cx="327.7" cy="264.8" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE MAP IS NOT THE TERRITORY | EN | Dampen | PCA 1=-0.111, PCA 2=-0.010</title></circle>
+<circle cx="421.8" cy="180.0" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>CHAOS FINDS A NARROW DOOR | EN | Gate | PCA 1=+0.018, PCA 2=+0.173</title></circle>
+<circle cx="474.7" cy="78.6" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>ORDER LEARNS TO DREAM | EN | Anchor | PCA 1=+0.090, PCA 2=+0.391</title></circle>
+<circle cx="363.9" cy="356.2" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE NAME CHANGES THE SHAPE | EN | Gate | PCA 1=-0.061, PCA 2=-0.208</title></circle>
+<circle cx="208.3" cy="176.5" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LIGHT RETURNS THROUGH THE CRACK | EN | Gate | PCA 1=-0.273, PCA 2=+0.180</title></circle>
+<circle cx="261.4" cy="247.4" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE MARKET CLOSES AT NOON | EN | Gate | PCA 1=-0.201, PCA 2=+0.027</title></circle>
+<circle cx="157.8" cy="381.3" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>COFFEE WAITS BESIDE THE WINDOW | EN | Dampen | PCA 1=-0.342, PCA 2=-0.262</title></circle>
+<circle cx="511.5" cy="242.5" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE TRAIN ARRIVES AFTER SUNSET | EN | Gate | PCA 1=+0.140, PCA 2=+0.038</title></circle>
+<circle cx="621.3" cy="287.7" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LIBERTAS PORTAM APERIT | LA | Propel | PCA 1=+0.290, PCA 2=-0.060</title></circle>
+<circle cx="386.4" cy="359.4" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MEMORIA LAPIDEM TENET | LA | Gate | PCA 1=-0.030, PCA 2=-0.215</title></circle>
+<circle cx="120.3" cy="291.6" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>AQUA IGNEM DOCET | LA | Dampen | PCA 1=-0.393, PCA 2=-0.068</title></circle>
+<circle cx="351.4" cy="146.9" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>OSCLAIONN CUIMHNE AN GEATA | GA | Fracture | PCA 1=-0.078, PCA 2=+0.244</title></circle>
+<circle cx="649.7" cy="180.4" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>BRISEANN SOLAS AN DORCHADAS | GA | Propel | PCA 1=+0.329, PCA 2=+0.172</title></circle>
+<circle cx="527.6" cy="301.7" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>IS CUIMHIN LEIS AN ABHAINN | GA | Propel | PCA 1=+0.162, PCA 2=-0.090</title></circle>
+<circle cx="460.2" cy="343.7" r="7" fill="#7c3aed" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>INTERESSENCE | NEO | Gate | PCA 1=+0.070, PCA 2=-0.181</title></circle>
+<circle cx="405.0" cy="207.0" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>CARE BENDS FRICTION TOWARDS FREEDOM | EN | Dampen | PCA 1=-0.005, PCA 2=+0.114</title></circle>
+<circle cx="290.7" cy="267.4" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>CURA FRICTIONEM AD LIBERTATEM FLECTIT | LA | Dampen | PCA 1=-0.161, PCA 2=-0.016</title></circle>
+<circle cx="247.7" cy="172.0" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>WAR BREAKS THE GATE | EN | Dampen | PCA 1=-0.220, PCA 2=+0.190</title></circle>
+<circle cx="622.1" cy="237.0" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>BELLUM PORTA FRANGIT | LA | Propel | PCA 1=+0.291, PCA 2=+0.050</title></circle>
+<circle cx="363.2" cy="118.0" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>BRISEANN COGADH AN GEATA | GA | Gate | PCA 1=-0.062, PCA 2=+0.306</title></circle>
+<circle cx="236.9" cy="325.8" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>AIT FHRITHCHUIMILTE | GA | Dampen | PCA 1=-0.234, PCA 2=-0.142</title></circle>
+<circle cx="440.6" cy="187.6" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>SNAIDHM A IARRANN CURAM | GA | Gate | PCA 1=+0.044, PCA 2=+0.156</title></circle>
+<circle cx="537.7" cy="295.9" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>PIZZA ON TUESDAY | EN | Gate | PCA 1=+0.176, PCA 2=-0.078</title></circle>
+<circle cx="626.6" cy="373.9" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE SPEIR IS BLUE | EN | Reinforce | PCA 1=+0.297, PCA 2=-0.246</title></circle>
+<circle cx="192.1" cy="308.3" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>THE FOCS AND THE HOUND | EN | Dampen | PCA 1=-0.296, PCA 2=-0.104</title></circle>
+<circle cx="493.2" cy="309.1" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>MEMORIA PORTAM ABDITAM APERIT | LA | Gate | PCA 1=+0.115, PCA 2=-0.106</title></circle>
+<circle cx="530.6" cy="287.1" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>FREEDOM OPENS THE DOOR | EN | Gate | PCA 1=+0.166, PCA 2=-0.059</title></circle>
+<circle cx="635.9" cy="196.1" r="5" fill="#15803d" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>OSCLAIONN SAOIRSE AN DORAS | GA | Propel | PCA 1=+0.310, PCA 2=+0.138</title></circle>
+<circle cx="420.4" cy="220.3" r="5" fill="#2563eb" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LIGHT BREAKS THE DARKNESS | EN | Anchor | PCA 1=+0.016, PCA 2=+0.086</title></circle>
+<circle cx="575.0" cy="237.1" r="5" fill="#c2410c" stroke="#0f172a" stroke-width="0.7" opacity="0.88"><title>LUX TENEBRAS FRANGIT | LA | Gate | PCA 1=+0.227, PCA 2=+0.049</title></circle>
+</svg></section>
+</div>
+</main>
+</body>
+</html>

@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neo Rotation Atlas</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #121416;
+      --panel: #1b2024;
+      --panel-2: #242b30;
+      --ink: #f4efe6;
+      --muted: #a9b0ad;
+      --line: #394247;
+      --accent: #f2b84b;
+      --accent-2: #72c7d8;
+      --mark: #f5f1e8;
+      --stem: #87928e;
+      --ghost: #596268;
+      --warn: #d77d6d;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    main {
+      width: min(1500px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 24px 0 40px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 52px);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      margin: 0;
+      color: var(--muted);
+      max-width: 820px;
+      line-height: 1.5;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    select,
+    button {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 0 10px;
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button[aria-pressed="true"] {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .legend-item {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px 12px;
+      min-height: 72px;
+    }
+
+    .legend-item strong {
+      display: block;
+      color: var(--accent);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .legend-item span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .atlas {
+      display: grid;
+      gap: 18px;
+    }
+
+    .family {
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+
+    .family-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .family-title h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .family-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(138px, 0.72fr) repeat(4, minmax(210px, 1fr));
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    .col-head,
+    .row-head,
+    .cell {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    .col-head {
+      min-height: 40px;
+      display: grid;
+      place-items: center;
+      color: var(--accent-2);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .row-head {
+      padding: 12px;
+      display: grid;
+      align-content: center;
+      gap: 6px;
+    }
+
+    .row-head .letter {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .row-head .name {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .row-head .meta {
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    .cell {
+      min-height: 286px;
+      padding: 10px;
+      display: grid;
+      grid-template-rows: auto 148px auto;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .cell.same-shape {
+      border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+    }
+
+    .cell-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+      min-width: 0;
+    }
+
+    .badge {
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 2px 8px;
+      white-space: nowrap;
+    }
+
+    .badge.warn {
+      border-color: color-mix(in srgb, var(--warn) 70%, var(--line));
+      color: var(--warn);
+    }
+
+    .glyph-stage {
+      background: #101315;
+      border: 1px solid #2d363b;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      min-width: 0;
+    }
+
+    .cell svg {
+      width: 140px;
+      height: 140px;
+      display: block;
+    }
+
+    .cell-data {
+      display: grid;
+      gap: 4px;
+      font-size: 12px;
+      line-height: 1.3;
+      color: var(--muted);
+    }
+
+    .cell-data code {
+      color: var(--ink);
+      font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+      font-size: 12px;
+    }
+
+    .cell-data .residue code {
+      color: var(--accent);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 1100px) {
+      header {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        justify-content: flex-start;
+      }
+
+      .legend {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid {
+        grid-template-columns: 120px repeat(4, minmax(190px, 1fr));
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 720px) {
+      main {
+        width: min(100vw - 20px, 1500px);
+        padding-top: 16px;
+      }
+
+      .legend {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: 112px repeat(4, 190px);
+      }
+
+      .cell {
+        min-height: 238px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Neo Rotation Atlas</h1>
+        <p class="lede">A first-pass visual model for directed glyph rotation. Neo's marks live in a top-biased five-slot lattice, so a rotated glyph can become shape-similar to another glyph while its origin, stem direction, stroke order, and arrow direction remain visible as residue.</p>
+      </div>
+      <div class="controls" aria-label="Atlas controls">
+        <label for="familyFilter">Family</label>
+        <select id="familyFilter">
+          <option value="all">All families</option>
+          <option value="right">Right / B</option>
+          <option value="left">Left / H</option>
+          <option value="cross">Cross / M</option>
+          <option value="diagonal">Diagonal / A</option>
+          <option value="backslash">Backslash / Forfeda</option>
+        </select>
+        <button id="toggleNumbers" type="button" aria-pressed="true">Numbers</button>
+        <button id="toggleArrows" type="button" aria-pressed="true">Arrows</button>
+      </div>
+    </header>
+
+    <section class="legend" aria-label="Reading guide">
+      <div class="legend-item">
+        <strong>Shape</strong>
+        <span>The nearest screen-space family after rotation, ignoring stroke direction and mark order.</span>
+      </div>
+      <div class="legend-item">
+        <strong>Residue</strong>
+        <span>The preserved identity: original letter, rotation, stem direction, stroke vector path, and mark index order.</span>
+      </div>
+      <div class="legend-item">
+        <strong>Highlight</strong>
+        <span>Gold borders mark exact primary shape matches whose residue is not canonical.</span>
+      </div>
+      <div class="legend-item">
+        <strong>Hypothesis</strong>
+        <span>Projection equivalence is not inscriptional identity. Rotation produces a derived glyph-state.</span>
+      </div>
+    </section>
+
+    <section id="atlas" class="atlas" aria-label="Neo glyph rotation atlas"></section>
+  </main>
+
+  <script>
+    const ALPHABET = [
+      ["B", "beith", "right", 1], ["L", "luis", "right", 2], ["F", "fearn", "right", 3], ["S", "sail", "right", 4], ["P", "peith", "right", 5],
+      ["H", "huath", "left", 1], ["D", "duir", "left", 2], ["T", "tinne", "left", 3], ["C", "coll", "left", 4], ["W", "ceirt", "left", 5],
+      ["M", "muin", "cross", 1], ["G", "gort", "cross", 2], ["N", "ngeadal", "cross", 3], ["Z", "straif", "cross", 4], ["R", "ruis", "cross", 5],
+      ["A", "ailm", "diagonal", 1], ["O", "onn", "diagonal", 2], ["U", "ur", "diagonal", 3], ["E", "eadhadh", "diagonal", 4], ["I", "idad", "diagonal", 5],
+      ["AE", "ae", "backslash", 1], ["OI", "oi", "backslash", 2], ["UI", "ui", "backslash", 3], ["EA", "ea", "backslash", 4], ["IO", "io", "backslash", 5]
+    ];
+
+    const FAMILIES = [
+      ["right", "Right / B-Group", "unilateral action; canonical marks extend to the right"],
+      ["left", "Left / H-Group", "unilateral reaction; canonical marks extend to the left"],
+      ["cross", "Cross / M-Group", "bilateral binding; marks traverse both sides"],
+      ["diagonal", "Diagonal / A-Group", "forward flow; marks descend left-to-right"],
+      ["backslash", "Backslash / Forfeda", "counter-flow; marks rise left-to-right"]
+    ];
+
+    const ROTATIONS = [0, 90, 180, 270];
+    const atlas = document.getElementById("atlas");
+    const familyFilter = document.getElementById("familyFilter");
+    const toggleNumbers = document.getElementById("toggleNumbers");
+    const toggleArrows = document.getElementById("toggleArrows");
+
+    const point = (x, y) => ({ x, y });
+
+    function rotatePoint(p, degrees, center = point(70, 70)) {
+      const radians = degrees * Math.PI / 180;
+      const cos = Math.cos(radians);
+      const sin = Math.sin(radians);
+      const dx = p.x - center.x;
+      const dy = p.y - center.y;
+      return point(
+        center.x + dx * cos - dy * sin,
+        center.y + dx * sin + dy * cos
+      );
+    }
+
+    function canonicalSegments(family, count) {
+      const cx = 70;
+      const startY = 42;
+      const spacing = 14;
+      const len = 25;
+      const diagX = 22;
+      const diagY = 14;
+      const marks = [];
+
+      for (let i = 0; i < count; i += 1) {
+        const y = startY + i * spacing;
+        let a;
+        let b;
+
+        if (family === "right") {
+          a = point(cx, y);
+          b = point(cx + len, y);
+        } else if (family === "left") {
+          a = point(cx, y);
+          b = point(cx - len, y);
+        } else if (family === "cross") {
+          a = point(cx - len, y);
+          b = point(cx + len, y);
+        } else if (family === "diagonal") {
+          a = point(cx - diagX, y - diagY);
+          b = point(cx + diagX, y + diagY);
+        } else {
+          a = point(cx - diagX, y + diagY);
+          b = point(cx + diagX, y - diagY);
+        }
+
+        marks.push({ index: i + 1, a, b });
+      }
+
+      return {
+        stem: { a: point(cx, 18), b: point(cx, 122) },
+        marks
+      };
+    }
+
+    function rotatedGeometry(family, count, degrees) {
+      const canonical = canonicalSegments(family, count);
+      return {
+        stem: {
+          a: rotatePoint(canonical.stem.a, degrees),
+          b: rotatePoint(canonical.stem.b, degrees)
+        },
+        marks: canonical.marks.map((mark) => ({
+          index: mark.index,
+          a: rotatePoint(mark.a, degrees),
+          b: rotatePoint(mark.b, degrees)
+        }))
+      };
+    }
+
+    function classifyAngle(mark) {
+      const dx = mark.b.x - mark.a.x;
+      const dy = mark.b.y - mark.a.y;
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+
+      if (absX > absY * 2.2) {
+        return dx >= 0 ? "rightward" : "leftward";
+      }
+
+      if (absY > absX * 2.2) {
+        return dy >= 0 ? "downward" : "upward";
+      }
+
+      if (dx * dy > 0) {
+        return dx >= 0 ? "down-diagonal" : "up-diagonal-reverse";
+      }
+
+      return dx >= 0 ? "up-diagonal" : "down-diagonal-reverse";
+    }
+
+    function apparentShape(family, degrees) {
+      const geometry = rotatedGeometry(family, 1, degrees);
+      const mark = geometry.marks[0];
+      const axis = classifyAngle(mark);
+      const y = (mark.a.y + mark.b.y) / 2;
+      const x = (mark.a.x + mark.b.x) / 2;
+      const verticalBand = y < 58 ? "upper" : y > 82 ? "lower" : "middle";
+      const horizontalBand = x < 58 ? "left" : x > 82 ? "right" : "middle";
+
+      const shapeLabels = {
+        rightward: `${verticalBand} R mark`,
+        leftward: `${verticalBand} L mark`,
+        downward: `${horizontalBand} down mark`,
+        upward: `${horizontalBand} up mark`,
+        "down-diagonal": `${verticalBand} A-like diagonal`,
+        "up-diagonal": `${verticalBand} Forfeda-like diagonal`,
+        "up-diagonal-reverse": `${verticalBand} A-like diagonal`,
+        "down-diagonal-reverse": `${verticalBand} Forfeda-like diagonal`
+      };
+
+      if (family === "cross") {
+        return degrees % 180 === 0 ? "cross, horizontal" : "cross, vertical";
+      }
+
+      return shapeLabels[axis] || axis;
+    }
+
+    function vectorWord(geometry, family) {
+      const words = geometry.marks.map((mark) => directionToken(mark, family));
+      return words.join(" -> ");
+    }
+
+    function directionToken(segment, family = "") {
+      const direction = classifyAngle(segment).replace("-reverse", "");
+      const tokens = {
+        rightward: "R",
+        leftward: "L",
+        downward: "D",
+        upward: "U",
+        "down-diagonal": "DR",
+        "up-diagonal": "UR"
+      };
+      const token = tokens[direction] || direction;
+      return family === "cross" ? `C${token}` : token;
+    }
+
+    function stemDirection(geometry) {
+      const token = directionToken(geometry.stem);
+      const labels = {
+        D: "T->B",
+        U: "B->T",
+        L: "R->L",
+        R: "L->R",
+        DR: "TL->BR",
+        UR: "BL->TR"
+      };
+      return labels[token] || token;
+    }
+
+    function drawOrder(geometry) {
+      return geometry.marks.map((mark) => mark.index).join("");
+    }
+
+    function stemOrder(geometry) {
+      const stem = geometry.stem;
+      const stemDx = stem.b.x - stem.a.x;
+      const stemDy = stem.b.y - stem.a.y;
+      const len = Math.hypot(stemDx, stemDy);
+      const ux = stemDx / len;
+      const uy = stemDy / len;
+
+      return [...geometry.marks]
+        .sort((m1, m2) => {
+          const m1Mid = point((m1.a.x + m1.b.x) / 2, (m1.a.y + m1.b.y) / 2);
+          const m2Mid = point((m2.a.x + m2.b.x) / 2, (m2.a.y + m2.b.y) / 2);
+          const t1 = (m1Mid.x - stem.a.x) * ux + (m1Mid.y - stem.a.y) * uy;
+          const t2 = (m2Mid.x - stem.a.x) * ux + (m2Mid.y - stem.a.y) * uy;
+          return t1 - t2;
+        })
+        .map((mark) => mark.index)
+        .join("");
+    }
+
+    function screenOrder(geometry) {
+      return [...geometry.marks]
+        .sort((m1, m2) => {
+          const a = point((m1.a.x + m1.b.x) / 2, (m1.a.y + m1.b.y) / 2);
+          const b = point((m2.a.x + m2.b.x) / 2, (m2.a.y + m2.b.y) / 2);
+          if (Math.abs(a.y - b.y) > 0.1) return a.y - b.y;
+          return a.x - b.x;
+        })
+        .map((mark) => mark.index)
+        .join("");
+    }
+
+    function roundedPoint(p) {
+      return `${Math.round(p.x * 100) / 100},${Math.round(p.y * 100) / 100}`;
+    }
+
+    function segmentKey(segment) {
+      const endpoints = [roundedPoint(segment.a), roundedPoint(segment.b)].sort();
+      return endpoints.join("~");
+    }
+
+    function shapeKey(geometry) {
+      return [segmentKey(geometry.stem), ...geometry.marks.map(segmentKey).sort()].join("|");
+    }
+
+    function exactPrimaryMatches(family, count, degrees) {
+      const rotatedKey = shapeKey(rotatedGeometry(family, count, degrees));
+      return ALPHABET
+        .filter(([letter, name, primaryFamily, primaryCount]) => (
+          shapeKey(rotatedGeometry(primaryFamily, primaryCount, 0)) === rotatedKey
+        ))
+        .map(([letter]) => letter);
+    }
+
+    function inverseHint(family, count, degrees) {
+      if (degrees !== 180 || count === 5) {
+        return "";
+      }
+
+      const opposite = {
+        right: "left",
+        left: "right",
+        diagonal: "diagonal",
+        backslash: "backslash",
+        cross: "cross"
+      }[family];
+      const match = ALPHABET.find(([, , primaryFamily, primaryCount]) => primaryFamily === opposite && primaryCount === count);
+      return match ? `inverse of ${match[0]}` : "";
+    }
+
+    function matchSummary(letter, family, count, degrees) {
+      const matches = exactPrimaryMatches(family, count, degrees);
+      const derivedMatches = matches.filter((match) => !(match === letter && degrees === 0));
+
+      if (degrees === 0) {
+        return {
+          label: `canonical ${letter}`,
+          exact: false,
+          detail: `exact: ${letter}`
+        };
+      }
+
+      if (derivedMatches.length > 0) {
+        return {
+          label: `exact as ${derivedMatches.join("/")}`,
+          exact: true,
+          detail: `exact primary: ${derivedMatches.join("/")}`
+        };
+      }
+
+      const inverse = inverseHint(family, count, degrees);
+      return {
+        label: inverse || "no primary match",
+        exact: false,
+        detail: inverse ? `primary relation: ${inverse}` : "primary relation: none"
+      };
+    }
+
+    function signature(letter, family, count, degrees, geometry) {
+      return `${letter}@R${degrees}: stem ${stemDirection(geometry)} / marks ${drawOrder(geometry)} / vectors ${vectorWord(geometry, family)}`;
+    }
+
+    function makeSvg(letter, family, count, degrees) {
+      const geometry = rotatedGeometry(family, count, degrees);
+      const arrow = "url(#arrow)";
+      const showNumbers = toggleNumbers.getAttribute("aria-pressed") === "true";
+      const showArrows = toggleArrows.getAttribute("aria-pressed") === "true";
+      const markEnd = showArrows ? `marker-end="${arrow}"` : "";
+      const stemEnd = showArrows ? `marker-end="url(#stemArrow)"` : "";
+
+      const marks = geometry.marks.map((mark) => {
+        const midX = (mark.a.x + mark.b.x) / 2;
+        const midY = (mark.a.y + mark.b.y) / 2;
+        const label = showNumbers
+          ? `<text x="${midX}" y="${midY - 7}" text-anchor="middle" class="index">${mark.index}</text>`
+          : "";
+        return `
+          <line class="mark" x1="${mark.a.x}" y1="${mark.a.y}" x2="${mark.b.x}" y2="${mark.b.y}" ${markEnd}></line>
+          ${label}
+        `;
+      }).join("");
+
+      return `
+        <svg viewBox="0 0 140 140" role="img" aria-label="${letter} rotated ${degrees} degrees">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"></path>
+            </marker>
+            <marker id="stemArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent-2)"></path>
+            </marker>
+          </defs>
+          <style>
+            .axis { stroke: var(--ghost); stroke-width: 1; stroke-dasharray: 3 5; opacity: 0.55; }
+            .stem { stroke: var(--stem); stroke-width: 3; stroke-linecap: round; }
+            .mark { stroke: var(--mark); stroke-width: 4; stroke-linecap: round; }
+            .index { fill: var(--accent-2); font: 700 10px "Cascadia Mono", Consolas, monospace; }
+            .origin { fill: var(--muted); font: 700 12px "Cascadia Mono", Consolas, monospace; }
+          </style>
+          <line class="axis" x1="70" y1="8" x2="70" y2="132"></line>
+          <line class="axis" x1="8" y1="70" x2="132" y2="70"></line>
+          <line class="stem" x1="${geometry.stem.a.x}" y1="${geometry.stem.a.y}" x2="${geometry.stem.b.x}" y2="${geometry.stem.b.y}" ${stemEnd}></line>
+          ${marks}
+          <text class="origin" x="10" y="18">${letter}</text>
+        </svg>
+      `;
+    }
+
+    function familyInfo(key) {
+      return FAMILIES.find(([family]) => family === key);
+    }
+
+    function render() {
+      const active = familyFilter.value;
+      atlas.innerHTML = "";
+
+      FAMILIES.forEach(([family, title, description]) => {
+        if (active !== "all" && active !== family) {
+          return;
+        }
+
+        const familyGlyphs = ALPHABET.filter((glyph) => glyph[2] === family);
+        const section = document.createElement("section");
+        section.className = "family";
+        section.innerHTML = `
+          <div class="family-title">
+            <h2>${title}</h2>
+            <p>${description}</p>
+          </div>
+          <div class="grid">
+            <div></div>
+            ${ROTATIONS.map((rotation) => `<div class="col-head">R${rotation}</div>`).join("")}
+            ${familyGlyphs.map((glyph) => rowHtml(glyph)).join("")}
+          </div>
+        `;
+        atlas.appendChild(section);
+      });
+    }
+
+    function rowHtml([letter, name, family, count]) {
+      const [, title] = familyInfo(family);
+      const cells = ROTATIONS.map((degrees) => {
+        const geometry = rotatedGeometry(family, count, degrees);
+        const apparent = apparentShape(family, degrees);
+        const match = matchSummary(letter, family, count, degrees);
+        const derived = degrees !== 0;
+        const className = match.exact && derived ? "cell same-shape" : "cell";
+        const badgeClass = match.exact && derived ? "badge warn" : "badge";
+
+        return `
+          <article class="${className}">
+            <div class="cell-head">
+              <span class="${badgeClass}">${match.label}</span>
+              <span>shape ${derived ? "derived" : "canonical"}</span>
+            </div>
+            <div class="glyph-stage">${makeSvg(letter, family, count, degrees)}</div>
+            <div class="cell-data">
+              <div>apparent: <code>${apparent}</code></div>
+              <div>${match.detail}</div>
+              <div>stem: <code>${stemDirection(geometry)}</code></div>
+              <div>draw marks: <code>${drawOrder(geometry)}</code>; screen marks: <code>${screenOrder(geometry)}</code>; stem-order: <code>${stemOrder(geometry)}</code></div>
+              <div class="residue">residue: <code>${signature(letter, family, count, degrees, geometry)}</code></div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      return `
+        <div class="row-head">
+          <div class="letter">${letter}</div>
+          <div class="name">${name}</div>
+          <div class="meta">${title}; magnitude ${count}</div>
+        </div>
+        ${cells}
+      `;
+    }
+
+    familyFilter.addEventListener("change", render);
+
+    [toggleNumbers, toggleArrows].forEach((button) => {
+      button.addEventListener("click", () => {
+        const pressed = button.getAttribute("aria-pressed") === "true";
+        button.setAttribute("aria-pressed", String(!pressed));
+        render();
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>

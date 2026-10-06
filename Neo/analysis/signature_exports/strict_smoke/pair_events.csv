@@ -1,0 +1,10 @@
+signature_id,phrase,index,scope,pair,glyph_a,glyph_b,name_a,name_b,group_a,group_b,marks_a,marks_b,magnitude_delta,magnitude_result,interaction,signal_a,signal_b,is_disruptive
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,0,adjacent,M->S,M,S,muin,sail,cross,right,1,4,3,Dominance,Anchor,Atomic Bind,Strong Enforcement,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,1,adjacent,S->B,S,B,sail,beith,right,right,4,1,3,Dominance,Reinforce,Strong Enforcement,Atomic Initiation,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,2,adjacent,B->O,B,O,beith,onn,right,diagonal,1,2,1,Modulation,Propel,Atomic Initiation,Weak Current,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,3,adjacent,O->T,O,T,onn,tinne,diagonal,left,2,3,1,Modulation,Dampen,Weak Current,Median Balance,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,4,adjacent,T->U,T,U,tinne,ur,left,diagonal,3,3,0,Resonance,Dampen,Median Balance,Median Stream,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,5,adjacent,U->E,U,E,ur,eadhadh,diagonal,diagonal,3,4,1,Modulation,Stream,Median Stream,Strong Torrent,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,6,adjacent,E->S,E,S,eadhadh,sail,diagonal,right,4,4,0,Resonance,Propel,Strong Torrent,Strong Enforcement,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,7,adjacent,S->D,S,D,sail,duir,right,left,4,2,2,Dominance,Opposition,Strong Enforcement,Weak Resistance,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,8,adjacent,D->A,D,A,duir,ailm,left,diagonal,2,1,1,Modulation,Dampen,Weak Resistance,Atomic Flow,False

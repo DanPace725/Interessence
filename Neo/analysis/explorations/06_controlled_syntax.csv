@@ -1,0 +1,21 @@
+frame,noun_pair,phrase,dominant,disruptive_events,entropy,chord_action_net,chord_structure,chord_flow,chord_transform
+breaks,hand_door,THE HAND BREAKS THE DOOR,Dampen,2,2.7108,-0.3027,0.3056,0.3205,0.0712
+breaks,stone_gate,THE STONE BREAKS THE GATE,Dampen,2,2.7551,-0.1739,0.2422,0.5093,0.0745
+breaks,river_road,THE RIVER BREAKS THE ROAD,Gate,2,2.9656,-0.1283,0.4394,0.3753,0.057
+breaks,fire_wall,THE FIRE BREAKS THE WALL,Dampen,2,2.7947,-0.1497,0.2381,0.5306,0.0816
+breaks,child_book,THE CHILD BREAKS THE BOOK,Dampen,2,2.7153,-0.4085,0.122,0.3963,0.0732
+holds,hand_door,THE HAND HOLDS THE DOOR,Dampen,0,2.4387,-0.3439,0.2211,0.4351,0.0
+holds,stone_gate,THE STONE HOLDS THE GATE,Dampen,0,2.161,-0.1926,0.1407,0.6667,0.0
+holds,river_road,THE RIVER HOLDS THE ROAD,Gate,0,2.6101,-0.1355,0.393,0.4715,0.0
+holds,fire_wall,THE FIRE HOLDS THE WALL,Dampen,0,2.2244,-0.1653,0.124,0.7107,0.0
+holds,child_book,THE CHILD HOLDS THE BOOK,Dampen,0,2.1685,-0.471,0.0,0.529,0.0
+opens,hand_door,THE HAND OPENS THE DOOR,Dampen,0,2.4807,-0.1708,0.2883,0.5409,0.0
+opens,stone_gate,THE STONE OPENS THE GATE,Dampen,0,2.5651,-0.0075,0.2105,0.782,0.0
+opens,river_road,THE RIVER OPENS THE ROAD,Gate,0,2.4371,-0.0,0.4466,0.5534,0.0
+opens,fire_wall,THE FIRE OPENS THE WALL,Propel,0,2.5522,0.0388,0.186,0.7752,0.0
+opens,child_book,THE CHILD OPENS THE BOOK,Dampen,0,2.4651,-0.2941,0.0662,0.6397,0.0
+waits_near,hand_door,THE HAND WAITS NEAR THE DOOR,Dampen,2,2.5109,-0.3305,0.2924,0.3093,0.0678
+waits_near,stone_gate,THE STONE WAITS NEAR THE GATE,Dampen,2,2.6412,-0.2407,0.2473,0.442,0.07
+waits_near,river_road,THE RIVER WAITS NEAR THE ROAD,Dampen,2,2.8242,-0.1942,0.3957,0.3525,0.0576
+waits_near,fire_wall,THE FIRE WAITS NEAR THE WALL,Dampen,2,2.718,-0.2284,0.2448,0.4522,0.0746
+waits_near,child_book,THE CHILD WAITS NEAR THE BOOK,Dampen,2,2.6228,-0.406,0.162,0.3629,0.0691

@@ -1,0 +1,266 @@
+{
+  "notes": [
+    "This is a first-pass sound-and-register model, not a complete phonology.",
+    "The goal is to keep generated names related to root history while preventing raw suffix stamping.",
+    "Because the world is volatile, early IW speakers avoid hard separations where possible; phrase speech should flow.",
+    "Twenty roots were enough for validating the mechanism; the current targeted batch expands thin mouth families without trying to complete the world lexicon."
+  ],
+  "sound_inventory": {
+    "vowels": ["a", "e", "i", "o", "u"],
+    "resonant_vowels": ["ai", "ea", "ia", "oa", "ou", "ui", "ae", "uo", "ei"],
+    "common_consonants": ["b", "d", "f", "g", "h", "k", "l", "m", "n", "r", "s", "t", "v", "y", "z"],
+    "glides": ["w", "y"],
+    "marked_consonants": ["sh", "th", "dh", "ch", "hm", "hn", "hl", "vr", "dr", "gw"],
+    "favored_shapes": ["CV", "CVC", "VC", "CVR", "CVCV"]
+  },
+  "phrase_fusion": {
+    "enabled": true,
+    "separator": "",
+    "vowel_bridges": {
+      "aa": "a",
+      "ae": "ai",
+      "ai": "ai",
+      "ao": "ao",
+      "au": "ou",
+      "ea": "ea",
+      "ee": "e",
+      "ei": "ei",
+      "eo": "eo",
+      "eu": "iu",
+      "ia": "ia",
+      "ie": "ie",
+      "ii": "i",
+      "io": "io",
+      "iu": "iu",
+      "oa": "oa",
+      "oe": "oi",
+      "oi": "oi",
+      "oo": "o",
+      "ou": "ou",
+      "ua": "ua",
+      "ue": "ui",
+      "ui": "ui",
+      "uo": "uo",
+      "uu": "u"
+    },
+    "boundary_rules": [
+      {
+        "final": "m",
+        "initial": "n",
+        "replacement": "mn",
+        "note": "nasal continuity"
+      },
+      {
+        "final": "m",
+        "initial": "m",
+        "replacement": "m",
+        "note": "shared closed-mouth posture"
+      },
+      {
+        "final": "l",
+        "initial": "m",
+        "replacement": "lm",
+        "note": "liquid into closure"
+      },
+      {
+        "final": "r",
+        "initial": "l",
+        "replacement": "rl",
+        "note": "flowing liquid cluster"
+      },
+      {
+        "final": "h",
+        "initial": "s",
+        "replacement": "is",
+        "note": "breath opens into hiss"
+      },
+      {
+        "final": "h",
+        "initial": "d",
+        "replacement": "idh",
+        "note": "breath softens a hard entry"
+      },
+      {
+        "final": "k",
+        "initial": "r",
+        "replacement": "kr",
+        "note": "fracture remains audible"
+      }
+    ],
+    "drop_duplicate_boundary_consonants": true
+  },
+  "vowel_duration": {
+    "principle": "Vowel length is postural duration. Held relations lengthen; quick contact, warning, and release shorten; flow prefers movement between vowels.",
+    "bias_patterns": {
+      "action": ["short", "long", "short"],
+      "resistance": ["long"],
+      "binding": ["short", "long"],
+      "flow": ["moving"],
+      "mutation": ["short", "long"]
+    },
+    "ascii_long": {
+      "a": "aa",
+      "e": "ee",
+      "i": "ii",
+      "o": "oo",
+      "u": "uu"
+    },
+    "marked_long": {
+      "a": "ā",
+      "e": "ē",
+      "i": "ī",
+      "o": "ō",
+      "u": "ū"
+    },
+    "marked_short": {
+      "a": "ă",
+      "e": "ĕ",
+      "i": "ĭ",
+      "o": "ŏ",
+      "u": "ŭ"
+    }
+  },
+  "bias_markers": {
+    "action": {
+      "ritual": "a",
+      "specialist": "ba",
+      "route_syllable": "tar"
+    },
+    "resistance": {
+      "ritual": "h",
+      "specialist": "ha",
+      "route_syllable": "hal"
+    },
+    "binding": {
+      "ritual": "m",
+      "specialist": "ma",
+      "route_syllable": "mor"
+    },
+    "flow": {
+      "ritual": "i",
+      "specialist": "ra",
+      "route_syllable": "rin"
+    },
+    "mutation": {
+      "ritual": "u",
+      "specialist": "fa",
+      "route_syllable": "vek"
+    }
+  },
+  "registers": {
+    "first_event": {
+      "label": "first event",
+      "description": "The first pressure-response form, before social smoothing.",
+      "operations": ["normalize"]
+    },
+    "daily_child": {
+      "label": "daily / child speech",
+      "description": "Frequent-use form. It erodes, smooths, and loses some final liquids.",
+      "operations": ["normalize", "soften_marked_clusters", "collapse_vowel_pairs", "erode_final_liquid"]
+    },
+    "ritual_taboo": {
+      "label": "ritual / taboo-preserved",
+      "description": "A preserved form with the primary bias marked by a small vowel or breath-residue.",
+      "operations": ["normalize", "append_primary_ritual_marker"]
+    },
+    "specialist_proto_neo": {
+      "label": "specialist / proto-Neo facing",
+      "description": "A compressed technical form that appends primary and secondary bias markers.",
+      "operations": ["normalize", "append_primary_specialist_marker", "append_secondary_specialist_marker"]
+    },
+    "place_fossil": {
+      "label": "place fossil",
+      "description": "A place-preserved form. Older sounds survive, but endings compact through repeated naming.",
+      "operations": ["normalize", "soften_marked_clusters", "append_primary_route_syllable"]
+    },
+    "trade_speech": {
+      "label": "trade speech",
+      "description": "A smoother form for cross-group exchange and public naming.",
+      "operations": ["normalize", "soften_marked_clusters", "collapse_vowel_pairs", "open_final_vowel"]
+    }
+  },
+  "name_routes": [
+    {
+      "id": "personal_omen",
+      "type": "personal",
+      "base_register": "ritual_taboo",
+      "suffix_by_bias": {
+        "action": "an",
+        "resistance": "en",
+        "binding": "em",
+        "flow": "il",
+        "mutation": "ur"
+      },
+      "register": "personal / omen",
+      "gloss_template": "one marked by {current_gloss}"
+    },
+    {
+      "id": "place_fossil",
+      "type": "place",
+      "base_register": "place_fossil",
+      "suffix_by_bias": {
+        "action": "a",
+        "resistance": "a",
+        "binding": "a",
+        "flow": "a",
+        "mutation": "a"
+      },
+      "register": "place-memory",
+      "gloss_template": "place remembered for {original_pressure}"
+    },
+    {
+      "id": "material_handling",
+      "type": "material",
+      "base_register": "specialist_proto_neo",
+      "suffix_by_bias": {
+        "action": "tek",
+        "resistance": "on",
+        "binding": "el",
+        "flow": "rin",
+        "mutation": "vek"
+      },
+      "register": "craft / specialist",
+      "gloss_template": "material handled under {bias_tone}"
+    },
+    {
+      "id": "tool_work",
+      "type": "tool",
+      "base_register": "trade_speech",
+      "prefix_by_bias": {
+        "action": "ta",
+        "resistance": "shu",
+        "binding": "gan",
+        "flow": "rin",
+        "mutation": "vek"
+      },
+      "register": "work / handling",
+      "gloss_template": "tool or procedure for {current_gloss}"
+    },
+    {
+      "id": "ritual_title",
+      "type": "ritual",
+      "base_register": "ritual_taboo",
+      "suffix_by_bias": {
+        "action": "druo",
+        "resistance": "sil",
+        "binding": "mor",
+        "flow": "om",
+        "mutation": "ru"
+      },
+      "register": "ritual / taboo",
+      "gloss_template": "ritual form preserving {first_context}"
+    }
+  ],
+  "growth_plan": {
+    "current_target": 28,
+    "prototype_floor": 20,
+    "regional_ecology_target": 50,
+    "naming_system_target": 100,
+    "notes": [
+      "Twenty roots were sufficient for testing drift, register, and Neo-bridge mechanics.",
+      "The 28-root batch adds targeted SZ, TH, CHSH, and H pressure so the later mouth-family alphabet has stronger ancestors.",
+      "Around fifty roots would support one regional naming ecology with less repetition.",
+      "Around one hundred roots would begin to support personal, place, material, role, ritual, and technical naming without overusing the same ancestors."
+    ]
+  }
+}

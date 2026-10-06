@@ -1,0 +1,217 @@
+{
+  "notes": [
+    "These are phrase probes, not finalized grammar.",
+    "They exist to make the current phonology and register rules audible in short lines.",
+    "Each probe combines existing roots through a selected register.",
+    "Phrase surfaces are fused by phonology rules unless a future probe opts out."
+  ],
+  "probes": [
+    {
+      "id": "cave_warning",
+      "type": "warning",
+      "context": "memory cave",
+      "register_id": "ritual_taboo",
+      "roots": ["ha", "sil"],
+      "gloss": "hush; wait for the cave's answer",
+      "scene_use": "A hush-keeper says this before entering an absorber hollow."
+    },
+    {
+      "id": "healer_command",
+      "type": "healing",
+      "context": "river moss wound-binding",
+      "register_id": "daily_child",
+      "roots": ["om", "nu"],
+      "gloss": "breathe; close the wound",
+      "scene_use": "A healer gives this as a quick instruction while pressing moss into a cut."
+    },
+    {
+      "id": "threshold_entry",
+      "type": "threshold",
+      "context": "side-opening stone slit",
+      "register_id": "ritual_taboo",
+      "roots": ["hea", "pae"],
+      "gloss": "hold breath open; enter by the held opening",
+      "scene_use": "A threshold-keeper says it with lifted chin and lowered voice before passage."
+    },
+    {
+      "id": "carry_memory",
+      "type": "handling",
+      "context": "moving a memory stone",
+      "register_id": "ritual_taboo",
+      "roots": ["kel", "mor"],
+      "gloss": "carry close; settle the memory",
+      "scene_use": "A carrier repeats this while moving a grief-saturated stone."
+    },
+    {
+      "id": "metalwork_rhythm",
+      "type": "craft",
+      "context": "crystalline-metal hammering",
+      "register_id": "trade_speech",
+      "roots": ["druo", "eli"],
+      "gloss": "strike correctly; wash clear",
+      "scene_use": "A metal-sorter uses this as a public workshop rhythm."
+    },
+    {
+      "id": "river_message",
+      "type": "travel",
+      "context": "flood-season reed calls",
+      "register_id": "trade_speech",
+      "roots": ["rin", "la"],
+      "gloss": "send downstream; call for kin",
+      "scene_use": "A carrier calls this across reeds to pass news safely."
+    },
+    {
+      "id": "fracture_warning",
+      "type": "warning",
+      "context": "broken garden path",
+      "register_id": "daily_child",
+      "roots": ["vek", "ru"],
+      "gloss": "fracture; old break returns",
+      "scene_use": "A root-tender says it to slow children near a cracked path."
+    },
+    {
+      "id": "oath_before_hunt",
+      "type": "law",
+      "context": "hunt near nesting hollow",
+      "register_id": "ritual_taboo",
+      "roots": ["gan", "bri"],
+      "gloss": "swear before action; drive together",
+      "scene_use": "Hunters speak it before touching the shared stone."
+    },
+    {
+      "id": "thae_warning",
+      "type": "warning",
+      "context": "spent emitter fire",
+      "register_id": "daily_child",
+      "roots": ["sha", "thae"],
+      "gloss": "cover and cool; the threshold heat still bites",
+      "scene_use": "A parent says it before a child sweeps gray powder."
+    },
+    {
+      "id": "mist_crossing",
+      "type": "travel",
+      "context": "fogged ravine",
+      "register_id": "place_fossil",
+      "roots": ["fai", "pae"],
+      "gloss": "wait for the path; enter by the side opening",
+      "scene_use": "A guide says this where the path shifts after rain."
+    },
+    {
+      "id": "mourning_silence",
+      "type": "mourning",
+      "context": "burial hollow",
+      "register_id": "ritual_taboo",
+      "roots": ["mor", "hu"],
+      "gloss": "settle the dead; empty the chest",
+      "scene_use": "Rememberers use it before closing a burial stone when names cannot be spoken."
+    },
+    {
+      "id": "child_reed_call",
+      "type": "child speech",
+      "context": "reed fields",
+      "register_id": "daily_child",
+      "roots": ["la", "rin"],
+      "gloss": "call; send along",
+      "scene_use": "Children use this shortened call to find each other in tall reeds."
+    },
+    {
+      "id": "purifying_cloth",
+      "type": "craft",
+      "context": "washing ore dust",
+      "register_id": "trade_speech",
+      "roots": ["eli", "sha"],
+      "gloss": "rinse clear; lower the pressure",
+      "scene_use": "Washers use this as a work chant near running water."
+    },
+    {
+      "id": "portal_accident",
+      "type": "technical warning",
+      "context": "unfixed threshold",
+      "register_id": "specialist_proto_neo",
+      "roots": ["fai", "vek", "pae"],
+      "gloss": "uncertain passage; phase breach; held gate",
+      "scene_use": "A later specialist note for a threshold that behaves like an accidental portal."
+    },
+    {
+      "id": "face_archive",
+      "type": "memory",
+      "context": "memory gem viewing",
+      "register_id": "ritual_taboo",
+      "roots": ["mea", "hea"],
+      "gloss": "let the likeness rise; hold breath open",
+      "scene_use": "A rememberer says this before viewing a stored face without claiming it too soon."
+    },
+    {
+      "id": "alarm_before_fall",
+      "type": "warning",
+      "context": "buzzing crystal shelf",
+      "register_id": "daily_child",
+      "roots": ["zai", "ru"],
+      "gloss": "hear the buzz; the path may split",
+      "scene_use": "A cave guide says it quickly when a wall begins to sing."
+    },
+    {
+      "id": "kept_alarm",
+      "type": "warning",
+      "context": "sleeping child behind a reed wall",
+      "register_id": "ritual_taboo",
+      "roots": ["zun", "hea"],
+      "gloss": "hold the alarm inside; wait open",
+      "scene_use": "A night watcher mouths it without waking the child."
+    },
+    {
+      "id": "edge_oath",
+      "type": "law",
+      "context": "named boundary before a hunt",
+      "register_id": "ritual_taboo",
+      "roots": ["dhae", "gan"],
+      "gloss": "swear the edge; bind the action",
+      "scene_use": "Hunters speak it before stepping around a nesting hollow."
+    },
+    {
+      "id": "edge_walk",
+      "type": "travel",
+      "context": "bright seam along a passable ledge",
+      "register_id": "trade_speech",
+      "roots": ["thol", "fai"],
+      "gloss": "walk the edge; wait for the path",
+      "scene_use": "Guides use it for a route that can be followed but not crossed."
+    },
+    {
+      "id": "spark_release",
+      "type": "craft",
+      "context": "brittle emitter shard",
+      "register_id": "daily_child",
+      "roots": ["cha", "chu"],
+      "gloss": "scrape once; drop the flare",
+      "scene_use": "Apprentices repeat it while learning to release a dangerous shard."
+    },
+    {
+      "id": "spark_cover",
+      "type": "warning",
+      "context": "over-bright shard under wet hide",
+      "register_id": "daily_child",
+      "roots": ["cha", "sha"],
+      "gloss": "spark; cover and cool",
+      "scene_use": "A washer says it when a scratch starts light under the cloth."
+    },
+    {
+      "id": "clear_alarm",
+      "type": "craft",
+      "context": "ore dust that keeps buzzing in water",
+      "register_id": "trade_speech",
+      "roots": ["eli", "zai"],
+      "gloss": "rinse clear; heed the pressure",
+      "scene_use": "Metal-sorters use it when the wash water continues to hum."
+    },
+    {
+      "id": "gate_refusal",
+      "type": "threshold",
+      "context": "permitted passage that must still refuse someone",
+      "register_id": "ritual_taboo",
+      "roots": ["dhae", "pae"],
+      "gloss": "name the edge; enter only by permission",
+      "scene_use": "A threshold-keeper says it when the opening exists but consent has not been given."
+    }
+  ]
+}

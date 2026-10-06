@@ -1,0 +1,77 @@
+{
+  "domains": [
+    {
+      "id": "crystals",
+      "description": "Coherent mineral lattices that emit, absorb, store, or modulate field signal.",
+      "carries": "deep structure, saturation, pressure, long memory"
+    },
+    {
+      "id": "metals",
+      "description": "Refined, alloyable, conductive or resistive materials.",
+      "carries": "craft, technology, weapons, infrastructure, corrosion"
+    },
+    {
+      "id": "biology",
+      "description": "Living bodies shaped by field ecology.",
+      "carries": "adaptation, instinct, inheritance, trauma, embodied knowledge"
+    },
+    {
+      "id": "language",
+      "description": "Speech, gesture, song, writing, notation, taboo, and social memory.",
+      "carries": "meaning, rhythm, relation, ritual continuity, drift"
+    },
+    {
+      "id": "place",
+      "description": "Geography plus accumulated history and field relation.",
+      "carries": "ruins, scars, gradients, ecological memory, long resonance"
+    }
+  ],
+  "bias_families": [
+    {
+      "id": "action",
+      "neo_family": "B",
+      "behavior": "initiates, projects, drives, activates",
+      "shorthand": "push, spark, strike, command, emission"
+    },
+    {
+      "id": "resistance",
+      "neo_family": "H",
+      "behavior": "dampens, filters, refuses, grounds",
+      "shorthand": "shield, silence, absorber, refusal, containment"
+    },
+    {
+      "id": "binding",
+      "neo_family": "M",
+      "behavior": "anchors, joins, stabilizes, remembers",
+      "shorthand": "knot, oath, bridge, bone, seal"
+    },
+    {
+      "id": "flow",
+      "neo_family": "A",
+      "behavior": "channels, carries, converts, circulates",
+      "shorthand": "river, breath, wire, nerve, song"
+    },
+    {
+      "id": "mutation",
+      "neo_family": "Forfeda",
+      "behavior": "twists, inverts, fractures, transforms",
+      "shorthand": "rupture, mutation, phase-shift, threshold"
+    }
+  ],
+  "roles": [
+    "listener",
+    "carrier",
+    "hush_keeper",
+    "cutter",
+    "washer",
+    "root_tender",
+    "metal_sorter",
+    "rememberer",
+    "parent",
+    "cave_guide",
+    "hunter",
+    "healer",
+    "trader",
+    "threshold_keeper"
+  ]
+}

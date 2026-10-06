@@ -1,0 +1,20 @@
+concept,language,provenance,phrase,glyph_count,dominant,dominant_count,disruptive_events,entropy,chord_action_net,chord_structure,chord_flow,chord_transform,group_right,group_left,group_cross,group_diagonal,group_backslash
+care_bends_friction,EN,user,CARE BENDS FRICTION TOWARDS FREEDOM,30,Dampen,7,2,2.8005,-0.0804,0.433,0.4196,0.067,0.167,0.267,0.233,0.3,0.033
+care_bends_friction,LA,user,CURA FRICTIONEM AD LIBERTATEM FLECTIT,32,Dampen,9,2,2.5784,-0.2004,0.2646,0.4767,0.0584,0.156,0.281,0.188,0.344,0.031
+freedom_opens_door,EN,claude,FREEDOM OPENS THE DOOR,19,Gate,5,0,2.5466,0.1139,0.3544,0.5316,0.0,0.158,0.211,0.211,0.421,0.0
+freedom_opens_door,LA,user,LIBERTAS PORTAM APERIT,20,Propel,7,0,2.0418,0.2587,0.2878,0.4535,0.0,0.25,0.15,0.2,0.4,0.0
+freedom_opens_door,GA,claude,OSCLAIONN SAOIRSE AN DORAS,21,Propel,5,4,2.966,0.266,0.3511,0.2713,0.1117,0.238,0.095,0.238,0.333,0.095
+light_breaks_darkness,EN,claude,LIGHT BREAKS THE DARKNESS,21,Anchor,4,2,2.871,-0.0531,0.4082,0.4408,0.098,0.238,0.333,0.19,0.19,0.048
+light_breaks_darkness,LA,claude,LUX TENEBRAS FRANGIT,19,Gate,6,0,2.5577,0.1638,0.4111,0.4251,0.0,0.263,0.158,0.263,0.316,0.0
+light_breaks_darkness,GA,user,BRISEANN SOLAS AN DORCHADAS,23,Propel,7,2,2.6228,0.2727,0.4034,0.2557,0.0682,0.261,0.174,0.217,0.304,0.043
+memory_holds_stone,EN,user,THE RIVER REMEMBERS THE STONE,25,Gate,10,0,2.4194,0.0,0.4371,0.5629,0.0,0.16,0.2,0.28,0.36,0.0
+memory_holds_stone,LA,user,MEMORIA LAPIDEM TENET,19,Gate,8,0,1.9477,-0.0648,0.2491,0.686,0.0,0.105,0.158,0.263,0.474,0.0
+memory_holds_stone,GA,user,IS CUIMHIN LEIS AN ABHAINN,21,Propel,5,2,2.9414,0.128,0.28,0.528,0.064,0.19,0.143,0.238,0.381,0.048
+memory_opens_gate,EN,user,MEMORY OPENS A HIDDEN GATE,22,Gate,7,2,2.4915,0.0637,0.2944,0.5464,0.0955,0.091,0.182,0.273,0.409,0.045
+memory_opens_gate,LA,claude,MEMORIA PORTAM ABDITAM APERIT,26,Gate,12,0,1.9943,0.0635,0.3425,0.5939,0.0,0.115,0.154,0.269,0.462,0.0
+memory_opens_gate,GA,user,OSCLAIONN CUIMHNE AN GEATA,20,Fracture,3,6,3.2211,-0.1346,0.3547,0.2477,0.263,0.1,0.2,0.3,0.25,0.15
+war_breaks_gate,EN,user,WAR BREAKS THE GATE,15,Dampen,4,2,2.6106,-0.2791,0.3488,0.2924,0.0797,0.133,0.333,0.2,0.267,0.067
+war_breaks_gate,LA,user,BELLUM PORTA FRANGIT,18,Propel,5,0,2.3243,0.2388,0.3772,0.3841,0.0,0.278,0.111,0.278,0.333,0.0
+war_breaks_gate,GA,user,BRISEANN COGADH AN GEATA,19,Gate,4,4,2.9477,-0.1424,0.4557,0.2247,0.1772,0.105,0.211,0.316,0.263,0.105
+water_teaches_fire,EN,user,FIRE TEACHES WATER TO TURN,21,Dampen,8,2,2.5219,-0.2652,0.287,0.3783,0.0696,0.095,0.333,0.19,0.333,0.048
+water_teaches_fire,LA,user,AQUA IGNEM DOCET,15,Dampen,6,0,2.217,-0.4067,0.1315,0.4618,0.0,0.0,0.333,0.2,0.467,0.0

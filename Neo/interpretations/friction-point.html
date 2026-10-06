@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEO Analysis — Friction Point</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --surface-2: #263347;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-dim: rgba(56,189,248,0.15);
+            --accent-glow: rgba(56,189,248,0.3);
+            --green: #10b981;
+            --green-dim: rgba(16,185,129,0.12);
+            --red: #ef4444;
+            --red-dim: rgba(239,68,68,0.12);
+            --amber: #f59e0b;
+            --amber-dim: rgba(245,158,11,0.12);
+            --purple: #818cf8;
+            --stem: #475569;
+            --mark: #f8fafc;
+            --border: #334155;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 60px 24px 120px;
+            line-height: 1.7;
+        }
+
+        .page {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        /* ─── HEADER ─────────────────────────────────────────────── */
+        .doc-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .doc-label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(2.4rem, 6vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #38bdf8, #818cf8, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .doc-meta {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 48px 0;
+        }
+
+        /* ─── PROSE ──────────────────────────────────────────────── */
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        p {
+            color: var(--muted);
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        p strong { color: var(--text); font-weight: 600; }
+
+        em { color: var(--accent); font-style: normal; }
+
+        /* ─── WORD HEADER ────────────────────────────────────────── */
+        .word-header {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .word-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .word-title.friction { color: var(--red); }
+        .word-title.point    { color: var(--green); }
+
+        .word-glyph-count {
+            font-size: 0.8rem;
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ─── GLYPH STRIP ────────────────────────────────────────── */
+        .glyph-strip {
+            display: flex;
+            gap: 0;
+            margin-bottom: 36px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
+            padding: 24px 20px;
+            overflow-x: auto;
+        }
+
+        .glyph-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+            width: 90px;
+            position: relative;
+        }
+
+        .glyph-cell + .glyph-cell::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            bottom: 10px;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .glyph-char {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+
+        .glyph-name {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .glyph-fp {
+            font-size: 0.7rem;
+            color: var(--text);
+            text-align: center;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        /* ─── PAIR TABLE ─────────────────────────────────────────── */
+        .pair-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            font-size: 0.9rem;
+        }
+
+        .pair-table th {
+            text-align: left;
+            padding: 10px 14px;
+            color: var(--muted);
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+        }
+
+        .pair-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(51,65,85,0.4);
+            vertical-align: middle;
+        }
+
+        .pair-table tr:last-child td { border-bottom: none; }
+
+        .pair-seq {
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 1px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .tag-anchor     { background: var(--accent-dim);  color: var(--accent); }
+        .tag-gate       { background: var(--amber-dim);   color: var(--amber); }
+        .tag-dampen     { background: var(--red-dim);     color: #f87171; }
+        .tag-reinforce  { background: var(--green-dim);   color: var(--green); }
+        .tag-invert     { background: rgba(129,140,248,0.15); color: var(--purple); }
+        .tag-fracture   { background: var(--red-dim);     color: var(--red); }
+        .tag-distort    { background: rgba(129,140,248,0.15); color: var(--purple); }
+        .tag-stream     { background: var(--green-dim);   color: var(--green); }
+        .tag-turbulence { background: var(--amber-dim);   color: var(--amber); }
+        .tag-opposition { background: var(--red-dim);     color: var(--red); }
+
+        .mag-resonance  { color: var(--green); font-weight: 700; font-size: 0.8rem; }
+        .mag-modulation { color: var(--amber); font-weight: 700; font-size: 0.8rem; }
+        .mag-dominance  { color: var(--red);   font-weight: 700; font-size: 0.8rem; }
+
+        .pair-note {
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-style: italic;
+        }
+
+        /* ─── SECTION CARDS ──────────────────────────────────────── */
+        .card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .card-accent {
+            border-left: 3px solid var(--accent);
+        }
+
+        .card-red   { border-left: 3px solid var(--red); }
+        .card-green { border-left: 3px solid var(--green); }
+        .card-amber { border-left: 3px solid var(--amber); }
+        .card-purple { border-left: 3px solid var(--purple); }
+
+        /* ─── BOUNDARY BOX ───────────────────────────────────────── */
+        .boundary-box {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 32px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .boundary-glyph {
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .boundary-char {
+            font-size: 1.6rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .boundary-char.left-word  { color: var(--red); }
+        .boundary-char.right-word { color: var(--green); }
+
+        .boundary-sub {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+        }
+
+        .boundary-arrow {
+            font-size: 1.8rem;
+            color: var(--border);
+            flex-shrink: 0;
+        }
+
+        .boundary-result {
+            flex: 1;
+        }
+
+        .boundary-result .tag {
+            margin-bottom: 8px;
+        }
+
+        /* ─── COMPOSITE FIELD ────────────────────────────────────── */
+        .field-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .field-cell {
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .field-cell-label {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .field-cell-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        /* ─── READING ────────────────────────────────────────────── */
+        .reading {
+            background: linear-gradient(135deg, rgba(56,189,248,0.05), rgba(129,140,248,0.05));
+            border: 1px solid rgba(56,189,248,0.2);
+            border-radius: 20px;
+            padding: 36px;
+            margin-top: 48px;
+        }
+
+        .reading-label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .reading p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .reading p + p { margin-top: 16px; }
+
+        /* ─── INSCRIPTION PREVIEW ────────────────────────────────── */
+        .inscription-row {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-bottom: 48px;
+        }
+
+        .inscription-word {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .inscription-label {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .inscription-glyphs {
+            display: flex;
+            gap: 4px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 16px 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- HEADER -->
+    <header class="doc-header">
+        <p class="doc-label">NEO · NeOgham Analysis</p>
+        <h1>Friction Point</h1>
+        <p class="doc-meta">Structural bias, interference fields, and composite signal reading</p>
+    </header>
+
+    <!-- INSCRIPTION PREVIEW -->
+    <div class="inscription-row" id="inscription-row"></div>
+
+    <hr class="divider">
+
+    <!-- WORD: FRICTION -->
+    <section style="margin-bottom: 60px;">
+        <div class="word-header">
+            <span class="word-title friction">Friction</span>
+            <span class="word-glyph-count">7 glyphs</span>
+        </div>
+
+        <div class="glyph-strip" id="strip-friction"></div>
+
+        <h2>Pairwise Interference — FRICTION</h2>
+        <table class="pair-table">
+            <thead>
+                <tr>
+                    <th>Sequence</th>
+                    <th>Interaction</th>
+                    <th>Magnitude</th>
+                    <th>Reading</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="pair-seq">F → R</td>
+                    <td><span class="tag tag-anchor">Anchor</span></td>
+                    <td><span class="mag-dominance">Dominance (Δ2)</span></td>
+                    <td class="pair-note">R's Maximal Fusion overwrites F's steady assertion and anchors hard.</td>
+                </tr>
+                <tr>
+                    <td class="pair-seq">R → I</td>
+                    <td><span class="tag tag-gate">Gate</span></td>
+                    <td><span class="mag-resonance">Resonance (Δ0)</span></td>
+                    <td class="pair-note">Two maximal forces at the same magnitude — the Jet amplifies through the Gate.</td>
+                </tr>
+                <tr>
+                    <td class="pair-seq">I → C</td>
+                    <td><span class="tag tag-dampen">Dampen</span></td>
+                    <td><span class="mag-modulation">Modulation (Δ1)</span></td>
+                    <td class="pair-note">The Maximal Jet meets the Strong Barrier and is dampened — the structural encoding of friction itself.</td>
+                </tr>
+                <tr>
+                    <td class="pair-seq">C → T</td>
+                    <td><span class="tag tag-reinforce">Reinforce</span></td>
+                    <td><span class="mag-modulation">Modulation (Δ1)</span></td>
+                    <td class="pair-note">Both left-group: the Barrier and the Balance reinforce each other. Resistance holds without escalating.</td>
+                </tr>
+                <tr>
+                    <td class="pair-seq">T → IO</td>
+                    <td><span class="tag tag-invert">Invert</span></td>
+                    <td><span class="mag-dominance">Dominance (Δ2)</span></td>
+                    <td class="pair-note">Maximal Chaos overrides and inverts T's stable equilibrium — the field destabilizes.</td>
+                </tr>
+                <tr>
+                    <td class="pair-seq">IO → N</td>
+                    <td><span class="tag tag-fracture">Fracture</span></td>
+                    <td><span class="mag-dominance">Dominance (Δ2)</span></td>
+                    <td class="pair-note">Maximal Chaos fractures the Median Lock — yet the Lock holds as the terminal glyph. Friction ends frozen.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="card card-red">
+            <h3 style="margin-bottom:12px;">Field Reading — FRICTION</h3>
+            <p>The word opens with <strong>F (Median Assertion)</strong> — a steady, founding pressure. Not explosive, just consistent. <strong>R (Maximal Fusion)</strong> immediately fires at full magnitude via Dominance, anchoring hard and collapsing distinctions.</p>
+            <p><strong>I (Maximal Jet)</strong> meets R at equal magnitude. The Gate/Resonance between them means the Jet passes through amplified — the field is at peak kinetic energy. Then it hits <strong>C (Strong Barrier)</strong>. The I→C interaction — <em>Dampen / Modulation</em> — is the structural heart of the word. Maximum velocity meeting deep resistance. Not destroyed, but flavored and slowed.</p>
+            <p>The barrier <strong>C</strong> and the balance <strong>T</strong> reinforce each other (both left-group), holding the resistance in place. Then <strong>IO (Maximal Chaos)</strong> arrives and inverts T's equilibrium by Dominance. The field collapses inward. IO then fractures the terminal <strong>N (Median Lock)</strong> — but the Lock persists. <strong>FRICTION closes as a locked, fractured state.</strong> It doesn't resolve. It freezes.</p>
+        </div>
+    </section>
+
+    <!-- WORD: POINT -->
+    <section style="margin-bottom: 60px;">
+        <div class="word-header">
+            <span class="word-title point">Point</span>
+            <span class="word-glyph-count">4 glyphs</span>
+        </div>
+
+        <div class="glyph-strip" id="strip-point"></div>
+
+        <h2>Pairwise Interference — POINT</h2>
+        <table class="pair-table">
+            <thead>
+                <tr>
+                    <th>Sequence</th>
+                    <th>Interaction</th>
+                    <th>Magnitude</th>
+                    <th>Reading</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="pair-seq">P → OI</td>
+                    <td><span class="tag tag-distort">Distort</span></td>
+                    <td><span class="mag-dominance">Dominance (Δ3)</span></td>
+                    <td class="pair-note">Maximal Drive crushes the Weak Vortex with maximum differential — local turbulence is distorted and overridden.</td>
+                </tr>
+                <tr>
+                    <td class="pair-seq">OI → N</td>
+                    <td><span class="tag tag-fracture">Fracture</span></td>
+                    <td><span class="mag-modulation">Modulation (Δ1)</span></td>
+                    <td class="pair-note">The weakened vortex flavors the Lock with a fracture — a hairline crack, not a break.</td>
+                </tr>
+                <tr>
+                    <td class="pair-seq">N → T</td>
+                    <td><span class="tag tag-anchor">Anchor</span></td>
+                    <td><span class="mag-resonance">Resonance (Δ0)</span></td>
+                    <td class="pair-note">Lock and Balance at equal magnitude — a resonant Anchor. POINT closes in stable structural equilibrium.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="card card-green">
+            <h3 style="margin-bottom:12px;">Field Reading — POINT</h3>
+            <p><strong>P (Maximal Drive)</strong> opens at the highest right-group magnitude — a heavy, overriding forcing function. It immediately encounters <strong>OI (Weak Vortex)</strong>, a low-magnitude backslash-group glyph that introduces local turbulence. The magnitude differential of 3 produces <em>Distort / Dominance</em>: P doesn't just win, it warps OI's shape entirely.</p>
+            <p>OI, now distorted, still manages to introduce a modulated fracture into <strong>N (Median Lock)</strong>. The crack is light — Modulation rather than Dominance. N absorbs it. Finally <strong>T (Median Balance)</strong> meets N at equal magnitude in a resonant Anchor — the word settles into a closed, stable structure. <strong>POINT resolves cleanly. It arrives.</strong></p>
+        </div>
+    </section>
+
+    <!-- PHRASE BOUNDARY -->
+    <section style="margin-bottom: 60px;">
+        <h2>Phrase Boundary</h2>
+        <p style="margin-bottom: 28px;">The terminal glyph of FRICTION meets the leading glyph of POINT. This junction is where the two semantic fields collide.</p>
+
+        <div class="boundary-box">
+            <div class="boundary-glyph">
+                <span class="boundary-char left-word">N</span>
+                <span class="boundary-sub">ngeadal<br>cross · 3<br>Median Lock</span>
+            </div>
+            <div class="boundary-arrow">→</div>
+            <div class="boundary-glyph">
+                <span class="boundary-char right-word">P</span>
+                <span class="boundary-sub">peith<br>right · 5<br>Maximal Drive</span>
+            </div>
+            <div class="boundary-arrow" style="color: var(--border);">⟹</div>
+            <div class="boundary-result">
+                <span class="tag tag-anchor" style="display:block; width:fit-content; margin-bottom:8px;">Anchor</span>
+                <span class="mag-dominance" style="display:block; margin-bottom:8px;">Dominance (Δ2)</span>
+                <p style="margin:0; font-size:0.85rem;">POINT's Maximal Drive anchors itself onto FRICTION's terminal lock — with full dominance. P overwrites N's magnitude and binds to the frozen state that friction created.</p>
+            </div>
+        </div>
+
+        <div class="card card-amber">
+            <h3 style="margin-bottom:12px;">The Junction</h3>
+            <p>N (cross/3) ends FRICTION in a fractured but persistent lock. P (right/5) begins POINT as a maximum forcing function. The interaction is <em>Anchor / Dominance</em>: POINT doesn't just follow FRICTION — it <strong>drives itself into the locked state</strong> and anchors there. The higher magnitude of P overwrites N.</p>
+            <p>This means a Friction Point is not where motion stops — it's where maximum drive encounters a locked, frozen field and <strong>anchors its force to that exact lock</strong>. The point is the attachment. The friction is the substrate it attaches to.</p>
+        </div>
+    </section>
+
+    <!-- COMPOSITE FIELD -->
+    <section style="margin-bottom: 60px;">
+        <h2>Composite Field — FRICTION POINT</h2>
+
+        <div class="field-grid">
+            <div class="field-cell">
+                <div class="field-cell-label">FRICTION terminal state</div>
+                <div class="field-cell-value">Fractured Lock (N via IO)</div>
+            </div>
+            <div class="field-cell">
+                <div class="field-cell-label">POINT terminal state</div>
+                <div class="field-cell-value">Resonant Anchor (N + T)</div>
+            </div>
+            <div class="field-cell">
+                <div class="field-cell-label">Critical internal event</div>
+                <div class="field-cell-value">I → C : Dampen / Modulation</div>
+            </div>
+            <div class="field-cell">
+                <div class="field-cell-label">Phrase junction</div>
+                <div class="field-cell-value">Anchor / Dominance (Δ2)</div>
+            </div>
+            <div class="field-cell">
+                <div class="field-cell-label">Dominant structure type</div>
+                <div class="field-cell-value">Cross-group (N × 2, R × 1)</div>
+            </div>
+            <div class="field-cell">
+                <div class="field-cell-label">Maximal magnitude count</div>
+                <div class="field-cell-value">4 of 11 glyphs at magnitude 5</div>
+            </div>
+        </div>
+
+        <div class="card card-purple">
+            <h3 style="margin-bottom:12px;">Structural Profile</h3>
+            <p>Across both words, <strong>11 glyphs</strong> fire in sequence. Four reach <strong>magnitude 5</strong> — the maximal tier — making this a high-energy phrase. The phrase contains <strong>3 Fracture interactions</strong> (IO→N, OI→N, and structurally at the boundary), more than any other interaction type. Fracture is the phrase's dominant event.</p>
+            <p>The cross-group (N, R) appears three times and both times serves as an <strong>absorbing node</strong> — receiving high-energy signals (Maximal Jet, Maximal Chaos, Maximal Drive) and holding. This is the structural backbone: friction creates a locked node; point drives into it.</p>
+            <p>The lone <em>Dampen / Modulation</em> at I→C is the quietest interaction in the phrase — and the most significant. It is where energy meets resistance and is transformed rather than destroyed. Everything before it (F→R→I) builds kinetic charge. Everything after it (C→T→IO→N) manages and locks the aftermath.</p>
+        </div>
+    </section>
+
+    <!-- FINAL READING -->
+    <div class="reading">
+        <p class="reading-label">Composite Reading</p>
+        <p>A <strong>Friction Point</strong> is a field event in three acts. In the first, energy is charged to maximum — a Median Assertion grows through Maximal Fusion into a Maximal Jet, amplified at resonance through a Gate. In the second, that Jet meets a Strong Barrier and is dampened — not destroyed, but transformed. The resistance holds and reinforces itself. Then chaos inverts the stabilizers and fractures the Lock. The field freezes.</p>
+        <p>In the third act, a Maximal Drive arrives and anchors itself to the frozen state with Dominance. The Point does not dissolve the friction. It plants itself in it. The word "POINT" closes in resonant equilibrium — stable, arrived, settled — precisely because the locked, fractured state beneath it gave the drive something to anchor against.</p>
+        <p>In NEO terms: a Friction Point is <em>the place where maximum kinetic energy is dampened into a locked state, and a new maximum drive anchors itself to that lock.</em> The friction doesn't end. The point just holds it still.</p>
+    </div>
+
+</div>
+
+<script>
+    // ─── NEO ENGINE (mirrored from neo_viewer) ──────────────────────────────
+    const ALPHABET = {"B":["right",1,"beith"],"L":["right",2,"luis"],"F":["right",3,"fearn"],"S":["right",4,"sail"],"P":["right",5,"peith"],"H":["left",1,"huath"],"D":["left",2,"duir"],"T":["left",3,"tinne"],"C":["left",4,"coll"],"W":["left",5,"ceirt"],"M":["cross",1,"muin"],"G":["cross",2,"gort"],"N":["cross",3,"ngeadal"],"Z":["cross",4,"straif"],"R":["cross",5,"ruis"],"A":["diagonal",1,"ailm"],"O":["diagonal",2,"onn"],"U":["diagonal",3,"ur"],"E":["diagonal",4,"eadhadh"],"I":["diagonal",5,"idad"],"AE":["backslash",1,"ae"],"OI":["backslash",2,"oi"],"UI":["backslash",3,"ui"],"EA":["backslash",4,"ea"],"IO":["backslash",5,"io"]};
+    const SIGNALS = {"beith":{"fingerprint":"Atomic Initiation","dynamic":"Small, sharp seed perturbation."},"luis":{"fingerprint":"Weak Coupling","dynamic":"Gentle directional wave."},"fearn":{"fingerprint":"Median Assertion","dynamic":"Stable, consistent pressure."},"sail":{"fingerprint":"Strong Enforcement","dynamic":"Deep, distinct channel."},"peith":{"fingerprint":"Maximal Drive","dynamic":"Heavy, overriding forcing function."},"huath":{"fingerprint":"Atomic Reaction","dynamic":"Small inverse perturbation."},"duir":{"fingerprint":"Weak Resistance","dynamic":"Gentle counter-wave."},"tinne":{"fingerprint":"Median Balance","dynamic":"Stable counter-pressure."},"coll":{"fingerprint":"Strong Barrier","dynamic":"Deep absorbing channel."},"ceirt":{"fingerprint":"Maximal Opposition","dynamic":"Heavy, dampening field."},"muin":{"fingerprint":"Atomic Bind","dynamic":"A \"staple\" or single stitch."},"gort":{"fingerprint":"Loose Knot","dynamic":"Flexible joint."},"ngeadal":{"fingerprint":"Median Lock","dynamic":"Standard structural rivet."},"straif":{"fingerprint":"Strong Anchor","dynamic":"Heavy, immobile weight."},"ruis":{"fingerprint":"Maximal Fusion","dynamic":"Total collapse of boundary."},"ailm":{"fingerprint":"Atomic Flow","dynamic":"A leak or trickle."},"onn":{"fingerprint":"Weak Current","dynamic":"Directional drift."},"ur":{"fingerprint":"Median Stream","dynamic":"Steady pipeline."},"eadhadh":{"fingerprint":"Strong Torrent","dynamic":"High-velocity channel."},"idad":{"fingerprint":"Maximal Jet","dynamic":"Ballistic trajectory."},"ae":{"fingerprint":"Atomic Twist","dynamic":"A spin or wobble."},"oi":{"fingerprint":"Weak Vortex","dynamic":"Local turbulence."},"ui":{"fingerprint":"Median Shift","dynamic":"Phase shift or refraction."},"ea":{"fingerprint":"Strong Warp","dynamic":"Manifold distortion."},"io":{"fingerprint":"Maximal Chaos","dynamic":"Singularity/Inversion."}};
+
+    function transliterate(text) {
+        const chars = text.toUpperCase().replace(/[^A-Z]/g, '');
+        const result = [];
+        let i = 0;
+        while (i < chars.length) {
+            if (i < chars.length - 1) {
+                const two = chars.substr(i, 2);
+                if (ALPHABET[two]) { result.push({ ...ALPHABET[two], char: two }); i += 2; continue; }
+            }
+            if (ALPHABET[chars[i]]) result.push({ ...ALPHABET[chars[i]], char: chars[i] });
+            i++;
+        }
+        return result;
+    }
+
+    function drawGlyph(position, count, w, h) {
+        const cx = w / 2;
+        const ml = 18;
+        const sp = 22;
+        const st = 22;
+        let p = `<line x1="${cx}" y1="0" x2="${cx}" y2="${h}" stroke="var(--stem)" stroke-width="2" stroke-linecap="butt"/>`;
+        for (let i = 0; i < count; i++) {
+            const y = st + i * sp;
+            let x1, y1, x2, y2;
+            switch (position) {
+                case 'left':     x1=cx; y1=y; x2=cx-ml; y2=y; break;
+                case 'right':    x1=cx; y1=y; x2=cx+ml; y2=y; break;
+                case 'cross':    x1=cx-ml; y1=y; x2=cx+ml; y2=y; break;
+                case 'diagonal': x1=cx-ml; y1=y-(ml*0.6); x2=cx+ml; y2=y+(ml*0.6); break;
+                case 'backslash':x1=cx-ml; y1=y+(ml*0.6); x2=cx+ml; y2=y-(ml*0.6); break;
+            }
+            p += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--mark)" stroke-width="2" stroke-linecap="round"/>`;
+        }
+        return `<svg width="${w}" height="${h}" style="display:block">${p}</svg>`;
+    }
+
+    function buildStrip(glyphs, containerId) {
+        const container = document.getElementById(containerId);
+        glyphs.forEach(g => {
+            const sig = SIGNALS[g[2].toLowerCase()];
+            const cell = document.createElement('div');
+            cell.className = 'glyph-cell';
+            cell.innerHTML = `
+                <div class="glyph-char">${g.char}</div>
+                ${drawGlyph(g[0], g[1], 80, 120)}
+                <div class="glyph-name">${g[2]}</div>
+                <div class="glyph-fp">${sig ? sig.fingerprint : ''}</div>
+            `;
+            container.appendChild(cell);
+        });
+    }
+
+    function buildInscription(glyphs, label, color) {
+        const wrap = document.createElement('div');
+        wrap.className = 'inscription-word';
+        const lbl = document.createElement('div');
+        lbl.className = 'inscription-label';
+        lbl.textContent = label;
+        const row = document.createElement('div');
+        row.className = 'inscription-glyphs';
+        glyphs.forEach(g => {
+            row.innerHTML += drawGlyph(g[0], g[1], 50, 90);
+        });
+        // tint stems for each word
+        row.querySelectorAll('line:first-child').forEach(l => l.setAttribute('stroke', color + '55'));
+        wrap.appendChild(lbl);
+        wrap.appendChild(row);
+        return wrap;
+    }
+
+    const friction = transliterate('FRICTION');
+    const point    = transliterate('POINT');
+
+    buildStrip(friction, 'strip-friction');
+    buildStrip(point,    'strip-point');
+
+    // Inscription preview
+    const inscRow = document.getElementById('inscription-row');
+    inscRow.appendChild(buildInscription(friction, 'FRICTION', '#ef4444'));
+    inscRow.appendChild(buildInscription(point,    'POINT',    '#10b981'));
+</script>
+</body>
+</html>

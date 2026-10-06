@@ -1,0 +1,199 @@
+signature_id,phrase,index,scope,pair,glyph_a,glyph_b,name_a,name_b,group_a,group_b,marks_a,marks_b,magnitude_delta,magnitude_result,interaction,signal_a,signal_b,is_disruptive
+interessence,INTERESSENCE,0,adjacent,I->N,I,N,idad,ngeadal,diagonal,cross,5,3,2,Dominance,Gate,Maximal Jet,Median Lock,False
+interessence,INTERESSENCE,1,adjacent,N->T,N,T,ngeadal,tinne,cross,left,3,3,0,Resonance,Anchor,Median Lock,Median Balance,False
+interessence,INTERESSENCE,2,adjacent,T->E,T,E,tinne,eadhadh,left,diagonal,3,4,1,Modulation,Dampen,Median Balance,Strong Torrent,False
+interessence,INTERESSENCE,3,adjacent,E->R,E,R,eadhadh,ruis,diagonal,cross,4,5,1,Modulation,Gate,Strong Torrent,Maximal Fusion,False
+interessence,INTERESSENCE,4,adjacent,R->E,R,E,ruis,eadhadh,cross,diagonal,5,4,1,Modulation,Gate,Maximal Fusion,Strong Torrent,False
+interessence,INTERESSENCE,5,adjacent,E->S,E,S,eadhadh,sail,diagonal,right,4,4,0,Resonance,Propel,Strong Torrent,Strong Enforcement,False
+interessence,INTERESSENCE,6,adjacent,S->S,S,S,sail,sail,right,right,4,4,0,Resonance,Reinforce,Strong Enforcement,Strong Enforcement,False
+interessence,INTERESSENCE,7,adjacent,S->E,S,E,sail,eadhadh,right,diagonal,4,4,0,Resonance,Propel,Strong Enforcement,Strong Torrent,False
+interessence,INTERESSENCE,8,adjacent,E->N,E,N,eadhadh,ngeadal,diagonal,cross,4,3,1,Modulation,Gate,Strong Torrent,Median Lock,False
+interessence,INTERESSENCE,9,adjacent,N->C,N,C,ngeadal,coll,cross,left,3,4,1,Modulation,Anchor,Median Lock,Strong Barrier,False
+interessence,INTERESSENCE,10,adjacent,C->E,C,E,coll,eadhadh,left,diagonal,4,4,0,Resonance,Dampen,Strong Barrier,Strong Torrent,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,0,adjacent,C->A,C,A,coll,ailm,left,diagonal,4,1,3,Dominance,Dampen,Strong Barrier,Atomic Flow,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,1,adjacent,A->R,A,R,ailm,ruis,diagonal,cross,1,5,4,Dominance,Gate,Atomic Flow,Maximal Fusion,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,2,adjacent,R->E,R,E,ruis,eadhadh,cross,diagonal,5,4,1,Modulation,Gate,Maximal Fusion,Strong Torrent,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,3,adjacent,E->B,E,B,eadhadh,beith,diagonal,right,4,1,3,Dominance,Propel,Strong Torrent,Atomic Initiation,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,4,adjacent,B->E,B,E,beith,eadhadh,right,diagonal,1,4,3,Dominance,Propel,Atomic Initiation,Strong Torrent,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,5,adjacent,E->N,E,N,eadhadh,ngeadal,diagonal,cross,4,3,1,Modulation,Gate,Strong Torrent,Median Lock,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,6,adjacent,N->D,N,D,ngeadal,duir,cross,left,3,2,1,Modulation,Anchor,Median Lock,Weak Resistance,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,7,adjacent,D->S,D,S,duir,sail,left,right,2,4,2,Dominance,Opposition,Weak Resistance,Strong Enforcement,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,8,adjacent,S->F,S,F,sail,fearn,right,right,4,3,1,Modulation,Reinforce,Strong Enforcement,Median Assertion,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,9,adjacent,F->R,F,R,fearn,ruis,right,cross,3,5,2,Dominance,Anchor,Median Assertion,Maximal Fusion,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,10,adjacent,R->I,R,I,ruis,idad,cross,diagonal,5,5,0,Resonance,Gate,Maximal Fusion,Maximal Jet,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,11,adjacent,I->C,I,C,idad,coll,diagonal,left,5,4,1,Modulation,Dampen,Maximal Jet,Strong Barrier,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,12,adjacent,C->T,C,T,coll,tinne,left,left,4,3,1,Modulation,Reinforce,Strong Barrier,Median Balance,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,13,adjacent,T->IO,T,IO,tinne,io,left,backslash,3,5,2,Dominance,Invert,Median Balance,Maximal Chaos,True
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,14,adjacent,IO->N,IO,N,io,ngeadal,backslash,cross,5,3,2,Dominance,Fracture,Maximal Chaos,Median Lock,True
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,15,adjacent,N->T,N,T,ngeadal,tinne,cross,left,3,3,0,Resonance,Anchor,Median Lock,Median Balance,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,16,adjacent,T->O,T,O,tinne,onn,left,diagonal,3,2,1,Modulation,Dampen,Median Balance,Weak Current,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,17,adjacent,O->W,O,W,onn,ceirt,diagonal,left,2,5,3,Dominance,Dampen,Weak Current,Maximal Opposition,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,18,adjacent,W->A,W,A,ceirt,ailm,left,diagonal,5,1,4,Dominance,Dampen,Maximal Opposition,Atomic Flow,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,19,adjacent,A->R,A,R,ailm,ruis,diagonal,cross,1,5,4,Dominance,Gate,Atomic Flow,Maximal Fusion,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,20,adjacent,R->D,R,D,ruis,duir,cross,left,5,2,3,Dominance,Anchor,Maximal Fusion,Weak Resistance,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,21,adjacent,D->S,D,S,duir,sail,left,right,2,4,2,Dominance,Opposition,Weak Resistance,Strong Enforcement,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,22,adjacent,S->F,S,F,sail,fearn,right,right,4,3,1,Modulation,Reinforce,Strong Enforcement,Median Assertion,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,23,adjacent,F->R,F,R,fearn,ruis,right,cross,3,5,2,Dominance,Anchor,Median Assertion,Maximal Fusion,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,24,adjacent,R->E,R,E,ruis,eadhadh,cross,diagonal,5,4,1,Modulation,Gate,Maximal Fusion,Strong Torrent,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,25,adjacent,E->E,E,E,eadhadh,eadhadh,diagonal,diagonal,4,4,0,Resonance,Stream,Strong Torrent,Strong Torrent,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,26,adjacent,E->D,E,D,eadhadh,duir,diagonal,left,4,2,2,Dominance,Dampen,Strong Torrent,Weak Resistance,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,27,adjacent,D->O,D,O,duir,onn,left,diagonal,2,2,0,Resonance,Dampen,Weak Resistance,Weak Current,False
+care-bends-friction-towards-freedom,CARE BENDS FRICTION TOWARDS FREEDOM,28,adjacent,O->M,O,M,onn,muin,diagonal,cross,2,1,1,Modulation,Gate,Weak Current,Atomic Bind,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,0,adjacent,C->U,C,U,coll,ur,left,diagonal,4,3,1,Modulation,Dampen,Strong Barrier,Median Stream,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,1,adjacent,U->R,U,R,ur,ruis,diagonal,cross,3,5,2,Dominance,Gate,Median Stream,Maximal Fusion,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,2,adjacent,R->A,R,A,ruis,ailm,cross,diagonal,5,1,4,Dominance,Gate,Maximal Fusion,Atomic Flow,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,3,adjacent,A->F,A,F,ailm,fearn,diagonal,right,1,3,2,Dominance,Propel,Atomic Flow,Median Assertion,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,4,adjacent,F->R,F,R,fearn,ruis,right,cross,3,5,2,Dominance,Anchor,Median Assertion,Maximal Fusion,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,5,adjacent,R->I,R,I,ruis,idad,cross,diagonal,5,5,0,Resonance,Gate,Maximal Fusion,Maximal Jet,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,6,adjacent,I->C,I,C,idad,coll,diagonal,left,5,4,1,Modulation,Dampen,Maximal Jet,Strong Barrier,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,7,adjacent,C->T,C,T,coll,tinne,left,left,4,3,1,Modulation,Reinforce,Strong Barrier,Median Balance,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,8,adjacent,T->IO,T,IO,tinne,io,left,backslash,3,5,2,Dominance,Invert,Median Balance,Maximal Chaos,True
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,9,adjacent,IO->N,IO,N,io,ngeadal,backslash,cross,5,3,2,Dominance,Fracture,Maximal Chaos,Median Lock,True
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,10,adjacent,N->E,N,E,ngeadal,eadhadh,cross,diagonal,3,4,1,Modulation,Gate,Median Lock,Strong Torrent,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,11,adjacent,E->M,E,M,eadhadh,muin,diagonal,cross,4,1,3,Dominance,Gate,Strong Torrent,Atomic Bind,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,12,adjacent,M->A,M,A,muin,ailm,cross,diagonal,1,1,0,Resonance,Gate,Atomic Bind,Atomic Flow,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,13,adjacent,A->D,A,D,ailm,duir,diagonal,left,1,2,1,Modulation,Dampen,Atomic Flow,Weak Resistance,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,14,adjacent,D->L,D,L,duir,luis,left,right,2,2,0,Resonance,Opposition,Weak Resistance,Weak Coupling,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,15,adjacent,L->I,L,I,luis,idad,right,diagonal,2,5,3,Dominance,Propel,Weak Coupling,Maximal Jet,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,16,adjacent,I->B,I,B,idad,beith,diagonal,right,5,1,4,Dominance,Propel,Maximal Jet,Atomic Initiation,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,17,adjacent,B->E,B,E,beith,eadhadh,right,diagonal,1,4,3,Dominance,Propel,Atomic Initiation,Strong Torrent,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,18,adjacent,E->R,E,R,eadhadh,ruis,diagonal,cross,4,5,1,Modulation,Gate,Strong Torrent,Maximal Fusion,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,19,adjacent,R->T,R,T,ruis,tinne,cross,left,5,3,2,Dominance,Anchor,Maximal Fusion,Median Balance,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,20,adjacent,T->A,T,A,tinne,ailm,left,diagonal,3,1,2,Dominance,Dampen,Median Balance,Atomic Flow,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,21,adjacent,A->T,A,T,ailm,tinne,diagonal,left,1,3,2,Dominance,Dampen,Atomic Flow,Median Balance,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,22,adjacent,T->E,T,E,tinne,eadhadh,left,diagonal,3,4,1,Modulation,Dampen,Median Balance,Strong Torrent,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,23,adjacent,E->M,E,M,eadhadh,muin,diagonal,cross,4,1,3,Dominance,Gate,Strong Torrent,Atomic Bind,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,24,adjacent,M->F,M,F,muin,fearn,cross,right,1,3,2,Dominance,Anchor,Atomic Bind,Median Assertion,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,25,adjacent,F->L,F,L,fearn,luis,right,right,3,2,1,Modulation,Reinforce,Median Assertion,Weak Coupling,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,26,adjacent,L->E,L,E,luis,eadhadh,right,diagonal,2,4,2,Dominance,Propel,Weak Coupling,Strong Torrent,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,27,adjacent,E->C,E,C,eadhadh,coll,diagonal,left,4,4,0,Resonance,Dampen,Strong Torrent,Strong Barrier,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,28,adjacent,C->T,C,T,coll,tinne,left,left,4,3,1,Modulation,Reinforce,Strong Barrier,Median Balance,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,29,adjacent,T->I,T,I,tinne,idad,left,diagonal,3,5,2,Dominance,Dampen,Median Balance,Maximal Jet,False
+cura-frictionem-ad-libertatem-flectit,CURA FRICTIONEM AD LIBERTATEM FLECTIT,30,adjacent,I->T,I,T,idad,tinne,diagonal,left,5,3,2,Dominance,Dampen,Maximal Jet,Median Balance,False
+war-breaks-the-gate,WAR BREAKS THE GATE,0,adjacent,W->A,W,A,ceirt,ailm,left,diagonal,5,1,4,Dominance,Dampen,Maximal Opposition,Atomic Flow,False
+war-breaks-the-gate,WAR BREAKS THE GATE,1,adjacent,A->R,A,R,ailm,ruis,diagonal,cross,1,5,4,Dominance,Gate,Atomic Flow,Maximal Fusion,False
+war-breaks-the-gate,WAR BREAKS THE GATE,2,adjacent,R->B,R,B,ruis,beith,cross,right,5,1,4,Dominance,Anchor,Maximal Fusion,Atomic Initiation,False
+war-breaks-the-gate,WAR BREAKS THE GATE,3,adjacent,B->R,B,R,beith,ruis,right,cross,1,5,4,Dominance,Anchor,Atomic Initiation,Maximal Fusion,False
+war-breaks-the-gate,WAR BREAKS THE GATE,4,adjacent,R->EA,R,EA,ruis,ea,cross,backslash,5,4,1,Modulation,Fracture,Maximal Fusion,Strong Warp,True
+war-breaks-the-gate,WAR BREAKS THE GATE,5,adjacent,EA->C,EA,C,ea,coll,backslash,left,4,4,0,Resonance,Invert,Strong Warp,Strong Barrier,True
+war-breaks-the-gate,WAR BREAKS THE GATE,6,adjacent,C->S,C,S,coll,sail,left,right,4,4,0,Resonance,Opposition,Strong Barrier,Strong Enforcement,False
+war-breaks-the-gate,WAR BREAKS THE GATE,7,adjacent,S->T,S,T,sail,tinne,right,left,4,3,1,Modulation,Opposition,Strong Enforcement,Median Balance,False
+war-breaks-the-gate,WAR BREAKS THE GATE,8,adjacent,T->H,T,H,tinne,huath,left,left,3,1,2,Dominance,Reinforce,Median Balance,Atomic Reaction,False
+war-breaks-the-gate,WAR BREAKS THE GATE,9,adjacent,H->E,H,E,huath,eadhadh,left,diagonal,1,4,3,Dominance,Dampen,Atomic Reaction,Strong Torrent,False
+war-breaks-the-gate,WAR BREAKS THE GATE,10,adjacent,E->G,E,G,eadhadh,gort,diagonal,cross,4,2,2,Dominance,Gate,Strong Torrent,Loose Knot,False
+war-breaks-the-gate,WAR BREAKS THE GATE,11,adjacent,G->A,G,A,gort,ailm,cross,diagonal,2,1,1,Modulation,Gate,Loose Knot,Atomic Flow,False
+war-breaks-the-gate,WAR BREAKS THE GATE,12,adjacent,A->T,A,T,ailm,tinne,diagonal,left,1,3,2,Dominance,Dampen,Atomic Flow,Median Balance,False
+war-breaks-the-gate,WAR BREAKS THE GATE,13,adjacent,T->E,T,E,tinne,eadhadh,left,diagonal,3,4,1,Modulation,Dampen,Median Balance,Strong Torrent,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,0,adjacent,B->E,B,E,beith,eadhadh,right,diagonal,1,4,3,Dominance,Propel,Atomic Initiation,Strong Torrent,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,1,adjacent,E->L,E,L,eadhadh,luis,diagonal,right,4,2,2,Dominance,Propel,Strong Torrent,Weak Coupling,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,2,adjacent,L->L,L,L,luis,luis,right,right,2,2,0,Resonance,Reinforce,Weak Coupling,Weak Coupling,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,3,adjacent,L->U,L,U,luis,ur,right,diagonal,2,3,1,Modulation,Propel,Weak Coupling,Median Stream,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,4,adjacent,U->M,U,M,ur,muin,diagonal,cross,3,1,2,Dominance,Gate,Median Stream,Atomic Bind,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,5,adjacent,M->P,M,P,muin,peith,cross,right,1,5,4,Dominance,Anchor,Atomic Bind,Maximal Drive,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,6,adjacent,P->O,P,O,peith,onn,right,diagonal,5,2,3,Dominance,Propel,Maximal Drive,Weak Current,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,7,adjacent,O->R,O,R,onn,ruis,diagonal,cross,2,5,3,Dominance,Gate,Weak Current,Maximal Fusion,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,8,adjacent,R->T,R,T,ruis,tinne,cross,left,5,3,2,Dominance,Anchor,Maximal Fusion,Median Balance,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,9,adjacent,T->A,T,A,tinne,ailm,left,diagonal,3,1,2,Dominance,Dampen,Median Balance,Atomic Flow,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,10,adjacent,A->F,A,F,ailm,fearn,diagonal,right,1,3,2,Dominance,Propel,Atomic Flow,Median Assertion,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,11,adjacent,F->R,F,R,fearn,ruis,right,cross,3,5,2,Dominance,Anchor,Median Assertion,Maximal Fusion,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,12,adjacent,R->A,R,A,ruis,ailm,cross,diagonal,5,1,4,Dominance,Gate,Maximal Fusion,Atomic Flow,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,13,adjacent,A->N,A,N,ailm,ngeadal,diagonal,cross,1,3,2,Dominance,Gate,Atomic Flow,Median Lock,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,14,adjacent,N->G,N,G,ngeadal,gort,cross,cross,3,2,1,Modulation,Crystalize,Median Lock,Loose Knot,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,15,adjacent,G->I,G,I,gort,idad,cross,diagonal,2,5,3,Dominance,Gate,Loose Knot,Maximal Jet,False
+bellum-porta-frangit,BELLUM PORTA FRANGIT,16,adjacent,I->T,I,T,idad,tinne,diagonal,left,5,3,2,Dominance,Dampen,Maximal Jet,Median Balance,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,0,adjacent,B->R,B,R,beith,ruis,right,cross,1,5,4,Dominance,Anchor,Atomic Initiation,Maximal Fusion,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,1,adjacent,R->I,R,I,ruis,idad,cross,diagonal,5,5,0,Resonance,Gate,Maximal Fusion,Maximal Jet,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,2,adjacent,I->S,I,S,idad,sail,diagonal,right,5,4,1,Modulation,Propel,Maximal Jet,Strong Enforcement,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,3,adjacent,S->EA,S,EA,sail,ea,right,backslash,4,4,0,Resonance,Distort,Strong Enforcement,Strong Warp,True
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,4,adjacent,EA->N,EA,N,ea,ngeadal,backslash,cross,4,3,1,Modulation,Fracture,Strong Warp,Median Lock,True
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,5,adjacent,N->N,N,N,ngeadal,ngeadal,cross,cross,3,3,0,Resonance,Crystalize,Median Lock,Median Lock,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,6,adjacent,N->C,N,C,ngeadal,coll,cross,left,3,4,1,Modulation,Anchor,Median Lock,Strong Barrier,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,7,adjacent,C->O,C,O,coll,onn,left,diagonal,4,2,2,Dominance,Dampen,Strong Barrier,Weak Current,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,8,adjacent,O->G,O,G,onn,gort,diagonal,cross,2,2,0,Resonance,Gate,Weak Current,Loose Knot,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,9,adjacent,G->A,G,A,gort,ailm,cross,diagonal,2,1,1,Modulation,Gate,Loose Knot,Atomic Flow,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,10,adjacent,A->D,A,D,ailm,duir,diagonal,left,1,2,1,Modulation,Dampen,Atomic Flow,Weak Resistance,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,11,adjacent,D->H,D,H,duir,huath,left,left,2,1,1,Modulation,Reinforce,Weak Resistance,Atomic Reaction,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,12,adjacent,H->A,H,A,huath,ailm,left,diagonal,1,1,0,Resonance,Dampen,Atomic Reaction,Atomic Flow,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,13,adjacent,A->N,A,N,ailm,ngeadal,diagonal,cross,1,3,2,Dominance,Gate,Atomic Flow,Median Lock,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,14,adjacent,N->G,N,G,ngeadal,gort,cross,cross,3,2,1,Modulation,Crystalize,Median Lock,Loose Knot,False
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,15,adjacent,G->EA,G,EA,gort,ea,cross,backslash,2,4,2,Dominance,Fracture,Loose Knot,Strong Warp,True
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,16,adjacent,EA->T,EA,T,ea,tinne,backslash,left,4,3,1,Modulation,Invert,Strong Warp,Median Balance,True
+briseann-cogadh-an-geata,BRISEANN COGADH AN GEATA,17,adjacent,T->A,T,A,tinne,ailm,left,diagonal,3,1,2,Dominance,Dampen,Median Balance,Atomic Flow,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,0,adjacent,A->I,A,I,ailm,idad,diagonal,diagonal,1,5,4,Dominance,Stream,Atomic Flow,Maximal Jet,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,1,adjacent,I->T,I,T,idad,tinne,diagonal,left,5,3,2,Dominance,Dampen,Maximal Jet,Median Balance,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,2,adjacent,T->F,T,F,tinne,fearn,left,right,3,3,0,Resonance,Opposition,Median Balance,Median Assertion,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,3,adjacent,F->H,F,H,fearn,huath,right,left,3,1,2,Dominance,Opposition,Median Assertion,Atomic Reaction,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,4,adjacent,H->R,H,R,huath,ruis,left,cross,1,5,4,Dominance,Anchor,Atomic Reaction,Maximal Fusion,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,5,adjacent,R->I,R,I,ruis,idad,cross,diagonal,5,5,0,Resonance,Gate,Maximal Fusion,Maximal Jet,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,6,adjacent,I->T,I,T,idad,tinne,diagonal,left,5,3,2,Dominance,Dampen,Maximal Jet,Median Balance,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,7,adjacent,T->H,T,H,tinne,huath,left,left,3,1,2,Dominance,Reinforce,Median Balance,Atomic Reaction,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,8,adjacent,H->C,H,C,huath,coll,left,left,1,4,3,Dominance,Reinforce,Atomic Reaction,Strong Barrier,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,9,adjacent,C->H,C,H,coll,huath,left,left,4,1,3,Dominance,Reinforce,Strong Barrier,Atomic Reaction,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,10,adjacent,H->UI,H,UI,huath,ui,left,backslash,1,3,2,Dominance,Invert,Atomic Reaction,Median Shift,True
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,11,adjacent,UI->M,UI,M,ui,muin,backslash,cross,3,1,2,Dominance,Fracture,Median Shift,Atomic Bind,True
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,12,adjacent,M->I,M,I,muin,idad,cross,diagonal,1,5,4,Dominance,Gate,Atomic Bind,Maximal Jet,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,13,adjacent,I->L,I,L,idad,luis,diagonal,right,5,2,3,Dominance,Propel,Maximal Jet,Weak Coupling,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,14,adjacent,L->T,L,T,luis,tinne,right,left,2,3,1,Modulation,Opposition,Weak Coupling,Median Balance,False
+ait-fhrithchuimilte,AIT FHRITHCHUIMILTE,15,adjacent,T->E,T,E,tinne,eadhadh,left,diagonal,3,4,1,Modulation,Dampen,Median Balance,Strong Torrent,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,0,adjacent,S->N,S,N,sail,ngeadal,right,cross,4,3,1,Modulation,Anchor,Strong Enforcement,Median Lock,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,1,adjacent,N->A,N,A,ngeadal,ailm,cross,diagonal,3,1,2,Dominance,Gate,Median Lock,Atomic Flow,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,2,adjacent,A->I,A,I,ailm,idad,diagonal,diagonal,1,5,4,Dominance,Stream,Atomic Flow,Maximal Jet,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,3,adjacent,I->D,I,D,idad,duir,diagonal,left,5,2,3,Dominance,Dampen,Maximal Jet,Weak Resistance,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,4,adjacent,D->H,D,H,duir,huath,left,left,2,1,1,Modulation,Reinforce,Weak Resistance,Atomic Reaction,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,5,adjacent,H->M,H,M,huath,muin,left,cross,1,1,0,Resonance,Anchor,Atomic Reaction,Atomic Bind,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,6,adjacent,M->A,M,A,muin,ailm,cross,diagonal,1,1,0,Resonance,Gate,Atomic Bind,Atomic Flow,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,7,adjacent,A->I,A,I,ailm,idad,diagonal,diagonal,1,5,4,Dominance,Stream,Atomic Flow,Maximal Jet,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,8,adjacent,I->A,I,A,idad,ailm,diagonal,diagonal,5,1,4,Dominance,Stream,Maximal Jet,Atomic Flow,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,9,adjacent,A->R,A,R,ailm,ruis,diagonal,cross,1,5,4,Dominance,Gate,Atomic Flow,Maximal Fusion,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,10,adjacent,R->R,R,R,ruis,ruis,cross,cross,5,5,0,Resonance,Crystalize,Maximal Fusion,Maximal Fusion,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,11,adjacent,R->A,R,A,ruis,ailm,cross,diagonal,5,1,4,Dominance,Gate,Maximal Fusion,Atomic Flow,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,12,adjacent,A->N,A,N,ailm,ngeadal,diagonal,cross,1,3,2,Dominance,Gate,Atomic Flow,Median Lock,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,13,adjacent,N->N,N,N,ngeadal,ngeadal,cross,cross,3,3,0,Resonance,Crystalize,Median Lock,Median Lock,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,14,adjacent,N->C,N,C,ngeadal,coll,cross,left,3,4,1,Modulation,Anchor,Median Lock,Strong Barrier,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,15,adjacent,C->U,C,U,coll,ur,left,diagonal,4,3,1,Modulation,Dampen,Strong Barrier,Median Stream,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,16,adjacent,U->R,U,R,ur,ruis,diagonal,cross,3,5,2,Dominance,Gate,Median Stream,Maximal Fusion,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,17,adjacent,R->A,R,A,ruis,ailm,cross,diagonal,5,1,4,Dominance,Gate,Maximal Fusion,Atomic Flow,False
+snaidhm-a-iarrann-curam,SNAIDHM A IARRANN CURAM,18,adjacent,A->M,A,M,ailm,muin,diagonal,cross,1,1,0,Resonance,Gate,Atomic Flow,Atomic Bind,False
+pizza-on-tuesday,PIZZA ON TUESDAY,0,adjacent,P->I,P,I,peith,idad,right,diagonal,5,5,0,Resonance,Propel,Maximal Drive,Maximal Jet,False
+pizza-on-tuesday,PIZZA ON TUESDAY,1,adjacent,I->Z,I,Z,idad,straif,diagonal,cross,5,4,1,Modulation,Gate,Maximal Jet,Strong Anchor,False
+pizza-on-tuesday,PIZZA ON TUESDAY,2,adjacent,Z->Z,Z,Z,straif,straif,cross,cross,4,4,0,Resonance,Crystalize,Strong Anchor,Strong Anchor,False
+pizza-on-tuesday,PIZZA ON TUESDAY,3,adjacent,Z->A,Z,A,straif,ailm,cross,diagonal,4,1,3,Dominance,Gate,Strong Anchor,Atomic Flow,False
+pizza-on-tuesday,PIZZA ON TUESDAY,4,adjacent,A->O,A,O,ailm,onn,diagonal,diagonal,1,2,1,Modulation,Stream,Atomic Flow,Weak Current,False
+pizza-on-tuesday,PIZZA ON TUESDAY,5,adjacent,O->N,O,N,onn,ngeadal,diagonal,cross,2,3,1,Modulation,Gate,Weak Current,Median Lock,False
+pizza-on-tuesday,PIZZA ON TUESDAY,6,adjacent,N->T,N,T,ngeadal,tinne,cross,left,3,3,0,Resonance,Anchor,Median Lock,Median Balance,False
+pizza-on-tuesday,PIZZA ON TUESDAY,7,adjacent,T->U,T,U,tinne,ur,left,diagonal,3,3,0,Resonance,Dampen,Median Balance,Median Stream,False
+pizza-on-tuesday,PIZZA ON TUESDAY,8,adjacent,U->E,U,E,ur,eadhadh,diagonal,diagonal,3,4,1,Modulation,Stream,Median Stream,Strong Torrent,False
+pizza-on-tuesday,PIZZA ON TUESDAY,9,adjacent,E->S,E,S,eadhadh,sail,diagonal,right,4,4,0,Resonance,Propel,Strong Torrent,Strong Enforcement,False
+pizza-on-tuesday,PIZZA ON TUESDAY,10,adjacent,S->D,S,D,sail,duir,right,left,4,2,2,Dominance,Opposition,Strong Enforcement,Weak Resistance,False
+pizza-on-tuesday,PIZZA ON TUESDAY,11,adjacent,D->A,D,A,duir,ailm,left,diagonal,2,1,1,Modulation,Dampen,Weak Resistance,Atomic Flow,False
+pizza-on-tuesday,PIZZA ON TUESDAY,12,adjacent,A->I,A,I,ailm,idad,diagonal,diagonal,1,5,4,Dominance,Stream,Atomic Flow,Maximal Jet,False
+the-speir-is-blue,THE SPEIR IS BLUE,0,adjacent,T->H,T,H,tinne,huath,left,left,3,1,2,Dominance,Reinforce,Median Balance,Atomic Reaction,False
+the-speir-is-blue,THE SPEIR IS BLUE,1,adjacent,H->E,H,E,huath,eadhadh,left,diagonal,1,4,3,Dominance,Dampen,Atomic Reaction,Strong Torrent,False
+the-speir-is-blue,THE SPEIR IS BLUE,2,adjacent,E->S,E,S,eadhadh,sail,diagonal,right,4,4,0,Resonance,Propel,Strong Torrent,Strong Enforcement,False
+the-speir-is-blue,THE SPEIR IS BLUE,3,adjacent,S->P,S,P,sail,peith,right,right,4,5,1,Modulation,Reinforce,Strong Enforcement,Maximal Drive,False
+the-speir-is-blue,THE SPEIR IS BLUE,4,adjacent,P->E,P,E,peith,eadhadh,right,diagonal,5,4,1,Modulation,Propel,Maximal Drive,Strong Torrent,False
+the-speir-is-blue,THE SPEIR IS BLUE,5,adjacent,E->I,E,I,eadhadh,idad,diagonal,diagonal,4,5,1,Modulation,Stream,Strong Torrent,Maximal Jet,False
+the-speir-is-blue,THE SPEIR IS BLUE,6,adjacent,I->R,I,R,idad,ruis,diagonal,cross,5,5,0,Resonance,Gate,Maximal Jet,Maximal Fusion,False
+the-speir-is-blue,THE SPEIR IS BLUE,7,adjacent,R->I,R,I,ruis,idad,cross,diagonal,5,5,0,Resonance,Gate,Maximal Fusion,Maximal Jet,False
+the-speir-is-blue,THE SPEIR IS BLUE,8,adjacent,I->S,I,S,idad,sail,diagonal,right,5,4,1,Modulation,Propel,Maximal Jet,Strong Enforcement,False
+the-speir-is-blue,THE SPEIR IS BLUE,9,adjacent,S->B,S,B,sail,beith,right,right,4,1,3,Dominance,Reinforce,Strong Enforcement,Atomic Initiation,False
+the-speir-is-blue,THE SPEIR IS BLUE,10,adjacent,B->L,B,L,beith,luis,right,right,1,2,1,Modulation,Reinforce,Atomic Initiation,Weak Coupling,False
+the-speir-is-blue,THE SPEIR IS BLUE,11,adjacent,L->U,L,U,luis,ur,right,diagonal,2,3,1,Modulation,Propel,Weak Coupling,Median Stream,False
+the-speir-is-blue,THE SPEIR IS BLUE,12,adjacent,U->E,U,E,ur,eadhadh,diagonal,diagonal,3,4,1,Modulation,Stream,Median Stream,Strong Torrent,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,0,adjacent,T->H,T,H,tinne,huath,left,left,3,1,2,Dominance,Reinforce,Median Balance,Atomic Reaction,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,1,adjacent,H->E,H,E,huath,eadhadh,left,diagonal,1,4,3,Dominance,Dampen,Atomic Reaction,Strong Torrent,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,2,adjacent,E->F,E,F,eadhadh,fearn,diagonal,right,4,3,1,Modulation,Propel,Strong Torrent,Median Assertion,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,3,adjacent,F->O,F,O,fearn,onn,right,diagonal,3,2,1,Modulation,Propel,Median Assertion,Weak Current,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,4,adjacent,O->C,O,C,onn,coll,diagonal,left,2,4,2,Dominance,Dampen,Weak Current,Strong Barrier,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,5,adjacent,C->S,C,S,coll,sail,left,right,4,4,0,Resonance,Opposition,Strong Barrier,Strong Enforcement,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,6,adjacent,S->A,S,A,sail,ailm,right,diagonal,4,1,3,Dominance,Propel,Strong Enforcement,Atomic Flow,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,7,adjacent,A->N,A,N,ailm,ngeadal,diagonal,cross,1,3,2,Dominance,Gate,Atomic Flow,Median Lock,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,8,adjacent,N->D,N,D,ngeadal,duir,cross,left,3,2,1,Modulation,Anchor,Median Lock,Weak Resistance,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,9,adjacent,D->T,D,T,duir,tinne,left,left,2,3,1,Modulation,Reinforce,Weak Resistance,Median Balance,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,10,adjacent,T->H,T,H,tinne,huath,left,left,3,1,2,Dominance,Reinforce,Median Balance,Atomic Reaction,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,11,adjacent,H->E,H,E,huath,eadhadh,left,diagonal,1,4,3,Dominance,Dampen,Atomic Reaction,Strong Torrent,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,12,adjacent,E->H,E,H,eadhadh,huath,diagonal,left,4,1,3,Dominance,Dampen,Strong Torrent,Atomic Reaction,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,13,adjacent,H->O,H,O,huath,onn,left,diagonal,1,2,1,Modulation,Dampen,Atomic Reaction,Weak Current,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,14,adjacent,O->U,O,U,onn,ur,diagonal,diagonal,2,3,1,Modulation,Stream,Weak Current,Median Stream,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,15,adjacent,U->N,U,N,ur,ngeadal,diagonal,cross,3,3,0,Resonance,Gate,Median Stream,Median Lock,False
+the-focs-and-the-hound,THE FOCS AND THE HOUND,16,adjacent,N->D,N,D,ngeadal,duir,cross,left,3,2,1,Modulation,Anchor,Median Lock,Weak Resistance,False

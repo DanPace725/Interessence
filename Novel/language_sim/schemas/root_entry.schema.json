@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "root_entry.schema.json",
+  "title": "IW Root Entry",
+  "type": "object",
+  "required": [
+    "root_id",
+    "proto_sound",
+    "phonogestural_contour",
+    "original_pressure",
+    "first_context",
+    "gesture",
+    "body_posture",
+    "danger_if_wrong",
+    "world_response",
+    "social_role_carriers",
+    "semantic_drift_path",
+    "proto_neo_mapping",
+    "story_fragment"
+  ],
+  "properties": {
+    "root_id": {
+      "type": "string"
+    },
+    "proto_sound": {
+      "type": "string"
+    },
+    "phonogestural_contour": {
+      "type": "object",
+      "required": [
+        "breath_shape",
+        "vowel_movement",
+        "consonant_transition",
+        "hand_enactment",
+        "posture_enactment"
+      ],
+      "properties": {
+        "breath_shape": {
+          "type": "string"
+        },
+        "vowel_movement": {
+          "type": "string"
+        },
+        "consonant_transition": {
+          "type": "string"
+        },
+        "hand_enactment": {
+          "type": "string"
+        },
+        "posture_enactment": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "original_pressure": {
+      "type": "string"
+    },
+    "first_context": {
+      "type": "string"
+    },
+    "gesture": {
+      "type": "string"
+    },
+    "body_posture": {
+      "type": "string"
+    },
+    "danger_if_wrong": {
+      "type": "string"
+    },
+    "world_response": {
+      "type": "string"
+    },
+    "social_role_carriers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "phonetic_drift_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "semantic_drift_path": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "descendants": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "proto_neo_mapping": {
+      "type": "object",
+      "required": ["primary_bias"],
+      "properties": {
+        "primary_bias": {
+          "type": "string",
+          "enum": ["action", "resistance", "binding", "flow", "mutation"]
+        },
+        "secondary_bias": {
+          "type": "string",
+          "enum": ["action", "resistance", "binding", "flow", "mutation"]
+        },
+        "early_feature_map": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "later_compression": {
+      "type": "object",
+      "description": "Optional authored override for the later 15-letter mouth-family reading. Generated audits can derive this from proto_sound and phonogestural_contour when absent.",
+      "properties": {
+        "mouth_families": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "light_deep_state": {
+          "type": "string"
+        },
+        "vowel_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "closure_behavior": {
+          "type": "string"
+        },
+        "later_compressed_form": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "surviving_taboo": {
+      "type": "string"
+    },
+    "story_fragment": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

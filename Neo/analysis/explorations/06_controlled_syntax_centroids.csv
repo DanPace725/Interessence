@@ -1,0 +1,5 @@
+frame,members,within_avg_cosine,dominant_consensus,dominant_consensus_count,centroid_action_net,centroid_structure,centroid_flow,centroid_transform
+breaks,5,0.8972,Dampen,4,-0.2326,0.2695,0.4264,0.0715
+holds,5,0.885,Dampen,4,-0.2617,0.1758,0.5626,0.0
+opens,5,0.9088,Dampen,3,-0.0867,0.2395,0.6582,0.0
+waits_near,5,0.9421,Dampen,5,-0.28,0.2684,0.3838,0.0678

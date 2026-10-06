@@ -1,0 +1,39 @@
+corpus_id,collection,concept_id,language,phrase,dominant,action_net,structure,flow,transform,pca_1,pca_2
+expanded_001,expanded,memory_holds_stone,EN,THE RIVER REMEMBERS THE STONE,Gate,0.0,0.4371,0.5629,0.0,0.075726,-0.016482
+expanded_002,expanded,memory_opens_gate,EN,MEMORY OPENS A HIDDEN GATE,Gate,0.0637,0.2944,0.5464,0.0955,0.103467,-0.080007
+expanded_003,expanded,broken_vessel_holds_light,EN,THE BROKEN VESSEL HOLDS LIGHT,Propel,0.1781,0.2469,0.575,0.0,0.203436,-0.165519
+expanded_004,expanded,water_teaches_fire,EN,FIRE TEACHES WATER TO TURN,Dampen,-0.2652,0.287,0.3783,0.0696,-0.219866,0.083398
+expanded_005,expanded,stone_listens,EN,STONE LISTENS UNDER THE RAIN,Gate,0.0622,0.4044,0.5333,0.0,0.127942,-0.022494
+expanded_006,expanded,key_opens_lock,EN,A SMALL KEY OPENS THE OLD LOCK,Propel,0.1032,0.1032,0.6508,0.1429,0.097611,-0.270785
+expanded_007,expanded,child_draws_circle,EN,THE CHILD DRAWS A CIRCLE,Dampen,-0.4093,0.1813,0.4093,0.0,-0.384724,0.00199
+expanded_008,expanded,music_bends_room,EN,MUSIC BENDS THE QUIET ROOM,Gate,-0.306,0.2164,0.4328,0.0448,-0.27567,6.9e-05
+expanded_009,expanded,map_territory,EN,THE MAP IS NOT THE TERRITORY,Dampen,-0.1535,0.2851,0.4825,0.0789,-0.110505,-0.01036
+expanded_010,expanded,chaos_finds_door,EN,CHAOS FINDS A NARROW DOOR,Gate,-0.0788,0.524,0.3973,0.0,0.017821,0.172531
+expanded_011,expanded,order_dreams,EN,ORDER LEARNS TO DREAM,Anchor,-0.0196,0.5948,0.2026,0.183,0.089988,0.391437
+expanded_012,expanded,name_changes_shape,EN,THE NAME CHANGES THE SHAPE,Gate,-0.0929,0.2357,0.6714,0.0,-0.061148,-0.207656
+expanded_013,expanded,light_returns_crack,EN,LIGHT RETURNS THROUGH THE CRACK,Gate,-0.3371,0.3596,0.3034,0.0,-0.273428,0.180093
+expanded_014,expanded,market_noon,EN,THE MARKET CLOSES AT NOON,Gate,-0.2508,0.3041,0.4451,0.0,-0.201054,0.027147
+expanded_015,expanded,coffee_window,EN,COFFEE WAITS BESIDE THE WINDOW,Dampen,-0.3333,0.0377,0.6289,0.0,-0.342375,-0.261861
+expanded_016,expanded,train_sunset,EN,THE TRAIN ARRIVES AFTER SUNSET,Gate,0.0649,0.4474,0.4877,0.0,0.140239,0.037703
+expanded_017,expanded,freedom_opens_door,LA,LIBERTAS PORTAM APERIT,Propel,0.2587,0.2878,0.4535,0.0,0.289903,-0.059919
+expanded_018,expanded,memory_holds_stone,LA,MEMORIA LAPIDEM TENET,Gate,-0.0648,0.2491,0.686,0.0,-0.030478,-0.214515
+expanded_019,expanded,water_teaches_fire,LA,AQUA IGNEM DOCET,Dampen,-0.4067,0.1315,0.4618,0.0,-0.393409,-0.068286
+expanded_020,expanded,memory_opens_gate,GA,OSCLAIONN CUIMHNE AN GEATA,Fracture,-0.1346,0.3547,0.2477,0.263,-0.07827,0.244025
+expanded_021,expanded,light_breaks_darkness,GA,BRISEANN SOLAS AN DORCHADAS,Propel,0.2727,0.4034,0.2557,0.0682,0.328651,0.171662
+expanded_022,expanded,memory_holds_stone,GA,IS CUIMHIN LEIS AN ABHAINN,Propel,0.128,0.28,0.528,0.064,0.162183,-0.090051
+seed_001,seed,project_name,NEO,INTERESSENCE,Gate,0.0254,0.3051,0.6695,0.0,0.07026,-0.180664
+seed_002,seed,care_bends_friction,EN,CARE BENDS FRICTION TOWARDS FREEDOM,Dampen,-0.0804,0.433,0.4196,0.067,-0.005056,0.11425
+seed_003,seed,care_bends_friction,LA,CURA FRICTIONEM AD LIBERTATEM FLECTIT,Dampen,-0.2004,0.2646,0.4767,0.0584,-0.161044,-0.015971
+seed_004,seed,war_breaks_gate,EN,WAR BREAKS THE GATE,Dampen,-0.2791,0.3488,0.2924,0.0797,-0.219703,0.189843
+seed_005,seed,war_breaks_gate,LA,BELLUM PORTA FRANGIT,Propel,0.2388,0.3772,0.3841,0.0,0.291022,0.049532
+seed_006,seed,war_breaks_gate,GA,BRISEANN COGADH AN GEATA,Gate,-0.1424,0.4557,0.2247,0.1772,-0.062172,0.306418
+seed_007,seed,friction_place,GA,AIT FHRITHCHUIMILTE,Dampen,-0.2453,0.1358,0.5509,0.0679,-0.234411,-0.141985
+seed_008,seed,knot_seeks_care,GA,SNAIDHM A IARRANN CURAM,Gate,-0.0537,0.5284,0.4179,0.0,0.043508,0.156097
+seed_009,seed,mundane_control,EN,PIZZA ON TUESDAY,Gate,0.1339,0.3138,0.5272,0.0251,0.175906,-0.077627
+seed_010,seed,color_statement,EN,THE SPEIR IS BLUE,Reinforce,0.3032,0.1312,0.5656,0.0,0.297183,-0.245812
+seed_011,seed,animal_control,EN,THE FOCS AND THE HOUND,Dampen,-0.315,0.1654,0.5197,0.0,-0.295534,-0.104387
+translation_001,translation_added,memory_opens_gate,LA,MEMORIA PORTAM ABDITAM APERIT,Gate,0.0635,0.3425,0.5939,0.0,0.115211,-0.106049
+translation_002,translation_added,freedom_opens_door,EN,FREEDOM OPENS THE DOOR,Gate,0.1139,0.3544,0.5316,0.0,0.166191,-0.058653
+translation_003,translation_added,freedom_opens_door,GA,OSCLAIONN SAOIRSE AN DORAS,Propel,0.266,0.3511,0.2713,0.1117,0.309933,0.137865
+translation_004,translation_added,light_breaks_darkness,EN,LIGHT BREAKS THE DARKNESS,Anchor,-0.0531,0.4082,0.4408,0.098,0.015855,0.085613
+translation_005,translation_added,light_breaks_darkness,LA,LUX TENEBRAS FRANGIT,Gate,0.1638,0.4111,0.4251,0.0,0.226809,0.049413

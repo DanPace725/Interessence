@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEO Analysis — BRISEANN COGADH AN GEATA</title>
+<style>
+:root {
+    --bg:#0f172a;--surface:#1e293b;--text:#f8fafc;--muted:#94a3b8;
+    --accent:#38bdf8;--green:#10b981;--red:#ef4444;--amber:#f59e0b;
+    --purple:#818cf8;--border:#334155;
+    --stem-color:#475569;--mark-color:#f8fafc;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Inter',sans-serif;background:var(--bg);color:var(--text);padding:60px 24px 100px;line-height:1.7}
+.page{max-width:860px;margin:0 auto}
+.doc-label{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:20px;text-align:center}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-2px;background:linear-gradient(135deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:12px}
+.doc-meta{color:var(--muted);font-size:.9rem;text-align:center;margin-bottom:40px}
+.divider{border:none;border-top:1px solid var(--border);margin:40px 0}
+h2{font-size:1rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+h3{font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:12px}
+p{color:var(--muted);margin-bottom:14px;font-size:1rem}
+p strong{color:var(--text)} em{color:var(--accent);font-style:normal}
+.inscription-row{display:flex;gap:40px;justify-content:center;margin-bottom:40px;flex-wrap:wrap}
+.inscription-word{display:flex;flex-direction:column;align-items:center;gap:10px}
+.inscription-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.inscription-glyphs{display:flex;gap:4px;background:rgba(0,0,0,.2);border-radius:12px;padding:14px 10px}
+.word-section{margin-bottom:48px}
+.word-header{display:flex;align-items:baseline;gap:16px;margin-bottom:20px}
+.word-title{font-size:1.8rem;font-weight:800;letter-spacing:4px;text-transform:uppercase}
+.word-count{font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.card{background:var(--surface);border-radius:16px;padding:24px 26px;margin-bottom:20px}
+.card-word{border-left:3px solid var(--accent)}
+.pair-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.pair-table th{text-align:left;padding:8px 12px;color:var(--muted);font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.pair-table td{padding:10px 12px;border-bottom:1px solid rgba(51,65,85,.35);vertical-align:middle;color:var(--muted)}
+.pair-table tr:last-child td{border-bottom:none}
+.pair-seq{font-weight:700;color:var(--text);letter-spacing:1px}
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.68rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
+.tag-reinforce{background:rgba(16,185,129,.15);color:#10b981}
+.tag-anchor{background:rgba(56,189,248,.15);color:#38bdf8}
+.tag-propel{background:rgba(16,185,129,.15);color:#10b981}
+.tag-stream{background:rgba(16,185,129,.15);color:#10b981}
+.tag-crystalize{background:rgba(245,158,11,.15);color:#f59e0b}
+.tag-gate{background:rgba(245,158,11,.15);color:#f59e0b}
+.tag-opposition{background:rgba(239,68,68,.15);color:#ef4444}
+.tag-dampen{background:rgba(239,68,68,.12);color:#f87171}
+.tag-invert{background:rgba(129,140,248,.15);color:#818cf8}
+.tag-fracture{background:rgba(239,68,68,.15);color:#ef4444}
+.tag-distort{background:rgba(129,140,248,.15);color:#818cf8}
+.tag-turbulence{background:rgba(245,158,11,.15);color:#f59e0b}
+.tag-phase-shift{background:rgba(129,140,248,.15);color:#818cf8}
+.mag-r{color:#10b981;font-weight:700;font-size:.78rem;white-space:nowrap}
+.mag-m{color:#f59e0b;font-weight:700;font-size:.78rem;white-space:nowrap}
+.mag-d{color:#ef4444;font-weight:700;font-size:.78rem;white-space:nowrap}
+.pair-note{color:var(--muted);font-size:.78rem;font-style:italic;line-height:1.4}
+.boundary-row{display:flex;align-items:center;gap:12px;background:rgba(0,0,0,.2);border-radius:10px;padding:14px 18px;margin-bottom:20px;flex-wrap:wrap}
+.boundary-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.boundary-seq{font-weight:800;font-size:1rem;letter-spacing:2px;color:var(--accent)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stat{background:rgba(0,0,0,.2);border-radius:10px;padding:14px 10px;text-align:center}
+.stat-value{font-size:1.3rem;font-weight:800;color:var(--accent);line-height:1}
+.stat-label{font-size:.62rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-top:6px;line-height:1.3}
+.reading{background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.18);border-radius:12px;padding:20px 24px}
+.reading-label{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.reading-text{font-size:.92rem;line-height:1.78;color:var(--muted)}
+.reading-text strong{color:var(--text);font-weight:600}
+.reading-text em{color:var(--accent);font-style:normal}
+footer{margin-top:60px;text-align:center;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--border);padding-bottom:40px}</style>
+</head>
+<body>
+<div class="page">
+<header style="text-align:center;margin-bottom:50px">
+    <p class="doc-label">NEO · NeOgham Analysis</p>
+    <h1>BRISEANN COGADH AN GEATA</h1>
+    <p class="doc-meta">Structural bias, interference fields, and composite signal reading</p>
+</header>
+
+<div class="inscription-row"><div class="inscription-word">
+                    <div class="inscription-label">BRISEANN</div>
+                    <div class="inscription-glyphs"><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="26" y1="18" x2="41" y2="18" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="18" x2="41" y2="18" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="35" x2="41" y2="35" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="52" x2="41" y2="52" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="69" x2="41" y2="69" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="86" x2="41" y2="86" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="9" x2="41" y2="27" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="26" x2="41" y2="44" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="43" x2="41" y2="61" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="60" x2="41" y2="78" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="77" x2="41" y2="95" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="26" y1="18" x2="41" y2="18" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="26" y1="35" x2="41" y2="35" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="26" y1="52" x2="41" y2="52" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="26" y1="69" x2="41" y2="69" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="27" x2="41" y2="9" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="44" x2="41" y2="26" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="61" x2="41" y2="43" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="78" x2="41" y2="60" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="18" x2="41" y2="18" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="35" x2="41" y2="35" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="52" x2="41" y2="52" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="18" x2="41" y2="18" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="35" x2="41" y2="35" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="52" x2="41" y2="52" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg></div>
+                </div><div class="inscription-word">
+                    <div class="inscription-label">COGADH</div>
+                    <div class="inscription-glyphs"><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="26" y1="18" x2="11" y2="18" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="26" y1="35" x2="11" y2="35" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="26" y1="52" x2="11" y2="52" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="26" y1="69" x2="11" y2="69" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="9" x2="41" y2="27" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="26" x2="41" y2="44" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="18" x2="41" y2="18" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="35" x2="41" y2="35" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="9" x2="41" y2="27" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="26" y1="18" x2="11" y2="18" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="26" y1="35" x2="11" y2="35" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="26" y1="18" x2="11" y2="18" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg></div>
+                </div><div class="inscription-word">
+                    <div class="inscription-label">AN</div>
+                    <div class="inscription-glyphs"><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="9" x2="41" y2="27" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="18" x2="41" y2="18" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="35" x2="41" y2="35" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="52" x2="41" y2="52" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg></div>
+                </div><div class="inscription-word">
+                    <div class="inscription-label">GEATA</div>
+                    <div class="inscription-glyphs"><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="18" x2="41" y2="18" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="35" x2="41" y2="35" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="27" x2="41" y2="9" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="44" x2="41" y2="26" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="61" x2="41" y2="43" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="78" x2="41" y2="60" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="26" y1="18" x2="11" y2="18" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="26" y1="35" x2="11" y2="35" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/><line x1="26" y1="52" x2="11" y2="52" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg><svg width="52" height="92" style="display:block"><line x1="26" y1="0" x2="26" y2="92" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/><line x1="11" y1="9" x2="41" y2="27" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/></svg></div>
+                </div></div>
+<hr class="divider">
+
+<section class="word-section">
+                    <div class="word-header">
+                        <span class="word-title" style="color:#38bdf8">BRISEANN</span>
+                        <span class="word-count">7 glyphs</span>
+                    </div>
+                    <div class="card card-word" style="border-left-color:#38bdf8"><table class="pair-table"><thead><tr><th>Pair</th><th>Interaction</th><th>Magnitude</th><th>Note</th></tr></thead><tbody><tr>
+                        <td class="pair-seq">B → R</td>
+                        <td><span class="tag tag-anchor">Anchor</span></td>
+                        <td><span class="mag-d">Dominance (Δ4)</span></td>
+                        <td class="pair-note">Atomic Initiation meets Maximal Fusion under dominance. Signal fixes to a stable reference point.</td>
+                    </tr><tr>
+                        <td class="pair-seq">R → I</td>
+                        <td><span class="tag tag-gate">Gate</span></td>
+                        <td><span class="mag-r">Resonance (Δ0)</span></td>
+                        <td class="pair-note">Maximal Fusion meets Maximal Jet at resonance. Signal passes through conditionally.</td>
+                    </tr><tr>
+                        <td class="pair-seq">I → S</td>
+                        <td><span class="tag tag-propel">Propel</span></td>
+                        <td><span class="mag-m">Modulation (Δ1)</span></td>
+                        <td class="pair-note">Maximal Jet meets Strong Enforcement with modulation. One signal accelerates the other forward.</td>
+                    </tr><tr>
+                        <td class="pair-seq">S → EA</td>
+                        <td><span class="tag tag-distort">Distort</span></td>
+                        <td><span class="mag-r">Resonance (Δ0)</span></td>
+                        <td class="pair-note">Strong Enforcement meets Strong Warp at resonance. Structure warps under the applied pressure.</td>
+                    </tr><tr>
+                        <td class="pair-seq">EA → N</td>
+                        <td><span class="tag tag-fracture">Fracture</span></td>
+                        <td><span class="mag-m">Modulation (Δ1)</span></td>
+                        <td class="pair-note">Strong Warp meets Median Lock with modulation. The junction breaks or splinters.</td>
+                    </tr><tr>
+                        <td class="pair-seq">N → N</td>
+                        <td><span class="tag tag-crystalize">Crystalize</span></td>
+                        <td><span class="mag-r">Resonance (Δ0)</span></td>
+                        <td class="pair-note">Median Lock meets Median Lock at resonance. Crossing signals solidify into a rigid joint.</td>
+                    </tr></tbody></table></div>
+                </section><div class="boundary-row">
+                        <span class="boundary-label">Word Boundary</span>
+                        <span class="boundary-seq">N → C</span>
+                        <span class="tag tag-anchor">Anchor</span>
+                        <span class="mag-m">Modulation (Δ1)</span>
+                        <span class="pair-note" style="margin-left:4px">Median Lock meets Strong Barrier with modulation.</span>
+                    </div><section class="word-section">
+                    <div class="word-header">
+                        <span class="word-title" style="color:#10b981">COGADH</span>
+                        <span class="word-count">6 glyphs</span>
+                    </div>
+                    <div class="card card-word" style="border-left-color:#10b981"><table class="pair-table"><thead><tr><th>Pair</th><th>Interaction</th><th>Magnitude</th><th>Note</th></tr></thead><tbody><tr>
+                        <td class="pair-seq">C → O</td>
+                        <td><span class="tag tag-dampen">Dampen</span></td>
+                        <td><span class="mag-d">Dominance (Δ2)</span></td>
+                        <td class="pair-note">Strong Barrier meets Weak Current under dominance. Energy is absorbed and reduced.</td>
+                    </tr><tr>
+                        <td class="pair-seq">O → G</td>
+                        <td><span class="tag tag-gate">Gate</span></td>
+                        <td><span class="mag-r">Resonance (Δ0)</span></td>
+                        <td class="pair-note">Weak Current meets Loose Knot at resonance. Signal passes through conditionally.</td>
+                    </tr><tr>
+                        <td class="pair-seq">G → A</td>
+                        <td><span class="tag tag-gate">Gate</span></td>
+                        <td><span class="mag-m">Modulation (Δ1)</span></td>
+                        <td class="pair-note">Loose Knot meets Atomic Flow with modulation. Signal passes through conditionally.</td>
+                    </tr><tr>
+                        <td class="pair-seq">A → D</td>
+                        <td><span class="tag tag-dampen">Dampen</span></td>
+                        <td><span class="mag-m">Modulation (Δ1)</span></td>
+                        <td class="pair-note">Atomic Flow meets Weak Resistance with modulation. Energy is absorbed and reduced.</td>
+                    </tr><tr>
+                        <td class="pair-seq">D → H</td>
+                        <td><span class="tag tag-reinforce">Reinforce</span></td>
+                        <td><span class="mag-m">Modulation (Δ1)</span></td>
+                        <td class="pair-note">Weak Resistance meets Atomic Reaction with modulation. Same-group signals amplify each other.</td>
+                    </tr></tbody></table></div>
+                </section><div class="boundary-row">
+                        <span class="boundary-label">Word Boundary</span>
+                        <span class="boundary-seq">H → A</span>
+                        <span class="tag tag-dampen">Dampen</span>
+                        <span class="mag-r">Resonance (Δ0)</span>
+                        <span class="pair-note" style="margin-left:4px">Atomic Reaction meets Atomic Flow at resonance.</span>
+                    </div><section class="word-section">
+                    <div class="word-header">
+                        <span class="word-title" style="color:#f59e0b">AN</span>
+                        <span class="word-count">2 glyphs</span>
+                    </div>
+                    <div class="card card-word" style="border-left-color:#f59e0b"><table class="pair-table"><thead><tr><th>Pair</th><th>Interaction</th><th>Magnitude</th><th>Note</th></tr></thead><tbody><tr>
+                        <td class="pair-seq">A → N</td>
+                        <td><span class="tag tag-gate">Gate</span></td>
+                        <td><span class="mag-d">Dominance (Δ2)</span></td>
+                        <td class="pair-note">Atomic Flow meets Median Lock under dominance. Signal passes through conditionally.</td>
+                    </tr></tbody></table></div>
+                </section><div class="boundary-row">
+                        <span class="boundary-label">Word Boundary</span>
+                        <span class="boundary-seq">N → G</span>
+                        <span class="tag tag-crystalize">Crystalize</span>
+                        <span class="mag-m">Modulation (Δ1)</span>
+                        <span class="pair-note" style="margin-left:4px">Median Lock meets Loose Knot with modulation.</span>
+                    </div><section class="word-section">
+                    <div class="word-header">
+                        <span class="word-title" style="color:#818cf8">GEATA</span>
+                        <span class="word-count">4 glyphs</span>
+                    </div>
+                    <div class="card card-word" style="border-left-color:#818cf8"><table class="pair-table"><thead><tr><th>Pair</th><th>Interaction</th><th>Magnitude</th><th>Note</th></tr></thead><tbody><tr>
+                        <td class="pair-seq">G → EA</td>
+                        <td><span class="tag tag-fracture">Fracture</span></td>
+                        <td><span class="mag-d">Dominance (Δ2)</span></td>
+                        <td class="pair-note">Loose Knot meets Strong Warp under dominance. The junction breaks or splinters.</td>
+                    </tr><tr>
+                        <td class="pair-seq">EA → T</td>
+                        <td><span class="tag tag-invert">Invert</span></td>
+                        <td><span class="mag-m">Modulation (Δ1)</span></td>
+                        <td class="pair-note">Strong Warp meets Median Balance with modulation. Signal polarity is reversed.</td>
+                    </tr><tr>
+                        <td class="pair-seq">T → A</td>
+                        <td><span class="tag tag-dampen">Dampen</span></td>
+                        <td><span class="mag-d">Dominance (Δ2)</span></td>
+                        <td class="pair-note">Median Balance meets Atomic Flow under dominance. Energy is absorbed and reduced.</td>
+                    </tr></tbody></table></div>
+                </section>
+
+<section>
+<h2>Composite Field</h2>
+<div class="card" style="background:var(--surface)">
+    <div class="stats-grid">
+        <div class="stat"><div class="stat-value">19</div><div class="stat-label">Total Glyphs</div></div>
+        <div class="stat"><div class="stat-value">2</div><div class="stat-label">Maximal (mag 5)</div></div>
+        <div class="stat"><div class="stat-value">3</div><div class="stat-label">Disruptive Events</div></div>
+        <div class="stat"><div class="stat-value" style="font-size:.95rem">Gate ×4</div><div class="stat-label">Dominant Pattern</div></div>
+    </div>
+    <div class="reading">
+        <div class="reading-label">Field Reading</div>
+        <div class="reading-text">The phrase opens with <strong>Atomic Initiation</strong> (B) and runs across a mixed-energy field — 2 of 19 glyphs reach maximal magnitude. The defining event is <strong>Fracture</strong> under dominance: <em>Loose Knot</em> (G) meets <em>Strong Warp</em> (EA). The dominant structural pattern is <strong>Gate</strong> (4×), closing on <em>Atomic Flow</em> — Allows slow state bleed. At the word boundary, <em>Median Lock</em> meets <em>Strong Barrier</em> — <strong>Anchor</strong> with modulation. At the word boundary, <em>Atomic Reaction</em> meets <em>Atomic Flow</em> — <strong>Dampen</strong> at resonance. At the word boundary, <em>Median Lock</em> meets <em>Loose Knot</em> — <strong>Crystalize</strong> with modulation.</div>
+    </div>
+</div>
+</section>
+
+<footer>NEO Signal Analyzer · Generated May 6, 2026</footer>
+</div>
+</body>
+</html>

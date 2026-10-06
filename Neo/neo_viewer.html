@@ -97,7 +97,7 @@
             flex-direction: column;
             align-items: center;
             min-height: 300px;
-            max-height: 600px;
+            max-height: 700px;
             overflow: hidden;
         }
 
@@ -119,11 +119,13 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             background: rgba(0,0,0,0.1);
             border-radius: 12px;
             padding: 20px;
-            overflow: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
+            box-sizing: border-box;
         }
         
         /* STREAM STYLES */
@@ -199,8 +201,8 @@
         }
         
         .glyph-slot {
-            width: 80px;
-            height: 140px;
+            width: 100px;
+            height: 160px;
             border: 2px dashed #475569;
             border-radius: 12px;
             display: flex;
@@ -281,6 +283,262 @@
             border-color: var(--accent);
             background: rgba(56, 189, 248, 0.1);
         }
+
+        /* ── FIELD ANALYSIS ─────────────────────────────────── */
+        #field-analysis {
+            margin-bottom: 40px;
+        }
+
+        .fa-section-title {
+            text-align: center;
+            margin-bottom: 24px;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .fa-word-block {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 28px 30px;
+            margin-bottom: 20px;
+        }
+
+        .fa-word-label {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .fa-word-name {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: var(--accent);
+        }
+
+        .fa-word-count {
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .fa-word-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #334155;
+        }
+
+        .fa-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-bottom: 0;
+        }
+
+        .fa-table th {
+            text-align: left;
+            padding: 8px 12px;
+            color: var(--text-secondary);
+            font-size: 0.68rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #334155;
+            font-weight: 600;
+        }
+
+        .fa-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(51,65,85,0.35);
+            vertical-align: middle;
+            color: var(--text-secondary);
+        }
+
+        .fa-table tr:last-child td { border-bottom: none; }
+
+        .fa-seq {
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .fa-tag {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 20px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .fa-tag-reinforce   { background: rgba(16,185,129,0.15);  color: #10b981; }
+        .fa-tag-anchor      { background: rgba(56,189,248,0.15);  color: #38bdf8; }
+        .fa-tag-propel      { background: rgba(16,185,129,0.15);  color: #10b981; }
+        .fa-tag-stream      { background: rgba(16,185,129,0.15);  color: #10b981; }
+        .fa-tag-crystalize  { background: rgba(245,158,11,0.15);  color: #f59e0b; }
+        .fa-tag-gate        { background: rgba(245,158,11,0.15);  color: #f59e0b; }
+        .fa-tag-opposition  { background: rgba(239,68,68,0.15);   color: #ef4444; }
+        .fa-tag-dampen      { background: rgba(239,68,68,0.12);   color: #f87171; }
+        .fa-tag-invert      { background: rgba(129,140,248,0.15); color: #818cf8; }
+        .fa-tag-fracture    { background: rgba(239,68,68,0.15);   color: #ef4444; }
+        .fa-tag-distort     { background: rgba(129,140,248,0.15); color: #818cf8; }
+        .fa-tag-turbulence  { background: rgba(245,158,11,0.15);  color: #f59e0b; }
+        .fa-tag-phase-shift { background: rgba(129,140,248,0.15); color: #818cf8; }
+
+        .fa-mag-r { color: #10b981; font-weight: 700; font-size: 0.78rem; white-space: nowrap; }
+        .fa-mag-m { color: #f59e0b; font-weight: 700; font-size: 0.78rem; white-space: nowrap; }
+        .fa-mag-d { color: #ef4444; font-weight: 700; font-size: 0.78rem; white-space: nowrap; }
+
+        .fa-note { color: var(--text-secondary); font-size: 0.78rem; font-style: italic; line-height: 1.4; }
+
+        .fa-boundary-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .fa-boundary-label {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .fa-boundary-seq {
+            font-weight: 800;
+            font-size: 1.05rem;
+            letter-spacing: 2px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .fa-boundary-detail {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .fa-composite {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 28px 30px;
+            margin-bottom: 20px;
+        }
+
+        .fa-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .fa-stat {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 14px 10px;
+            text-align: center;
+        }
+
+        .fa-stat-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .fa-stat-label {
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            line-height: 1.3;
+        }
+
+        .fa-reading {
+            background: rgba(56,189,248,0.05);
+            border: 1px solid rgba(56,189,248,0.18);
+            border-radius: 12px;
+            padding: 20px 24px;
+        }
+
+        .fa-reading-label {
+            font-size: 0.65rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .fa-reading-text {
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+        }
+
+        .fa-reading-text strong { color: var(--text-primary); font-weight: 600; }
+        .fa-reading-text em     { color: var(--accent); font-style: normal; }
+
+        .fa-empty {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            opacity: 0.4;
+            font-size: 0.9rem;
+        }
+
+        .fa-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .fa-section-title { margin-bottom: 0; }
+
+        .fa-export-btn {
+            background: rgba(56,189,248,0.08);
+            border: 1px solid rgba(56,189,248,0.25);
+            color: var(--accent);
+            padding: 8px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            font-family: inherit;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .fa-export-btn.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .fa-export-btn:hover {
+            background: rgba(56,189,248,0.2);
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(56,189,248,0.2);
+        }
+
+        .fa-export-btn:active {
+            transform: scale(0.97);
+        }
         
     </style>
 </head>
@@ -292,7 +550,7 @@
         </header>
 
         <section class="input-section">
-            <input type="text" id="input" placeholder="TYPE TO GENERATE..." value="INTERESSENCE">
+            <input type="text" id="input" placeholder="TYPE A WORD OR PHRASE..." value="INTERESSENCE">
         </section>
 
         <section class="outputs">
@@ -308,6 +566,14 @@
             </div>
         </section>
         
+        <section id="field-analysis">
+            <div class="fa-section-header">
+                <h2 class="fa-section-title">Field Analysis</h2>
+                <button id="export-btn" class="fa-export-btn" onclick="exportAnalysis()">↓ Export</button>
+            </div>
+            <div id="fa-content"><div class="fa-empty">Type a word or phrase above to generate field analysis.</div></div>
+        </section>
+
         <h2 style="text-align: center; margin-bottom: 20px; color: var(--text-secondary);">Pairwise Interference Lab</h2>
         
         <section class="analyzer-section">
@@ -338,61 +604,83 @@
     </div>
 
     <script>
-        const ALPHABET = {"B": ["right", 1, "beith"], "L": ["right", 2, "luis"], "F": ["right", 3, "fearn"], "S": ["right", 4, "sail"], "P": ["right", 5, "peith"], "H": ["left", 1, "huath"], "D": ["left", 2, "duir"], "T": ["left", 3, "tinne"], "C": ["left", 4, "coll"], "W": ["left", 5, "ceirt"], "M": ["cross", 1, "muin"], "G": ["cross", 2, "gort"], "N": ["cross", 3, "ngeadal"], "Z": ["cross", 4, "straif"], "R": ["cross", 5, "ruis"], "A": ["diagonal", 1, "ailm"], "O": ["diagonal", 2, "onn"], "U": ["diagonal", 3, "ur"], "E": ["diagonal", 4, "eadhadh"], "I": ["diagonal", 5, "idad"], "AE": ["backslash", 1, "ae"], "OI": ["backslash", 2, "oi"], "UI": ["backslash", 3, "ui"], "EA": ["backslash", 4, "ea"], "IO": ["backslash", 5, "io"]};
-        const SIGNALS = {"beith": {"fingerprint": "Atomic Initiation", "dynamic": "Small, sharp seed perturbation.", "closure": "Requires support to hold."}, "luis": {"fingerprint": "Weak Coupling", "dynamic": "Gentle directional wave.", "closure": "Links easily but breaks easily."}, "fearn": {"fingerprint": "Median Assertion", "dynamic": "Stable, consistent pressure.", "closure": "Standard closure strength."}, "sail": {"fingerprint": "Strong Enforcement", "dynamic": "Deep, distinct channel.", "closure": "Resists deviation; guides flow."}, "peith": {"fingerprint": "Maximal Drive", "dynamic": "Heavy, overriding forcing function.", "closure": "Forces closure; dominates local field."}, "huath": {"fingerprint": "Atomic Reaction", "dynamic": "Small inverse perturbation.", "closure": "Anti-seed; opens space for response."}, "duir": {"fingerprint": "Weak Resistance", "dynamic": "Gentle counter-wave.", "closure": "Filters low-intensity signals."}, "tinne": {"fingerprint": "Median Balance", "dynamic": "Stable counter-pressure.", "closure": "Balances B-Group inputs."}, "coll": {"fingerprint": "Strong Barrier", "dynamic": "Deep absorbing channel.", "closure": "Blocks or redirects specific flows."}, "ceirt": {"fingerprint": "Maximal Opposition", "dynamic": "Heavy, dampening field.", "closure": "Negates/grounds local energy."}, "muin": {"fingerprint": "Atomic Bind", "dynamic": "A \"staple\" or single stitch.", "closure": "Connects two weak signals."}, "gort": {"fingerprint": "Loose Knot", "dynamic": "Flexible joint.", "closure": "Allows play/movement between sides."}, "ngeadal": {"fingerprint": "Median Lock", "dynamic": "Standard structural rivet.", "closure": "Creates rigid dependency."}, "straif": {"fingerprint": "Strong Anchor", "dynamic": "Heavy, immobile weight.", "closure": "Prevents separation of faces."}, "ruis": {"fingerprint": "Maximal Fusion", "dynamic": "Total collapse of boundary.", "closure": "Merges Left/Right into singular point."}, "ailm": {"fingerprint": "Atomic Flow", "dynamic": "A leak or trickle.", "closure": "Allows slow state bleed."}, "onn": {"fingerprint": "Weak Current", "dynamic": "Directional drift.", "closure": "Biases wandering trajectories."}, "ur": {"fingerprint": "Median Stream", "dynamic": "Steady pipeline.", "closure": "Reliable transport layer."}, "eadhadh": {"fingerprint": "Strong Torrent", "dynamic": "High-velocity channel.", "closure": "Scours unstable states; forces movement."}, "idad": {"fingerprint": "Maximal Jet", "dynamic": "Ballistic trajectory.", "closure": "Shoots signal past local stops."}, "ae": {"fingerprint": "Atomic Twist", "dynamic": "A spin or wobble.", "closure": "Destabilizes generic closures."}, "oi": {"fingerprint": "Weak Vortex", "dynamic": "Local turbulence.", "closure": "Mixes adjacent signals."}, "ui": {"fingerprint": "Median Shift", "dynamic": "Phase shift or refraction.", "closure": "Alters signal properties."}, "ea": {"fingerprint": "Strong Warp", "dynamic": "Manifold distortion.", "closure": "Bends geometry around the point."}, "io": {"fingerprint": "Maximal Chaos", "dynamic": "Singularity/Inversion.", "closure": "Inverts field polarity locally."}};
-        const MATRIX = {"right": {"right": "Reinforce", "left": "Opposition", "cross": "Anchor", "diagonal": "Propel", "backslash": "Distort"}, "left": {"right": "Opposition", "left": "Reinforce", "cross": "Anchor", "diagonal": "Dampen", "backslash": "Invert"}, "cross": {"right": "Anchor", "left": "Anchor", "cross": "Crystalize", "diagonal": "Gate", "backslash": "Fracture"}, "diagonal": {"right": "Propel", "left": "Dampen", "cross": "Gate", "diagonal": "Stream", "backslash": "Turbulence"}, "backslash": {"right": "Distort", "left": "Invert", "cross": "Fracture", "diagonal": "Turbulence", "backslash": "Phase Shift"}};
-        
-        const input = document.getElementById('input');
-        const vOutput = document.getElementById('v-output');
-        const signalStream = document.getElementById('signal-stream');
-        
-        // State
-        let activeSlot = 1;
-        let slot1Glyph = null;
-        let slot2Glyph = null;
+        const ALPHABET = {"B":["right",1,"beith"],"L":["right",2,"luis"],"F":["right",3,"fearn"],"S":["right",4,"sail"],"P":["right",5,"peith"],"H":["left",1,"huath"],"D":["left",2,"duir"],"T":["left",3,"tinne"],"C":["left",4,"coll"],"W":["left",5,"ceirt"],"M":["cross",1,"muin"],"G":["cross",2,"gort"],"N":["cross",3,"ngeadal"],"Z":["cross",4,"straif"],"R":["cross",5,"ruis"],"A":["diagonal",1,"ailm"],"O":["diagonal",2,"onn"],"U":["diagonal",3,"ur"],"E":["diagonal",4,"eadhadh"],"I":["diagonal",5,"idad"],"AE":["backslash",1,"ae"],"OI":["backslash",2,"oi"],"UI":["backslash",3,"ui"],"EA":["backslash",4,"ea"],"IO":["backslash",5,"io"]};
+        const SIGNALS = {"beith":{"fingerprint":"Atomic Initiation","dynamic":"Small, sharp seed perturbation.","closure":"Requires support to hold."},"luis":{"fingerprint":"Weak Coupling","dynamic":"Gentle directional wave.","closure":"Links easily but breaks easily."},"fearn":{"fingerprint":"Median Assertion","dynamic":"Stable, consistent pressure.","closure":"Standard closure strength."},"sail":{"fingerprint":"Strong Enforcement","dynamic":"Deep, distinct channel.","closure":"Resists deviation; guides flow."},"peith":{"fingerprint":"Maximal Drive","dynamic":"Heavy, overriding forcing function.","closure":"Forces closure; dominates local field."},"huath":{"fingerprint":"Atomic Reaction","dynamic":"Small inverse perturbation.","closure":"Anti-seed; opens space for response."},"duir":{"fingerprint":"Weak Resistance","dynamic":"Gentle counter-wave.","closure":"Filters low-intensity signals."},"tinne":{"fingerprint":"Median Balance","dynamic":"Stable counter-pressure.","closure":"Balances B-Group inputs."},"coll":{"fingerprint":"Strong Barrier","dynamic":"Deep absorbing channel.","closure":"Blocks or redirects specific flows."},"ceirt":{"fingerprint":"Maximal Opposition","dynamic":"Heavy, dampening field.","closure":"Negates/grounds local energy."},"muin":{"fingerprint":"Atomic Bind","dynamic":"A \"staple\" or single stitch.","closure":"Connects two weak signals."},"gort":{"fingerprint":"Loose Knot","dynamic":"Flexible joint.","closure":"Allows play/movement between sides."},"ngeadal":{"fingerprint":"Median Lock","dynamic":"Standard structural rivet.","closure":"Creates rigid dependency."},"straif":{"fingerprint":"Strong Anchor","dynamic":"Heavy, immobile weight.","closure":"Prevents separation of faces."},"ruis":{"fingerprint":"Maximal Fusion","dynamic":"Total collapse of boundary.","closure":"Merges Left/Right into singular point."},"ailm":{"fingerprint":"Atomic Flow","dynamic":"A leak or trickle.","closure":"Allows slow state bleed."},"onn":{"fingerprint":"Weak Current","dynamic":"Directional drift.","closure":"Biases wandering trajectories."},"ur":{"fingerprint":"Median Stream","dynamic":"Steady pipeline.","closure":"Reliable transport layer."},"eadhadh":{"fingerprint":"Strong Torrent","dynamic":"High-velocity channel.","closure":"Scours unstable states; forces movement."},"idad":{"fingerprint":"Maximal Jet","dynamic":"Ballistic trajectory.","closure":"Shoots signal past local stops."},"ae":{"fingerprint":"Atomic Twist","dynamic":"A spin or wobble.","closure":"Destabilizes generic closures."},"oi":{"fingerprint":"Weak Vortex","dynamic":"Local turbulence.","closure":"Mixes adjacent signals."},"ui":{"fingerprint":"Median Shift","dynamic":"Phase shift or refraction.","closure":"Alters signal properties."},"ea":{"fingerprint":"Strong Warp","dynamic":"Manifold distortion.","closure":"Bends geometry around the point."},"io":{"fingerprint":"Maximal Chaos","dynamic":"Singularity/Inversion.","closure":"Inverts field polarity locally."}};
+        const MATRIX = {"right":{"right":"Reinforce","left":"Opposition","cross":"Anchor","diagonal":"Propel","backslash":"Distort"},"left":{"right":"Opposition","left":"Reinforce","cross":"Anchor","diagonal":"Dampen","backslash":"Invert"},"cross":{"right":"Anchor","left":"Anchor","cross":"Crystalize","diagonal":"Gate","backslash":"Fracture"},"diagonal":{"right":"Propel","left":"Dampen","cross":"Gate","diagonal":"Stream","backslash":"Turbulence"},"backslash":{"right":"Distort","left":"Invert","cross":"Fracture","diagonal":"Turbulence","backslash":"Phase Shift"}};
 
-        function generateGlyph(position, count, orientation, width=60, height=120) {
-            const stemCenter = width/2;
-            const markLength = 15;
-            const spacing = 18;
-            const startPos = 20;
-            
+        const INTERACTION_DESC = {
+            'Reinforce':   'Same-group signals amplify each other.',
+            'Opposition':  'Conflicting groups push against each other.',
+            'Anchor':      'Signal fixes to a stable reference point.',
+            'Propel':      'One signal accelerates the other forward.',
+            'Distort':     'Structure warps under the applied pressure.',
+            'Dampen':      'Energy is absorbed and reduced.',
+            'Invert':      'Signal polarity is reversed.',
+            'Crystalize':  'Crossing signals solidify into a rigid joint.',
+            'Gate':        'Signal passes through conditionally.',
+            'Fracture':    'The junction breaks or splinters.',
+            'Stream':      'Signals flow together in parallel.',
+            'Turbulence':  'Mixed signals create unstable interference.',
+            'Phase Shift': 'Signal properties are altered in transit.',
+        };
+
+        const INTERACTION_BASE_SEVERITY = {
+            'Fracture':10,'Opposition':9,'Invert':8,'Distort':7,'Dampen':6,
+            'Turbulence':5,'Gate':4,'Crystalize':3,'Phase Shift':3,
+            'Anchor':2,'Propel':2,'Stream':1,'Reinforce':1,
+        };
+
+        const TAG_CLASS = {
+            'Reinforce':'fa-tag-reinforce','Opposition':'fa-tag-opposition','Anchor':'fa-tag-anchor',
+            'Propel':'fa-tag-propel','Distort':'fa-tag-distort','Dampen':'fa-tag-dampen',
+            'Invert':'fa-tag-invert','Crystalize':'fa-tag-crystalize','Gate':'fa-tag-gate',
+            'Fracture':'fa-tag-fracture','Stream':'fa-tag-stream','Turbulence':'fa-tag-turbulence',
+            'Phase Shift':'fa-tag-phase-shift',
+        };
+
+        // ── Core rendering ──────────────────────────────────────────
+
+        const inputEl   = document.getElementById('input');
+        const vOutput   = document.getElementById('v-output');
+        const signalStream = document.getElementById('signal-stream');
+
+        let activeSlot = 1, slot1Glyph = null, slot2Glyph = null;
+
+        function generateGlyph(position, count, orientation, width=100, height=160) {
+            const stemCenter = width / 2;
+            const markLength = 24, spacing = 26, startPos = 28;
             let paths = '';
-            
-            // Stem
+
             if (orientation === 'vertical') {
                 paths += `<line x1="${stemCenter}" y1="0" x2="${stemCenter}" y2="${height}" stroke="var(--stem-color)" stroke-width="2.5" stroke-linecap="butt"/>`;
             } else {
                 paths += `<line x1="0" y1="${stemCenter}" x2="${width}" y2="${stemCenter}" stroke="var(--stem-color)" stroke-width="2.5" stroke-linecap="butt"/>`;
             }
-            
-            // Marks
+
             for (let i = 0; i < count; i++) {
-                const step = startPos + (i * spacing);
+                const step = startPos + i * spacing;
                 let x1, y1, x2, y2;
-                
                 if (orientation === 'vertical') {
                     const y = step;
                     switch(position) {
-                        case 'left': x1=stemCenter; y1=y; x2=stemCenter-markLength; y2=y; break;
-                        case 'right': x1=stemCenter; y1=y; x2=stemCenter+markLength; y2=y; break;
-                        case 'cross': x1=stemCenter-markLength; y1=y; x2=stemCenter+markLength; y2=y; break;
+                        case 'left':     x1=stemCenter; y1=y; x2=stemCenter-markLength; y2=y; break;
+                        case 'right':    x1=stemCenter; y1=y; x2=stemCenter+markLength; y2=y; break;
+                        case 'cross':    x1=stemCenter-markLength; y1=y; x2=stemCenter+markLength; y2=y; break;
                         case 'diagonal': x1=stemCenter-markLength; y1=y-(markLength*0.6); x2=stemCenter+markLength; y2=y+(markLength*0.6); break;
-                        case 'backslash': x1=stemCenter-markLength; y1=y+(markLength*0.6); x2=stemCenter+markLength; y2=y-(markLength*0.6); break;
+                        case 'backslash':x1=stemCenter-markLength; y1=y+(markLength*0.6); x2=stemCenter+markLength; y2=y-(markLength*0.6); break;
                     }
                 } else {
                     const x = step;
                     switch(position) {
-                        case 'left': x1=x; y1=stemCenter; x2=x; y2=stemCenter-markLength; break;
-                        case 'right': x1=x; y1=stemCenter; x2=x; y2=stemCenter+markLength; break;
-                        case 'cross': x1=x; y1=stemCenter-markLength; x2=x; y2=stemCenter+markLength; break;
+                        case 'left':     x1=x; y1=stemCenter; x2=x; y2=stemCenter-markLength; break;
+                        case 'right':    x1=x; y1=stemCenter; x2=x; y2=stemCenter+markLength; break;
+                        case 'cross':    x1=x; y1=stemCenter-markLength; x2=x; y2=stemCenter+markLength; break;
                         case 'diagonal': x1=x-(markLength*0.6); y1=stemCenter-markLength; x2=x+(markLength*0.6); y2=stemCenter+markLength; break;
-                        case 'backslash': x1=x-(markLength*0.6); y1=stemCenter+markLength; x2=x+(markLength*0.6); y2=stemCenter-markLength; break;
+                        case 'backslash':x1=x-(markLength*0.6); y1=stemCenter+markLength; x2=x+(markLength*0.6); y2=stemCenter-markLength; break;
                     }
                 }
                 paths += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--mark-color)" stroke-width="2.5" stroke-linecap="round"/>`;
             }
-            
             return `<svg width="${width}" height="${height}">${paths}</svg>`;
         }
 
@@ -400,70 +688,510 @@
             const chars = text.toUpperCase().replace(/[^A-Z]/g, '');
             const result = [];
             let i = 0;
-            while(i < chars.length) {
+            while (i < chars.length) {
                 if (i < chars.length - 1) {
                     const two = chars.substr(i, 2);
                     if (ALPHABET[two]) { result.push({...ALPHABET[two], char: two}); i += 2; continue; }
                 }
-                if (ALPHABET[chars[i]]) { result.push({...ALPHABET[chars[i]], char: chars[i]}); }
+                if (ALPHABET[chars[i]]) result.push({...ALPHABET[chars[i]], char: chars[i]});
                 i++;
             }
             return result;
         }
-        
-        function updateSignalStream(glyphs) {
+
+        function getWords(text) {
+            return text.trim().split(/\s+/).filter(Boolean).map(w => ({
+                raw: w.toUpperCase(),
+                glyphs: transliterate(w),
+            })).filter(w => w.glyphs.length > 0);
+        }
+
+        // ── Pair computation ─────────────────────────────────────────
+
+        function computePair(g1, g2) {
+            const interaction = MATRIX[g1[0]][g2[0]];
+            const diff = Math.abs(g1[1] - g2[1]);
+            const magClass = diff === 0 ? 'resonance' : diff === 1 ? 'modulation' : 'dominance';
+            const magLabel = diff === 0 ? `Resonance (Δ0)` : diff === 1 ? `Modulation (Δ1)` : `Dominance (Δ${diff})`;
+            const magMult  = diff === 0 ? 1 : diff === 1 ? 2 : 3;
+            const severity = (INTERACTION_BASE_SEVERITY[interaction] || 1) * magMult;
+            return { g1, g2, interaction, diff, magClass, magLabel, severity };
+        }
+
+        function computePairs(glyphs) {
+            return glyphs.slice(0, -1).map((g, i) => computePair(g, glyphs[i + 1]));
+        }
+
+        function pairNote(pair) {
+            const fp1 = SIGNALS[pair.g1[2].toLowerCase()].fingerprint;
+            const fp2 = SIGNALS[pair.g2[2].toLowerCase()].fingerprint;
+            const magPhrase = { resonance: 'at resonance', modulation: 'with modulation', dominance: 'under dominance' }[pair.magClass];
+            return `${fp1} meets ${fp2} ${magPhrase}. ${INTERACTION_DESC[pair.interaction] || ''}`;
+        }
+
+        // ── Signal stream ─────────────────────────────────────────────
+
+        function updateSignalStream(words) {
             signalStream.innerHTML = '';
-            
-            glyphs.forEach(g => {
-                const name = g[2];
-                const sig = SIGNALS[name.toLowerCase()];
-                if(!sig) return;
-                
-                const card = document.createElement('div');
-                card.className = 'signal-card';
-                card.innerHTML = `
-                    <div class="signal-icon">${g.char}</div>
-                    <div class="signal-data">
-                        <div class="signal-name">${name}</div>
-                        <div class="signal-fingerprint">${sig.fingerprint}</div>
-                        <div class="signal-desc">${sig.dynamic}</div>
-                    </div>
-                `;
-                signalStream.appendChild(card);
+            words.forEach((w, wi) => {
+                if (words.length > 1) {
+                    const sep = document.createElement('div');
+                    sep.style.cssText = 'font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-secondary);opacity:0.5;padding:6px 0 10px;border-top:1px solid #334155;margin-top:4px;';
+                    sep.textContent = w.raw;
+                    if (wi > 0) signalStream.appendChild(sep);
+                    else { sep.style.borderTop = 'none'; sep.style.marginTop = '0'; signalStream.appendChild(sep); }
+                }
+                w.glyphs.forEach(g => {
+                    const sig = SIGNALS[g[2].toLowerCase()];
+                    if (!sig) return;
+                    const card = document.createElement('div');
+                    card.className = 'signal-card';
+                    card.innerHTML = `
+                        <div class="signal-icon">${g.char}</div>
+                        <div class="signal-data">
+                            <div class="signal-name">${g[2]}</div>
+                            <div class="signal-fingerprint">${sig.fingerprint}</div>
+                            <div class="signal-desc">${sig.dynamic}</div>
+                        </div>`;
+                    signalStream.appendChild(card);
+                });
             });
         }
 
-        function render() {
-            const glyphs = transliterate(input.value);
-            const size = 120;
-            const total = glyphs.length * size;
-            
-            // Vertical
-            let vSvg = `<svg width="100%" height="${total}" viewBox="0 0 60 ${total}" preserveAspectRatio="xMidYMin meet">`;
-            [...glyphs].reverse().forEach((g, i) => {
-                const y = i * size;
-                vSvg += `<g transform="translate(0, ${y})">
-                            ${generateGlyph(g[0], g[1], 'vertical')}
-                         </g>`;
+        // ── Inscription ───────────────────────────────────────────────
+
+        function renderInscription(words) {
+            const glyphW = 100, glyphH = 160, gapH = 36;
+            const items = [];
+            words.forEach((w, wi) => {
+                if (wi > 0) items.push(null); // gap marker
+                w.glyphs.forEach(g => items.push(g));
             });
-            vSvg += `</svg>`;
-            vOutput.innerHTML = vSvg;
-            
-            // Update Stream
-            updateSignalStream(glyphs);
+
+            const reversed = [...items].reverse();
+            let currentY = 0, svgParts = [];
+            reversed.forEach(item => {
+                if (item === null) { currentY += gapH; return; }
+                svgParts.push(`<g transform="translate(0,${currentY})">${generateGlyph(item[0], item[1], 'vertical', glyphW, glyphH)}</g>`);
+                currentY += glyphH;
+            });
+
+            vOutput.innerHTML = `<svg width="${glyphW}" height="${currentY}" viewBox="0 0 ${glyphW} ${currentY}">${svgParts.join('')}</svg>`;
         }
-        
-        // --- ANALYZER LOGIC ---
-        
+
+        // ── Field Analysis renderer ───────────────────────────────────
+
+        function magHtml(pair) {
+            const cls = { resonance:'fa-mag-r', modulation:'fa-mag-m', dominance:'fa-mag-d' }[pair.magClass];
+            return `<span class="${cls}">${pair.magLabel}</span>`;
+        }
+
+        function tagHtml(interaction) {
+            return `<span class="fa-tag ${TAG_CLASS[interaction] || ''}">${interaction}</span>`;
+        }
+
+        function pairsTableHtml(pairs) {
+            if (!pairs.length) return '<p style="opacity:0.4;font-size:0.85rem;padding:10px 0">Single glyph — no pairs.</p>';
+            const rows = pairs.map(p => `
+                <tr>
+                    <td class="fa-seq">${p.g1.char} → ${p.g2.char}</td>
+                    <td>${tagHtml(p.interaction)}</td>
+                    <td>${magHtml(p)}</td>
+                    <td class="fa-note">${pairNote(p)}</td>
+                </tr>`).join('');
+            return `<table class="fa-table">
+                <thead><tr><th>Pair</th><th>Interaction</th><th>Magnitude</th><th>Note</th></tr></thead>
+                <tbody>${rows}</tbody>
+            </table>`;
+        }
+
+        function generateReading(words, boundaries) {
+            const allGlyphs  = words.flatMap(w => w.glyphs);
+            const allPairs   = words.flatMap(w => w.pairs);
+            const allEvents  = [...allPairs, ...boundaries];
+            if (!allGlyphs.length) return '';
+
+            const firstG  = allGlyphs[0];
+            const lastG   = allGlyphs[allGlyphs.length - 1];
+            const firstSig = SIGNALS[firstG[2].toLowerCase()];
+            const lastSig  = SIGNALS[lastG[2].toLowerCase()];
+
+            const maximalCount = allGlyphs.filter(g => g[1] === 5).length;
+            const energyRatio  = maximalCount / allGlyphs.length;
+            const energyDesc   = energyRatio >= 0.4 ? 'at high energy' : energyRatio <= 0.1 ? 'at low amplitude' : 'across a mixed-energy field';
+
+            const critical = allEvents.length ? allEvents.reduce((b, p) => p.severity > b.severity ? p : b, allEvents[0]) : null;
+
+            const counts = {};
+            allPairs.forEach(p => counts[p.interaction] = (counts[p.interaction] || 0) + 1);
+            const dominant = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+
+            let sentences = [];
+
+            sentences.push(`The phrase opens with <strong>${firstSig.fingerprint}</strong> (${firstG.char}) and runs ${energyDesc} — ${maximalCount} of ${allGlyphs.length} ${allGlyphs.length === 1 ? 'glyph reaches' : 'glyphs reach'} maximal magnitude.`);
+
+            if (critical) {
+                const cs1 = SIGNALS[critical.g1[2].toLowerCase()];
+                const cs2 = SIGNALS[critical.g2[2].toLowerCase()];
+                const magWord = { resonance:'at resonance', modulation:'with modulation', dominance:'under dominance' }[critical.magClass];
+                sentences.push(`The defining event is <strong>${critical.interaction}</strong> ${magWord}: <em>${cs1.fingerprint}</em> (${critical.g1.char}) meets <em>${cs2.fingerprint}</em> (${critical.g2.char}).`);
+            }
+
+            if (dominant && dominant[1] > 1) {
+                sentences.push(`The dominant structural pattern is <strong>${dominant[0]}</strong> (${dominant[1]}×), closing on <em>${lastSig.fingerprint}</em> — ${lastSig.closure || lastSig.dynamic}`);
+            } else {
+                sentences.push(`The phrase closes on <strong>${lastSig.fingerprint}</strong> (${lastG.char}) — ${lastSig.closure || lastSig.dynamic}`);
+            }
+
+            if (boundaries.length) {
+                boundaries.forEach(b => {
+                    const bs1 = SIGNALS[b.g1[2].toLowerCase()];
+                    const bs2 = SIGNALS[b.g2[2].toLowerCase()];
+                    const magWord = { resonance:'at resonance', modulation:'with modulation', dominance:'under dominance' }[b.magClass];
+                    sentences.push(`At the word boundary, <em>${bs1.fingerprint}</em> meets <em>${bs2.fingerprint}</em> — <strong>${b.interaction}</strong> ${magWord}.`);
+                });
+            }
+
+            return sentences.join(' ');
+        }
+
+        function renderFieldAnalysis(words) {
+            const faContent = document.getElementById('fa-content');
+            const exportBtn = document.getElementById('export-btn');
+            const allGlyphs = words.flatMap(w => w.glyphs);
+            if (!allGlyphs.length) {
+                faContent.innerHTML = '<div class="fa-empty">Type a word or phrase above to generate field analysis.</div>';
+                exportBtn.classList.remove('active');
+                return;
+            }
+            exportBtn.classList.add('active');
+
+            // Attach pairs to each word
+            words.forEach(w => { w.pairs = computePairs(w.glyphs); });
+
+            // Compute word boundaries
+            const boundaries = [];
+            for (let i = 0; i < words.length - 1; i++) {
+                const lastG  = words[i].glyphs[words[i].glyphs.length - 1];
+                const firstG = words[i + 1].glyphs[0];
+                if (lastG && firstG) boundaries.push({ ...computePair(lastG, firstG), boundaryBetween: [words[i].raw, words[i+1].raw] });
+            }
+
+            const allPairs   = words.flatMap(w => w.pairs);
+            const allEvents  = [...allPairs, ...boundaries];
+
+            // Stats
+            const maximalCount = allGlyphs.filter(g => g[1] === 5).length;
+            const counts = {};
+            allPairs.forEach(p => counts[p.interaction] = (counts[p.interaction] || 0) + 1);
+            const dominant   = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+            const dominantLabel = dominant ? `${dominant[0]} ×${dominant[1]}` : '—';
+            const criticalPair = allEvents.length ? allEvents.reduce((b, p) => p.severity > b.severity ? p : b, allEvents[0]) : null;
+
+            // Build HTML
+            let html = '';
+
+            // Word blocks
+            words.forEach((w, wi) => {
+                html += `<div class="fa-word-block">
+                    <div class="fa-word-label">
+                        <span class="fa-word-name">${w.raw}</span>
+                        <span class="fa-word-count">${w.glyphs.length} glyph${w.glyphs.length !== 1 ? 's' : ''}</span>
+                    </div>
+                    ${pairsTableHtml(w.pairs)}
+                </div>`;
+
+                // Boundary row after each word (except last)
+                if (wi < words.length - 1) {
+                    const b = boundaries[wi];
+                    html += `<div class="fa-boundary-row">
+                        <span class="fa-boundary-label">Boundary</span>
+                        <span class="fa-boundary-seq">${b.g1.char} → ${b.g2.char}</span>
+                        <div class="fa-boundary-detail">
+                            ${tagHtml(b.interaction)}
+                            ${magHtml(b)}
+                            <span class="fa-note" style="margin-left:4px">${INTERACTION_DESC[b.interaction] || ''}</span>
+                        </div>
+                    </div>`;
+                }
+            });
+
+            // Composite block
+            const totalPairs = allPairs.length;
+            const fractures  = allPairs.filter(p => p.interaction === 'Fracture' || p.interaction === 'Opposition' || p.interaction === 'Invert').length;
+            html += `<div class="fa-composite">
+                <div class="fa-stats">
+                    <div class="fa-stat">
+                        <div class="fa-stat-value">${allGlyphs.length}</div>
+                        <div class="fa-stat-label">Total Glyphs</div>
+                    </div>
+                    <div class="fa-stat">
+                        <div class="fa-stat-value">${maximalCount}</div>
+                        <div class="fa-stat-label">Maximal (mag 5)</div>
+                    </div>
+                    <div class="fa-stat">
+                        <div class="fa-stat-value">${fractures}</div>
+                        <div class="fa-stat-label">Disruptive Events</div>
+                    </div>
+                    <div class="fa-stat">
+                        <div class="fa-stat-value" style="font-size:0.95rem">${dominantLabel}</div>
+                        <div class="fa-stat-label">Dominant Pattern</div>
+                    </div>
+                </div>
+                <div class="fa-reading">
+                    <div class="fa-reading-label">Field Reading</div>
+                    <div class="fa-reading-text">${generateReading(words, boundaries)}</div>
+                </div>
+            </div>`;
+
+            faContent.innerHTML = html;
+        }
+
+        // ── Export ───────────────────────────────────────────────────
+
+        function exportAnalysis() {
+            const words = getWords(inputEl.value);
+            if (!words.length) return;
+            words.forEach(w => { w.pairs = computePairs(w.glyphs); });
+            const boundaries = [];
+            for (let i = 0; i < words.length - 1; i++) {
+                const lastG  = words[i].glyphs[words[i].glyphs.length - 1];
+                const firstG = words[i + 1].glyphs[0];
+                if (lastG && firstG) boundaries.push({ ...computePair(lastG, firstG), between: [words[i].raw, words[i+1].raw] });
+            }
+            const html = generateExportHTML(words, boundaries);
+            const blob = new Blob([html], { type: 'text/html' });
+            const url  = URL.createObjectURL(blob);
+            const a    = document.createElement('a');
+            a.href     = url;
+            a.download = `neo-${words.map(w => w.raw.toLowerCase()).join('-')}.html`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function generateExportHTML(words, boundaries) {
+            const phrase    = words.map(w => w.raw).join(' ');
+            const allGlyphs = words.flatMap(w => w.glyphs);
+            const allPairs  = words.flatMap(w => w.pairs);
+            const allEvents = [...allPairs, ...boundaries];
+            const date      = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+
+            // Helpers scoped to export (use unprefixed class names)
+            const EXPORT_TAG = {
+                'Reinforce':'tag-reinforce','Opposition':'tag-opposition','Anchor':'tag-anchor',
+                'Propel':'tag-propel','Distort':'tag-distort','Dampen':'tag-dampen',
+                'Invert':'tag-invert','Crystalize':'tag-crystalize','Gate':'tag-gate',
+                'Fracture':'tag-fracture','Stream':'tag-stream','Turbulence':'tag-turbulence',
+                'Phase Shift':'tag-phase-shift',
+            };
+            const xTag = i => `<span class="tag ${EXPORT_TAG[i]||''}">${i}</span>`;
+            const xMag = p => {
+                const cls = {resonance:'mag-r',modulation:'mag-m',dominance:'mag-d'}[p.magClass];
+                return `<span class="${cls}">${p.magLabel}</span>`;
+            };
+
+            // Glyph SVG (uses CSS vars that are defined in the exported doc)
+            function xGlyph(position, count, w, h) {
+                const cx = w/2, ml = Math.round(w*0.28), sp = Math.round(h*0.18), st = Math.round(h*0.2);
+                let p = `<line x1="${cx}" y1="0" x2="${cx}" y2="${h}" stroke="var(--stem-color)" stroke-width="2" stroke-linecap="butt"/>`;
+                for (let i = 0; i < count; i++) {
+                    const y = st + i*sp; let x1,y1,x2,y2;
+                    switch(position) {
+                        case 'left':     x1=cx;y1=y;x2=cx-ml;y2=y; break;
+                        case 'right':    x1=cx;y1=y;x2=cx+ml;y2=y; break;
+                        case 'cross':    x1=cx-ml;y1=y;x2=cx+ml;y2=y; break;
+                        case 'diagonal': x1=cx-ml;y1=y-(ml*0.6);x2=cx+ml;y2=y+(ml*0.6); break;
+                        case 'backslash':x1=cx-ml;y1=y+(ml*0.6);x2=cx+ml;y2=y-(ml*0.6); break;
+                    }
+                    p += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--mark-color)" stroke-width="2" stroke-linecap="round"/>`;
+                }
+                return `<svg width="${w}" height="${h}" style="display:block">${p}</svg>`;
+            }
+
+            // Inscription row
+            const inscriptionRow = words.map(w => {
+                const svgs = w.glyphs.map(g => xGlyph(g[0], g[1], 52, 92)).join('');
+                return `<div class="inscription-word">
+                    <div class="inscription-label">${w.raw}</div>
+                    <div class="inscription-glyphs">${svgs}</div>
+                </div>`;
+            }).join('');
+
+            // Per-word sections
+            const WORD_COLORS = ['#38bdf8','#10b981','#f59e0b','#818cf8','#f87171'];
+            let wordSections = '';
+            words.forEach((w, wi) => {
+                const color = WORD_COLORS[wi % WORD_COLORS.length];
+                const pairRows = w.pairs.map(p => {
+                    const fp1 = SIGNALS[p.g1[2].toLowerCase()].fingerprint;
+                    const fp2 = SIGNALS[p.g2[2].toLowerCase()].fingerprint;
+                    const magWord = {resonance:'at resonance',modulation:'with modulation',dominance:'under dominance'}[p.magClass];
+                    const note = `${fp1} meets ${fp2} ${magWord}. ${INTERACTION_DESC[p.interaction]||''}`;
+                    return `<tr>
+                        <td class="pair-seq">${p.g1.char} → ${p.g2.char}</td>
+                        <td>${xTag(p.interaction)}</td>
+                        <td>${xMag(p)}</td>
+                        <td class="pair-note">${note}</td>
+                    </tr>`;
+                }).join('');
+                const table = w.pairs.length
+                    ? `<table class="pair-table"><thead><tr><th>Pair</th><th>Interaction</th><th>Magnitude</th><th>Note</th></tr></thead><tbody>${pairRows}</tbody></table>`
+                    : `<p style="opacity:0.4;font-size:0.85rem">Single glyph — no pairs.</p>`;
+                wordSections += `<section class="word-section">
+                    <div class="word-header">
+                        <span class="word-title" style="color:${color}">${w.raw}</span>
+                        <span class="word-count">${w.glyphs.length} glyph${w.glyphs.length!==1?'s':''}</span>
+                    </div>
+                    <div class="card card-word" style="border-left-color:${color}">${table}</div>
+                </section>`;
+
+                // Boundary after this word
+                if (wi < words.length - 1) {
+                    const b = boundaries[wi];
+                    const bfp1 = SIGNALS[b.g1[2].toLowerCase()].fingerprint;
+                    const bfp2 = SIGNALS[b.g2[2].toLowerCase()].fingerprint;
+                    const bMagWord = {resonance:'at resonance',modulation:'with modulation',dominance:'under dominance'}[b.magClass];
+                    wordSections += `<div class="boundary-row">
+                        <span class="boundary-label">Word Boundary</span>
+                        <span class="boundary-seq">${b.g1.char} → ${b.g2.char}</span>
+                        ${xTag(b.interaction)}
+                        ${xMag(b)}
+                        <span class="pair-note" style="margin-left:4px">${bfp1} meets ${bfp2} ${bMagWord}.</span>
+                    </div>`;
+                }
+            });
+
+            // Composite stats
+            const maximalCount = allGlyphs.filter(g => g[1]===5).length;
+            const counts = {};
+            allPairs.forEach(p => counts[p.interaction]=(counts[p.interaction]||0)+1);
+            const dominant = Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];
+            const dominantLabel = dominant ? `${dominant[0]} ×${dominant[1]}` : '—';
+            const fractures = allPairs.filter(p=>['Fracture','Opposition','Invert'].includes(p.interaction)).length;
+            const reading = generateReading(words, boundaries);
+
+            const css = `
+:root {
+    --bg:#0f172a;--surface:#1e293b;--text:#f8fafc;--muted:#94a3b8;
+    --accent:#38bdf8;--green:#10b981;--red:#ef4444;--amber:#f59e0b;
+    --purple:#818cf8;--border:#334155;
+    --stem-color:#475569;--mark-color:#f8fafc;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Inter',sans-serif;background:var(--bg);color:var(--text);padding:60px 24px 100px;line-height:1.7}
+.page{max-width:860px;margin:0 auto}
+.doc-label{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:20px;text-align:center}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-2px;background:linear-gradient(135deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:12px}
+.doc-meta{color:var(--muted);font-size:.9rem;text-align:center;margin-bottom:40px}
+.divider{border:none;border-top:1px solid var(--border);margin:40px 0}
+h2{font-size:1rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+h3{font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:12px}
+p{color:var(--muted);margin-bottom:14px;font-size:1rem}
+p strong{color:var(--text)} em{color:var(--accent);font-style:normal}
+.inscription-row{display:flex;gap:40px;justify-content:center;margin-bottom:40px;flex-wrap:wrap}
+.inscription-word{display:flex;flex-direction:column;align-items:center;gap:10px}
+.inscription-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.inscription-glyphs{display:flex;gap:4px;background:rgba(0,0,0,.2);border-radius:12px;padding:14px 10px}
+.word-section{margin-bottom:48px}
+.word-header{display:flex;align-items:baseline;gap:16px;margin-bottom:20px}
+.word-title{font-size:1.8rem;font-weight:800;letter-spacing:4px;text-transform:uppercase}
+.word-count{font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.card{background:var(--surface);border-radius:16px;padding:24px 26px;margin-bottom:20px}
+.card-word{border-left:3px solid var(--accent)}
+.pair-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.pair-table th{text-align:left;padding:8px 12px;color:var(--muted);font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.pair-table td{padding:10px 12px;border-bottom:1px solid rgba(51,65,85,.35);vertical-align:middle;color:var(--muted)}
+.pair-table tr:last-child td{border-bottom:none}
+.pair-seq{font-weight:700;color:var(--text);letter-spacing:1px}
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.68rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
+.tag-reinforce{background:rgba(16,185,129,.15);color:#10b981}
+.tag-anchor{background:rgba(56,189,248,.15);color:#38bdf8}
+.tag-propel{background:rgba(16,185,129,.15);color:#10b981}
+.tag-stream{background:rgba(16,185,129,.15);color:#10b981}
+.tag-crystalize{background:rgba(245,158,11,.15);color:#f59e0b}
+.tag-gate{background:rgba(245,158,11,.15);color:#f59e0b}
+.tag-opposition{background:rgba(239,68,68,.15);color:#ef4444}
+.tag-dampen{background:rgba(239,68,68,.12);color:#f87171}
+.tag-invert{background:rgba(129,140,248,.15);color:#818cf8}
+.tag-fracture{background:rgba(239,68,68,.15);color:#ef4444}
+.tag-distort{background:rgba(129,140,248,.15);color:#818cf8}
+.tag-turbulence{background:rgba(245,158,11,.15);color:#f59e0b}
+.tag-phase-shift{background:rgba(129,140,248,.15);color:#818cf8}
+.mag-r{color:#10b981;font-weight:700;font-size:.78rem;white-space:nowrap}
+.mag-m{color:#f59e0b;font-weight:700;font-size:.78rem;white-space:nowrap}
+.mag-d{color:#ef4444;font-weight:700;font-size:.78rem;white-space:nowrap}
+.pair-note{color:var(--muted);font-size:.78rem;font-style:italic;line-height:1.4}
+.boundary-row{display:flex;align-items:center;gap:12px;background:rgba(0,0,0,.2);border-radius:10px;padding:14px 18px;margin-bottom:20px;flex-wrap:wrap}
+.boundary-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.boundary-seq{font-weight:800;font-size:1rem;letter-spacing:2px;color:var(--accent)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stat{background:rgba(0,0,0,.2);border-radius:10px;padding:14px 10px;text-align:center}
+.stat-value{font-size:1.3rem;font-weight:800;color:var(--accent);line-height:1}
+.stat-label{font-size:.62rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-top:6px;line-height:1.3}
+.reading{background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.18);border-radius:12px;padding:20px 24px}
+.reading-label{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.reading-text{font-size:.92rem;line-height:1.78;color:var(--muted)}
+.reading-text strong{color:var(--text);font-weight:600}
+.reading-text em{color:var(--accent);font-style:normal}
+footer{margin-top:60px;text-align:center;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--border);padding-bottom:40px}`;
+
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEO Analysis — ${phrase}</title>
+<style>${css}</style>
+</head>
+<body>
+<div class="page">
+<header style="text-align:center;margin-bottom:50px">
+    <p class="doc-label">NEO · NeOgham Analysis</p>
+    <h1>${phrase}</h1>
+    <p class="doc-meta">Structural bias, interference fields, and composite signal reading</p>
+</header>
+
+<div class="inscription-row">${inscriptionRow}</div>
+<hr class="divider">
+
+${wordSections}
+
+<section>
+<h2>Composite Field</h2>
+<div class="card" style="background:var(--surface)">
+    <div class="stats-grid">
+        <div class="stat"><div class="stat-value">${allGlyphs.length}</div><div class="stat-label">Total Glyphs</div></div>
+        <div class="stat"><div class="stat-value">${maximalCount}</div><div class="stat-label">Maximal (mag 5)</div></div>
+        <div class="stat"><div class="stat-value">${fractures}</div><div class="stat-label">Disruptive Events</div></div>
+        <div class="stat"><div class="stat-value" style="font-size:.95rem">${dominantLabel}</div><div class="stat-label">Dominant Pattern</div></div>
+    </div>
+    <div class="reading">
+        <div class="reading-label">Field Reading</div>
+        <div class="reading-text">${reading}</div>
+    </div>
+</div>
+</section>
+
+<footer>NEO Signal Analyzer · Generated ${date}</footer>
+</div>
+</body>
+</html>`;
+        }
+
+        // ── Main render ───────────────────────────────────────────────
+
+        function render() {
+            const words = getWords(inputEl.value);
+            renderInscription(words);
+            updateSignalStream(words);
+            renderFieldAnalysis(words);
+        }
+
+        // ── Pairwise Lab ──────────────────────────────────────────────
+
         function initSelector() {
             const grid = document.getElementById('glyph-selector');
-            // Sort by Aicme for cleanliness
-            const sorted = Object.entries(ALPHABET).sort((a,b) => {
-                // Custom sort order based on Group then Count
-                return 0; 
-            });
-            
-            for(let [char, data] of Object.entries(ALPHABET)) {
+            for (let [char, data] of Object.entries(ALPHABET)) {
                 const btn = document.createElement('div');
                 btn.className = 'glyph-btn';
                 btn.innerHTML = `<strong>${char}</strong><br><small>${data[2]}</small>`;
@@ -471,86 +1199,49 @@
                 grid.appendChild(btn);
             }
         }
-        
+
         function setActive(slot) {
             activeSlot = slot;
             document.querySelectorAll('.glyph-slot').forEach(el => el.classList.remove('active'));
             document.getElementById(`slot-${slot}`).classList.add('active');
         }
-        
+
         function selectGlyph(data, char) {
-            const svg = generateGlyph(data[0], data[1], 'vertical');
             const slotEl = document.getElementById(`slot-${activeSlot}`);
-            
-            slotEl.innerHTML = svg;
+            slotEl.innerHTML = generateGlyph(data[0], data[1], 'vertical');
             slotEl.classList.add('selected');
-            
-            if(activeSlot === 1) slot1Glyph = {...data, char};
+            if (activeSlot === 1) slot1Glyph = {...data, char};
             else slot2Glyph = {...data, char};
-            
             calculateInterference();
-            
-            // Auto switch slot for convenience
-            if(activeSlot === 1) setActive(2);
+            if (activeSlot === 1) setActive(2);
         }
-        
+
         function calculateInterference() {
             if (!slot1Glyph || !slot2Glyph) return;
-            
-            const g1 = slot1Glyph;
-            const g2 = slot2Glyph;
+            const g1 = slot1Glyph, g2 = slot2Glyph;
             const output = document.getElementById('analysis-output');
-            
-            // 1. Magnitude Logic
-            const m1 = g1[1];
-            const m2 = g2[1];
+            const m1 = g1[1], m2 = g2[1];
             const diff = Math.abs(m1 - m2);
-            let magResult = '';
-            
-            if (diff === 0) magResult = 'Resonance (Amplification)';
-            else if (diff === 1) magResult = 'Modulation (Flavoring)';
-            else magResult = 'Dominance (Overwrite)';
-            
-            // 2. Matrix Logic
-            const p1 = g1[0]; // 'right', 'left', etc
-            const p2 = g2[0];
+            const magResult = diff === 0 ? 'Resonance (Amplification)' : diff === 1 ? 'Modulation (Flavoring)' : 'Dominance (Overwrite)';
+            const p1 = g1[0], p2 = g2[0];
             const interaction = MATRIX[p1][p2];
-            
-            // Determine Color Class
             let boxClass = 'interaction-box';
-            if(magResult.includes('Dominance') || interaction === 'Opposition' || interaction === 'Fracture') {
-                boxClass += ' dominance';
-            }
-            
+            if (magResult.includes('Dominance') || interaction === 'Opposition' || interaction === 'Fracture') boxClass += ' dominance';
             const s1 = SIGNALS[g1[2].toLowerCase()];
             const s2 = SIGNALS[g2[2].toLowerCase()];
-
             output.innerHTML = `
-                <div class="result-row">
-                    <span class="result-label">Structure Match</span>
-                    <span class="result-value">${p1.toUpperCase()} + ${p2.toUpperCase()}</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">Magnitude Delta</span>
-                    <span class="result-value">${m1} vs ${m2} (Δ${diff})</span>
-                </div>
-                
-                <div class="${boxClass}">
-                    ${interaction.toUpperCase()}<br>
-                    <span style="font-size:0.9rem; font-weight:normal; opacity:0.8">${magResult}</span>
-                </div>
-                
-                <div style="margin-top:20px; font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary)">
-                    <strong>Resultant Field:</strong><br>
-                    ${interaction} between <em>"${s1.fingerprint}"</em> and <em>"${s2.fingerprint}"</em>.
-                </div>
-            `;
+                <div class="result-row"><span class="result-label">Structure Match</span><span class="result-value">${p1.toUpperCase()} + ${p2.toUpperCase()}</span></div>
+                <div class="result-row"><span class="result-label">Magnitude Delta</span><span class="result-value">${m1} vs ${m2} (Δ${diff})</span></div>
+                <div class="${boxClass}">${interaction.toUpperCase()}<br><span style="font-size:0.9rem;font-weight:normal;opacity:0.8">${magResult}</span></div>
+                <div style="margin-top:20px;font-size:0.9rem;line-height:1.5;color:var(--text-secondary)">
+                    <strong>Resultant Field:</strong><br>${interaction} between <em>"${s1.fingerprint}"</em> and <em>"${s2.fingerprint}"</em>.
+                </div>`;
         }
 
         initSelector();
         setActive(1);
-        input.addEventListener('input', render);
-        render(); // Initial render
+        inputEl.addEventListener('input', render);
+        render();
     </script>
 </body>
 </html>

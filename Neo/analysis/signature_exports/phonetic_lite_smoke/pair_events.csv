@@ -1,0 +1,16 @@
+signature_id,phrase,index,scope,pair,glyph_a,glyph_b,name_a,name_b,group_a,group_b,marks_a,marks_b,magnitude_delta,magnitude_result,interaction,signal_a,signal_b,is_disruptive
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,0,adjacent,M->A,M,A,muin,ailm,cross,diagonal,1,1,0,Resonance,Gate,Atomic Bind,Atomic Flow,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,1,adjacent,A->I,A,I,ailm,idad,diagonal,diagonal,1,5,4,Dominance,Stream,Atomic Flow,Maximal Jet,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,2,adjacent,I->S,I,S,idad,sail,diagonal,right,5,4,1,Modulation,Propel,Maximal Jet,Strong Enforcement,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,3,adjacent,S->C,S,C,sail,coll,right,left,4,4,0,Resonance,Opposition,Strong Enforcement,Strong Barrier,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,4,adjacent,C->A,C,A,coll,ailm,left,diagonal,4,1,3,Dominance,Dampen,Strong Barrier,Atomic Flow,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,5,adjacent,A->I,A,I,ailm,idad,diagonal,diagonal,1,5,4,Dominance,Stream,Atomic Flow,Maximal Jet,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,6,adjacent,I->B,I,B,idad,beith,diagonal,right,5,1,4,Dominance,Propel,Maximal Jet,Atomic Initiation,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,7,adjacent,B->OI,B,OI,beith,oi,right,backslash,1,2,1,Modulation,Distort,Atomic Initiation,Weak Vortex,True
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,8,adjacent,OI->T,OI,T,oi,tinne,backslash,left,2,3,1,Modulation,Invert,Weak Vortex,Median Balance,True
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,9,adjacent,T->U,T,U,tinne,ur,left,diagonal,3,3,0,Resonance,Dampen,Median Balance,Median Stream,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,10,adjacent,U->E,U,E,ur,eadhadh,diagonal,diagonal,3,4,1,Modulation,Stream,Median Stream,Strong Torrent,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,11,adjacent,E->S,E,S,eadhadh,sail,diagonal,right,4,4,0,Resonance,Propel,Strong Torrent,Strong Enforcement,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,12,adjacent,S->D,S,D,sail,duir,right,left,4,2,2,Dominance,Opposition,Strong Enforcement,Weak Resistance,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,13,adjacent,D->A,D,A,duir,ailm,left,diagonal,2,1,1,Modulation,Dampen,Weak Resistance,Atomic Flow,False
+my-sky-boy-tuesday,MY SKY BOY TUESDAY,14,adjacent,A->I,A,I,ailm,idad,diagonal,diagonal,1,5,4,Dominance,Stream,Atomic Flow,Maximal Jet,False

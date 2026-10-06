@@ -1,0 +1,854 @@
+{
+  "roots": [
+    {
+      "root_id": "root_ha_001",
+      "proto_sound": "ha",
+      "phonogestural_contour": {
+        "breath_shape": "soft outgoing breath",
+        "vowel_movement": "a",
+        "consonant_transition": "h",
+        "hand_enactment": "open palm lowers the field",
+        "posture_enactment": "head lowers as weight moves back"
+      },
+      "original_pressure": "hush / restraint / dampening",
+      "first_context": "absorber cave where echo agitation caused children to panic",
+      "gesture": "palm down, fingers spread low",
+      "body_posture": "lowered head, weight back",
+      "danger_if_wrong": "echo amplification, memory bleed, panic, animal flight",
+      "world_response": "soft breath and palm-down posture reduce harmful resonance",
+      "social_role_carriers": ["hush_keeper", "parent", "cave_guide"],
+      "semantic_drift_path": ["quiet", "restrain sound", "respect the place", "refuse action", "sacred boundary", "legal prohibition", "mourning silence"],
+      "proto_neo_mapping": {
+        "primary_bias": "resistance",
+        "secondary_bias": "binding",
+        "early_feature_map": {
+          "voice_root": "glyph identity or phonetic residue",
+          "handshape": "relational operator",
+          "body_orientation": "glyph orientation",
+          "taboo": "constraint rule"
+        }
+      },
+      "surviving_taboo": "never speak personal names after ha in memory caves",
+      "story_fragment": "The child who laughed in the lower hollow forgot his mother's face for three days."
+    },
+    {
+      "root_id": "root_kel_001",
+      "proto_sound": "kel",
+      "phonogestural_contour": {
+        "breath_shape": "held breath released low",
+        "vowel_movement": "e",
+        "consonant_transition": "k-l",
+        "hand_enactment": "cupped closure carried inward",
+        "posture_enactment": "shoulders fold around the carried thing"
+      },
+      "original_pressure": "careful carrying / not spilling pressure",
+      "first_context": "moving a saturated memory stone between sleeping places",
+      "gesture": "cupped hands close to the ribs",
+      "body_posture": "shoulders rounded inward, steps shortened",
+      "danger_if_wrong": "stored grief leaks into bystanders or cracks the carrier stone",
+      "world_response": "close carrying stabilizes the stone during movement",
+      "social_role_carriers": ["carrier", "rememberer"],
+      "semantic_drift_path": ["carry carefully", "keep near the body", "bear a memory", "hold responsibility", "lineage burden"],
+      "proto_neo_mapping": {
+        "primary_bias": "binding",
+        "secondary_bias": "flow",
+        "early_feature_map": {
+          "gesture": "relational operator",
+          "distance_from_body": "activation condition",
+          "story_residue": "rune history"
+        }
+      },
+      "surviving_taboo": "do not pass kel-stones hand to hand without naming the carrier",
+      "story_fragment": "The first carrier walked all night and would not open her hands."
+    },
+    {
+      "root_id": "root_ta_001",
+      "proto_sound": "ta",
+      "phonogestural_contour": {
+        "breath_shape": "short outward pulse",
+        "vowel_movement": "a",
+        "consonant_transition": "t",
+        "hand_enactment": "two fingers snap away from the body",
+        "posture_enactment": "weight tips forward then releases"
+      },
+      "original_pressure": "strike / spark / start",
+      "first_context": "emitter shards igniting dry moss during sorting",
+      "gesture": "two fingers snap outward from thumb",
+      "body_posture": "weight forward, chin lifted",
+      "danger_if_wrong": "fire jump, hand burns, startled animals",
+      "world_response": "quick outward motion discharges the shard away from the body",
+      "social_role_carriers": ["cutter", "metal_sorter"],
+      "semantic_drift_path": ["spark", "start work", "command release", "first blow", "ignition order"],
+      "proto_neo_mapping": {
+        "primary_bias": "action",
+        "secondary_bias": "flow",
+        "early_feature_map": {
+          "voice_root": "glyph identity or phonetic residue",
+          "gesture": "relational operator",
+          "repetition": "mark-count magnitude"
+        }
+      },
+      "surviving_taboo": "never use ta toward a loaded absorber",
+      "story_fragment": "The moss burned, but the hand lived because the spark was thrown away."
+    },
+    {
+      "root_id": "root_om_001",
+      "proto_sound": "om",
+      "phonogestural_contour": {
+        "breath_shape": "rounded exhale",
+        "vowel_movement": "o",
+        "consonant_transition": "m",
+        "hand_enactment": "open hand passes before the mouth",
+        "posture_enactment": "chest opens without leaning forward"
+      },
+      "original_pressure": "steady breath / safe exhale",
+      "first_context": "crossing a vapor seam where held breath caused dizziness",
+      "gesture": "open hand passing slowly before the mouth",
+      "body_posture": "chest open, knees loose",
+      "danger_if_wrong": "fainting, wrong echo, vapor panic",
+      "world_response": "slow voiced breath keeps the vapor from pulsing sharply",
+      "social_role_carriers": ["listener", "healer", "parent"],
+      "semantic_drift_path": ["breathe out", "steady yourself", "make passage safe", "give permission", "begin a healing"],
+      "proto_neo_mapping": {
+        "primary_bias": "flow",
+        "secondary_bias": "resistance",
+        "early_feature_map": {
+          "voice_root": "phonetic residue",
+          "breath": "activation condition",
+          "sequence": "inscription order"
+        }
+      },
+      "surviving_taboo": "om is not spoken over open blood unless a healer leads",
+      "story_fragment": "The old listener breathed first, and the children crossed through the white seam."
+    },
+    {
+      "root_id": "root_rin_001",
+      "proto_sound": "rin",
+      "phonogestural_contour": {
+        "breath_shape": "carried voice along the tongue",
+        "vowel_movement": "i",
+        "consonant_transition": "r-n",
+        "hand_enactment": "two fingers draw a downstream line",
+        "posture_enactment": "torso angles with the current"
+      },
+      "original_pressure": "running water / carried message",
+      "first_context": "reed signals passed along a river bend during flood season",
+      "gesture": "two fingers drawn downstream",
+      "body_posture": "body angled with the current",
+      "danger_if_wrong": "message lost, flood path misread, boat overturned",
+      "world_response": "aligned gesture and call help carriers read flow direction",
+      "social_role_carriers": ["carrier", "trader"],
+      "semantic_drift_path": ["downstream", "send along", "message path", "trade route", "news bearer"],
+      "proto_neo_mapping": {
+        "primary_bias": "flow",
+        "secondary_bias": "action",
+        "early_feature_map": {
+          "handshape": "relational operator",
+          "body_orientation": "glyph orientation",
+          "sequence": "inscription order"
+        }
+      },
+      "surviving_taboo": "do not call rin upstream in flood season",
+      "story_fragment": "The river took the wrong word once and brought back a drowned basket."
+    },
+    {
+      "root_id": "root_mor_001",
+      "proto_sound": "mor",
+      "phonogestural_contour": {
+        "breath_shape": "low closed breath",
+        "vowel_movement": "o",
+        "consonant_transition": "m-r",
+        "hand_enactment": "thumb closes into the fist",
+        "posture_enactment": "spine stills over the closed hand"
+      },
+      "original_pressure": "grave binding / held memory",
+      "first_context": "sealing a burial hollow after a remembered voice persisted",
+      "gesture": "thumb pressed to closed fist",
+      "body_posture": "kneeling with spine still",
+      "danger_if_wrong": "name echo, grief sickness, memory wandering",
+      "world_response": "still posture and closed hand help settle the grave field",
+      "social_role_carriers": ["rememberer", "hush_keeper"],
+      "semantic_drift_path": ["hold the dead", "settle memory", "grave promise", "ancestor place", "law of keeping"],
+      "proto_neo_mapping": {
+        "primary_bias": "binding",
+        "secondary_bias": "resistance",
+        "early_feature_map": {
+          "posture": "activation condition",
+          "story_residue": "rune history",
+          "taboo": "constraint rule"
+        }
+      },
+      "surviving_taboo": "mor is never repeated three times outside a burial place",
+      "story_fragment": "They closed the fist before they closed the stone."
+    },
+    {
+      "root_id": "root_vek_001",
+      "proto_sound": "vek",
+      "phonogestural_contour": {
+        "breath_shape": "cut breath stopped early",
+        "vowel_movement": "e",
+        "consonant_transition": "v-k",
+        "hand_enactment": "hand breaks sideways from the work",
+        "posture_enactment": "hips turn away from the blast line"
+      },
+      "original_pressure": "fracture / sudden phase change",
+      "first_context": "volatile crystal powder flashing when scraped with the wrong blade",
+      "gesture": "hand jerked sideways away from the work",
+      "body_posture": "hips turned from the blast line",
+      "danger_if_wrong": "flash burn, splintered sight, false opening",
+      "world_response": "sideways withdrawal reduces the phase bite",
+      "social_role_carriers": ["cutter", "metal_sorter"],
+      "semantic_drift_path": ["crack", "flash away", "wrong edge", "dangerous change", "breach"],
+      "proto_neo_mapping": {
+        "primary_bias": "mutation",
+        "secondary_bias": "action",
+        "early_feature_map": {
+          "gesture": "relational operator",
+          "body_orientation": "glyph orientation",
+          "repetition": "mark-count magnitude"
+        }
+      },
+      "surviving_taboo": "vek marks are not carved on shared tools",
+      "story_fragment": "The powder opened like an eye and burned the cutter's shadow on the wall."
+    },
+    {
+      "root_id": "root_shu_001",
+      "proto_sound": "sha",
+      "phonogestural_contour": {
+        "breath_shape": "hushed breath spread across the teeth",
+        "vowel_movement": "ui",
+        "consonant_transition": "sh",
+        "hand_enactment": "flat hand folds downward",
+        "posture_enactment": "shoulders sink with the cover"
+      },
+      "original_pressure": "cooling / covering / pressure reduction",
+      "first_context": "wet hide laid over an over-bright emitter stone",
+      "gesture": "flat hand folding downward",
+      "body_posture": "shoulders lowered, weight sinking",
+      "danger_if_wrong": "radiant fever, cracked hide, bright-blindness",
+      "world_response": "covered pressure dims when the body also lowers",
+      "social_role_carriers": ["washer", "root_tender"],
+      "semantic_drift_path": ["cover", "cool", "lower pressure", "hide from brightness", "make safe by dimming"],
+      "proto_neo_mapping": {
+        "primary_bias": "resistance",
+        "secondary_bias": "mutation",
+        "early_feature_map": {
+          "handshape": "relational operator",
+          "posture": "activation condition",
+          "ritual_context": "substrate requirement"
+        }
+      },
+      "surviving_taboo": "sha-cloths are never dried beside emitter gardens",
+      "story_fragment": "The hide smoked until the washer knelt with it."
+    },
+    {
+      "root_id": "root_la_001",
+      "proto_sound": "la",
+      "phonogestural_contour": {
+        "breath_shape": "open sung breath",
+        "vowel_movement": "ia",
+        "consonant_transition": "l-y",
+        "hand_enactment": "hand lifts beside the ear",
+        "posture_enactment": "torso turns toward the answer"
+      },
+      "original_pressure": "calling through open air / locating kin",
+      "first_context": "children using a sung call to find one another in tall reed fields",
+      "gesture": "hand lifted beside the ear",
+      "body_posture": "torso turned toward the answer",
+      "danger_if_wrong": "predators hear, kin move toward danger, echo confuses direction",
+      "world_response": "sung intervals travel farther and mark direction better than speech",
+      "social_role_carriers": ["parent", "hunter", "carrier"],
+      "semantic_drift_path": ["call", "answer", "kin sound", "song path", "public name"],
+      "proto_neo_mapping": {
+        "primary_bias": "flow",
+        "secondary_bias": "binding",
+        "early_feature_map": {
+          "voice_root": "glyph identity or phonetic residue",
+          "sequence": "inscription order",
+          "story_residue": "rune history"
+        }
+      },
+      "surviving_taboo": "la calls are shortened near hunting grounds",
+      "story_fragment": "The reeds answered before the child did."
+    },
+    {
+      "root_id": "root_bri_001",
+      "proto_sound": "bri",
+      "phonogestural_contour": {
+        "breath_shape": "shared braced pulse",
+        "vowel_movement": "i",
+        "consonant_transition": "b-r",
+        "hand_enactment": "forearm thrusts in a short arc",
+        "posture_enactment": "feet brace while the chest moves forward"
+      },
+      "original_pressure": "drive forward together",
+      "first_context": "hunters flushing a horned animal away from a crystal marsh",
+      "gesture": "forearm thrust in a short arc",
+      "body_posture": "feet braced, chest forward",
+      "danger_if_wrong": "animal turns, marsh ignites, hunters scatter",
+      "world_response": "shared rhythm keeps the drive line coherent",
+      "social_role_carriers": ["hunter", "carrier"],
+      "semantic_drift_path": ["push together", "drive game", "coordinated strike", "war shout", "collective command"],
+      "proto_neo_mapping": {
+        "primary_bias": "action",
+        "secondary_bias": "binding",
+        "early_feature_map": {
+          "voice_root": "phonetic residue",
+          "repetition": "mark-count magnitude",
+          "sequence": "inscription order"
+        }
+      },
+      "surviving_taboo": "bri is not called by a lone hunter",
+      "story_fragment": "One voice scattered them; four voices turned the horns."
+    },
+    {
+      "root_id": "root_nu_001",
+      "proto_sound": "nu",
+      "phonogestural_contour": {
+        "breath_shape": "held breath released through the nose",
+        "vowel_movement": "u",
+        "consonant_transition": "n",
+        "hand_enactment": "two fingers press inward and up",
+        "posture_enactment": "body holds, then releases"
+      },
+      "original_pressure": "closing flesh / wet binding",
+      "first_context": "packing river moss against a cut that would not clot",
+      "gesture": "two fingers pressing inward and up",
+      "body_posture": "breath held briefly, then released",
+      "danger_if_wrong": "blood pulls open, moss drinks too much, fever follows",
+      "world_response": "pressure and release help the wound field settle",
+      "social_role_carriers": ["healer", "washer"],
+      "semantic_drift_path": ["press wound", "close flesh", "bind wetly", "restore body", "mercy act"],
+      "proto_neo_mapping": {
+        "primary_bias": "binding",
+        "secondary_bias": "flow",
+        "early_feature_map": {
+          "handshape": "relational operator",
+          "breath": "activation condition",
+          "ritual_context": "substrate requirement"
+        }
+      },
+      "surviving_taboo": "nu is not sung after death, only before the body cools",
+      "story_fragment": "The moss drank red, then green, then nothing."
+    },
+    {
+      "root_id": "root_thae_001",
+      "proto_sound": "thae",
+      "phonogestural_contour": {
+        "breath_shape": "thin breath held at the teeth",
+        "vowel_movement": "ae",
+        "consonant_transition": "th",
+        "hand_enactment": "two fingers hover at the lip before turning away",
+        "posture_enactment": "face holds at the edge before the body withdraws"
+      },
+      "original_pressure": "threshold heat / dangerous remainder",
+      "first_context": "gray heat from emitter-burns still warming after the flame had gone",
+      "gesture": "two fingers held near the mouth, then turned from gray powder",
+      "body_posture": "face held at the edge, weight already withdrawing",
+      "danger_if_wrong": "false cold, sleeper burns, dust cough, threshold bite",
+      "world_response": "tongue-teeth restraint and delayed touch mark the powder as not yet safe",
+      "social_role_carriers": ["washer", "parent", "threshold_keeper"],
+      "semantic_drift_path": ["not yet safe", "spent but dangerous", "threshold remainder", "hidden consequence", "old harm"],
+      "proto_neo_mapping": {
+        "primary_bias": "mutation",
+        "secondary_bias": "resistance",
+        "early_feature_map": {
+          "gesture": "relational operator",
+          "posture": "activation condition",
+          "voice_root": "phonetic residue",
+          "taboo": "constraint rule"
+        }
+      },
+      "surviving_taboo": "children do not touch thae-dust before morning light",
+      "story_fragment": "The fire was gone, but the gray held its teeth."
+    },
+    {
+      "root_id": "root_pae_001",
+      "proto_sound": "pae",
+      "phonogestural_contour": {
+        "breath_shape": "parted-lip breath held open",
+        "vowel_movement": "ae",
+        "consonant_transition": "p",
+        "hand_enactment": "palm turns from vertical into inward passage",
+        "posture_enactment": "one shoulder leads while the eyes lower"
+      },
+      "original_pressure": "threshold / held opening",
+      "first_context": "a stone slit that opened safely only when approached from the side",
+      "gesture": "palm vertical, then turned inward",
+      "body_posture": "one shoulder leading, eyes lowered",
+      "danger_if_wrong": "pressure snap, lost time, crushed hand",
+      "world_response": "side approach keeps the threshold from closing violently",
+      "social_role_carriers": ["threshold_keeper", "cave_guide"],
+      "semantic_drift_path": ["side opening", "safe entry", "threshold rule", "permitted passage", "formal gate"],
+      "proto_neo_mapping": {
+        "primary_bias": "binding",
+        "secondary_bias": "flow",
+        "early_feature_map": {
+          "body_orientation": "glyph orientation",
+          "handshape": "relational operator",
+          "taboo": "constraint rule"
+        }
+      },
+      "surviving_taboo": "pae is not spoken from directly before a threshold",
+      "story_fragment": "The first passage was not forced; it was spared from closing."
+    },
+    {
+      "root_id": "root_sil_001",
+      "proto_sound": "sil",
+      "phonogestural_contour": {
+        "breath_shape": "unvoiced held breath",
+        "vowel_movement": "i",
+        "consonant_transition": "s-l",
+        "hand_enactment": "fingertips rest lightly at the throat",
+        "posture_enactment": "chin tucks as the feet settle parallel"
+      },
+      "original_pressure": "listening silence / waiting for the place",
+      "first_context": "standing still until a memory cave finished answering",
+      "gesture": "fingertips held lightly to the throat",
+      "body_posture": "chin tucked, feet parallel",
+      "danger_if_wrong": "interrupted echo, false omen, panic",
+      "world_response": "unvoiced waiting lets the cave response decay safely",
+      "social_role_carriers": ["listener", "hush_keeper"],
+      "semantic_drift_path": ["listen without sound", "wait for answer", "defer action", "respectful pause", "judicial silence"],
+      "proto_neo_mapping": {
+        "primary_bias": "resistance",
+        "secondary_bias": "flow",
+        "early_feature_map": {
+          "voice_root": "phonetic residue",
+          "posture": "activation condition",
+          "sequence": "inscription order"
+        }
+      },
+      "surviving_taboo": "sil must follow any question asked in a memory cave",
+      "story_fragment": "The cave was still speaking after the people thought it had stopped."
+    },
+    {
+      "root_id": "root_druo_001",
+      "proto_sound": "druo",
+      "phonogestural_contour": {
+        "breath_shape": "rolled breath after impact",
+        "vowel_movement": "uo",
+        "consonant_transition": "dr",
+        "hand_enactment": "wrist turns through the end of the blow",
+        "posture_enactment": "hips stay square while the elbow loosens"
+      },
+      "original_pressure": "correct striking / work rhythm",
+      "first_context": "hammering crystalline metal without waking a fracture line",
+      "gesture": "wrist turned after the blow",
+      "body_posture": "hips square, elbow loose",
+      "danger_if_wrong": "metal shrieks, tool snaps, sleeping crack runs",
+      "world_response": "turned wrist changes the ring and keeps the crack asleep",
+      "social_role_carriers": ["metal_sorter", "cutter"],
+      "semantic_drift_path": ["strike correctly", "work rhythm", "craft discipline", "maker's law", "authorized tool"],
+      "proto_neo_mapping": {
+        "primary_bias": "action",
+        "secondary_bias": "resistance",
+        "early_feature_map": {
+          "gesture": "relational operator",
+          "repetition": "mark-count magnitude",
+          "ritual_context": "substrate requirement"
+        }
+      },
+      "surviving_taboo": "druo rhythms are not taught before a child can hear false ringing",
+      "story_fragment": "The wrong hammer made the metal scream like a throat."
+    },
+    {
+      "root_id": "root_mea_001",
+      "proto_sound": "mea",
+      "phonogestural_contour": {
+        "breath_shape": "soft breath held near the lips",
+        "vowel_movement": "ea",
+        "consonant_transition": "m",
+        "hand_enactment": "two fingers trace the brow without touching",
+        "posture_enactment": "head tilts toward the stone without leaning in"
+      },
+      "original_pressure": "remembered face / held likeness",
+      "first_context": "a memory gem keeping the outline of a lost person's expression",
+      "gesture": "two fingers tracing the brow without touching",
+      "body_posture": "head tilted toward the stone",
+      "danger_if_wrong": "borrowed grief, face confusion, memory fixation",
+      "world_response": "near-touch lets the image surface without fastening to the viewer",
+      "social_role_carriers": ["rememberer", "listener"],
+      "semantic_drift_path": ["face remembered", "likeness", "beloved trace", "true account", "archive name"],
+      "proto_neo_mapping": {
+        "primary_bias": "binding",
+        "secondary_bias": "resistance",
+        "early_feature_map": {
+          "handshape": "relational operator",
+          "distance_from_body": "activation condition",
+          "story_residue": "rune history"
+        }
+      },
+      "surviving_taboo": "mea stones are veiled during childbirth",
+      "story_fragment": "The stone remembered the brow, but not the breath."
+    },
+    {
+      "root_id": "root_fai_001",
+      "proto_sound": "fai",
+      "phonogestural_contour": {
+        "breath_shape": "uncertain breath that delays closure",
+        "vowel_movement": "ai",
+        "consonant_transition": "f",
+        "hand_enactment": "hand wavers before choosing a line",
+        "posture_enactment": "weight remains between both feet"
+      },
+      "original_pressure": "mist path / uncertain passage",
+      "first_context": "a fogged ravine where the shortest path changed after rain",
+      "gesture": "hand wavering before choosing a line",
+      "body_posture": "weight kept between both feet",
+      "danger_if_wrong": "wrong ledge, time-loss, return to starting stone",
+      "world_response": "hesitation lets the ravine show the safer condensation line",
+      "social_role_carriers": ["cave_guide", "carrier"],
+      "semantic_drift_path": ["wait for path", "mist choice", "uncertain crossing", "trial passage", "unfixed road"],
+      "proto_neo_mapping": {
+        "primary_bias": "flow",
+        "secondary_bias": "mutation",
+        "early_feature_map": {
+          "gesture": "relational operator",
+          "body_orientation": "glyph orientation",
+          "place_memory": "closure basin"
+        }
+      },
+      "surviving_taboo": "fai paths are not counted aloud until crossed",
+      "story_fragment": "The ravine disliked certainty."
+    },
+    {
+      "root_id": "root_gan_001",
+      "proto_sound": "gan",
+      "phonogestural_contour": {
+        "breath_shape": "grounded breath held in the chest",
+        "vowel_movement": "oa",
+        "consonant_transition": "g-n",
+        "hand_enactment": "knuckles touch the shared stone",
+        "posture_enactment": "forehead nears the hand before action"
+      },
+      "original_pressure": "oath before action",
+      "first_context": "hunters binding themselves not to drive animals into a nesting hollow",
+      "gesture": "knuckles touched to shared stone",
+      "body_posture": "forehead near the hand",
+      "danger_if_wrong": "nest rage, broken hunt, hollow sickness",
+      "world_response": "shared contact makes the vow carry through the hunting line",
+      "social_role_carriers": ["hunter", "rememberer"],
+      "semantic_drift_path": ["promise before strike", "bound action", "group restraint", "lawful hunt", "sworn office"],
+      "proto_neo_mapping": {
+        "primary_bias": "binding",
+        "secondary_bias": "action",
+        "early_feature_map": {
+          "handshape": "relational operator",
+          "posture": "activation condition",
+          "taboo": "constraint rule"
+        }
+      },
+      "surviving_taboo": "gan is void if spoken after the first blow",
+      "story_fragment": "The hollow spared those who touched the stone before raising spears."
+    },
+    {
+      "root_id": "root_ru_001",
+      "proto_sound": "ru",
+      "phonogestural_contour": {
+        "breath_shape": "short breath split by caution",
+        "vowel_movement": "ou",
+        "consonant_transition": "r",
+        "hand_enactment": "two fingers split apart",
+        "posture_enactment": "step shortens while the eyes lower"
+      },
+      "original_pressure": "broken place / returning danger",
+      "first_context": "a cracked garden path that reopened old injuries when crossed quickly",
+      "gesture": "two fingers split apart",
+      "body_posture": "step shortened, eyes on the ground",
+      "danger_if_wrong": "old pain returns, path widens, ankle turns",
+      "world_response": "slow split-gesture acknowledges the break and lowers recurrence",
+      "social_role_carriers": ["root_tender", "healer"],
+      "semantic_drift_path": ["split path", "old wound in place", "ruin warning", "unhealed history", "fracture district"],
+      "proto_neo_mapping": {
+        "primary_bias": "mutation",
+        "secondary_bias": "binding",
+        "early_feature_map": {
+          "place_memory": "closure basin",
+          "gesture": "relational operator",
+          "story_residue": "rune history"
+        }
+      },
+      "surviving_taboo": "ru places are crossed in pairs when carrying children",
+      "story_fragment": "The path remembered the broken ankle better than the child did."
+    },
+    {
+      "root_id": "root_eli_001",
+      "proto_sound": "eli",
+      "phonogestural_contour": {
+        "breath_shape": "clear breath over moving water",
+        "vowel_movement": "ei",
+        "consonant_transition": "l",
+        "hand_enactment": "fingers comb downward through liquid",
+        "posture_enactment": "spine bends over flow without collapsing"
+      },
+      "original_pressure": "washing clear / separating mixed matter",
+      "first_context": "rinsing ore dust until the dangerous shine left the water",
+      "gesture": "fingers combing downward through liquid",
+      "body_posture": "spine bent over running water",
+      "danger_if_wrong": "poisoned slurry, false purity, brittle metal",
+      "world_response": "repeated washing carries unstable dust away from the ore",
+      "social_role_carriers": ["washer", "metal_sorter"],
+      "semantic_drift_path": ["rinse", "clear water", "separate danger", "purify work", "honest preparation"],
+      "proto_neo_mapping": {
+        "primary_bias": "flow",
+        "secondary_bias": "resistance",
+        "early_feature_map": {
+          "repetition": "mark-count magnitude",
+          "sequence": "inscription order",
+          "ritual_context": "substrate requirement"
+        }
+      },
+      "surviving_taboo": "eli water is not returned upstream",
+      "story_fragment": "The shine left the bowl last, and that was how they knew the ore would hold."
+    },
+    {
+      "root_id": "root_zai_001",
+      "proto_sound": "zai",
+      "phonogestural_contour": {
+        "breath_shape": "voiced hiss held behind the teeth",
+        "vowel_movement": "ai",
+        "consonant_transition": "z",
+        "hand_enactment": "two fingers hover at the throat while the palm warns outward",
+        "posture_enactment": "chin stays low while the chest hums"
+      },
+      "original_pressure": "alarm-hum / pressure heard before speech",
+      "first_context": "a wall of thin crystals buzzing before a cave shelf gave way",
+      "gesture": "two fingers at the throat, palm held outward",
+      "body_posture": "chin low, chest held still",
+      "danger_if_wrong": "shelf fall, panic shout, crystal rain",
+      "world_response": "low buzz warns the group without striking the crystal field",
+      "social_role_carriers": ["listener", "cave_guide", "hush_keeper"],
+      "semantic_drift_path": ["buzz warning", "heard pressure", "do not speak yet", "alarm before collapse", "caution sign"],
+      "proto_neo_mapping": {
+        "primary_bias": "resistance",
+        "secondary_bias": "action",
+        "early_feature_map": {
+          "voice_root": "phonetic residue",
+          "breath": "activation condition",
+          "body_orientation": "glyph orientation",
+          "taboo": "constraint rule"
+        }
+      },
+      "surviving_taboo": "zai is hummed, not shouted, near thin crystal shelves",
+      "story_fragment": "The wall sang before it fell, and the quiet ones lived."
+    },
+    {
+      "root_id": "root_zun_001",
+      "proto_sound": "zun",
+      "phonogestural_contour": {
+        "breath_shape": "deep buzz closed into the nose",
+        "vowel_movement": "u",
+        "consonant_transition": "z-n",
+        "hand_enactment": "fingers close over the lips, then press inward",
+        "posture_enactment": "body folds around a sound that should not leave"
+      },
+      "original_pressure": "kept warning / internal alarm",
+      "first_context": "guarding a sleeping child while predator calls moved outside the reed wall",
+      "gesture": "fingers sealed over the mouth, then pressed inward",
+      "body_posture": "shoulders folded, breath held in the nose",
+      "danger_if_wrong": "predator hears, child wakes, warning spreads too late",
+      "world_response": "voiced nasal buzz carries warning only through touch and close bodies",
+      "social_role_carriers": ["parent", "hunter", "listener"],
+      "semantic_drift_path": ["hidden warning", "keep alarm inside", "guard silently", "private danger", "unspoken alert"],
+      "proto_neo_mapping": {
+        "primary_bias": "resistance",
+        "secondary_bias": "binding",
+        "early_feature_map": {
+          "voice_root": "phonetic residue",
+          "handshape": "relational operator",
+          "distance_from_body": "activation condition",
+          "taboo": "constraint rule"
+        }
+      },
+      "surviving_taboo": "zun is not used in open fields because hidden warnings become suspicion there",
+      "story_fragment": "The child slept through the danger because the warning stayed in the bodies around her."
+    },
+    {
+      "root_id": "root_dhae_001",
+      "proto_sound": "dhae",
+      "phonogestural_contour": {
+        "breath_shape": "voiced threshold breath pressed through the teeth",
+        "vowel_movement": "ae",
+        "consonant_transition": "dh",
+        "hand_enactment": "thumb touches the tooth line, then points to the boundary",
+        "posture_enactment": "feet stop before the line while the chest remains voiced"
+      },
+      "original_pressure": "oath at a named limit",
+      "first_context": "marking the edge where hunters swore not to cross into a nesting hollow",
+      "gesture": "thumb to teeth, then toward the boundary stone",
+      "body_posture": "feet stopped, chest held open",
+      "danger_if_wrong": "oath breaks, hollow sickness, nest rage",
+      "world_response": "voiced threshold-sound makes the limit socially and materially audible",
+      "social_role_carriers": ["hunter", "rememberer", "threshold_keeper"],
+      "semantic_drift_path": ["named edge", "sworn boundary", "limit that hears", "oath line", "lawful refusal"],
+      "proto_neo_mapping": {
+        "primary_bias": "resistance",
+        "secondary_bias": "binding",
+        "early_feature_map": {
+          "voice_root": "phonetic residue",
+          "body_orientation": "glyph orientation",
+          "taboo": "constraint rule",
+          "story_residue": "rune history"
+        }
+      },
+      "surviving_taboo": "dhae cannot be spoken while stepping over the named line",
+      "story_fragment": "The oath held because the mouth stopped before the feet did."
+    },
+    {
+      "root_id": "root_thol_001",
+      "proto_sound": "thol",
+      "phonogestural_contour": {
+        "breath_shape": "thin threshold breath released sideways",
+        "vowel_movement": "oa",
+        "consonant_transition": "th-l",
+        "hand_enactment": "flat hand marks a line, then slides along it",
+        "posture_enactment": "body turns parallel to the edge instead of crossing"
+      },
+      "original_pressure": "tested edge / safe along but not through",
+      "first_context": "walking beside a bright seam that burned anyone who crossed it directly",
+      "gesture": "flat hand traced along the seam",
+      "body_posture": "shoulders turned parallel to the edge",
+      "danger_if_wrong": "seam burn, lost path, false permission",
+      "world_response": "sideways threshold posture lets people travel along danger without entering it",
+      "social_role_carriers": ["cave_guide", "threshold_keeper"],
+      "semantic_drift_path": ["walk the edge", "test without crossing", "parallel passage", "safe border", "edgecraft"],
+      "proto_neo_mapping": {
+        "primary_bias": "flow",
+        "secondary_bias": "resistance",
+        "early_feature_map": {
+          "body_orientation": "glyph orientation",
+          "handshape": "relational operator",
+          "place_memory": "closure basin",
+          "sequence": "inscription order"
+        }
+      },
+      "surviving_taboo": "thol is not said from the far side of an edge",
+      "story_fragment": "They learned the seam by walking beside it for three days."
+    },
+    {
+      "root_id": "root_cha_001",
+      "proto_sound": "cha",
+      "phonogestural_contour": {
+        "breath_shape": "short scrape released from closure",
+        "vowel_movement": "a",
+        "consonant_transition": "ch",
+        "hand_enactment": "fingernail scrapes a stone, then snaps away",
+        "posture_enactment": "shoulder jerks back after the release"
+      },
+      "original_pressure": "spark-change / released scrape",
+      "first_context": "a brittle emitter shard sparking only when scratched and immediately released",
+      "gesture": "nail scrape followed by a quick withdrawal",
+      "body_posture": "shoulder pulled back from the shard",
+      "danger_if_wrong": "spark bite, shard chatter, fire jump",
+      "world_response": "short release prevents the scrape from becoming a sustained flare",
+      "social_role_carriers": ["cutter", "metal_sorter"],
+      "semantic_drift_path": ["scrape spark", "release danger", "short change", "trigger safely", "spark sign"],
+      "proto_neo_mapping": {
+        "primary_bias": "mutation",
+        "secondary_bias": "action",
+        "early_feature_map": {
+          "gesture": "relational operator",
+          "repetition": "mark-count magnitude",
+          "body_orientation": "glyph orientation",
+          "ritual_context": "substrate requirement"
+        }
+      },
+      "surviving_taboo": "cha scratches are made once, never worried back and forth",
+      "story_fragment": "The safe spark was the one that was not asked twice."
+    },
+    {
+      "root_id": "root_chu_001",
+      "proto_sound": "chu",
+      "phonogestural_contour": {
+        "breath_shape": "closed scrape dropping into a deep vowel",
+        "vowel_movement": "ui",
+        "consonant_transition": "ch",
+        "hand_enactment": "closed fingers scrape downward into the palm",
+        "posture_enactment": "body lowers after a sharp release"
+      },
+      "original_pressure": "dropped danger / released pressure into depth",
+      "first_context": "lowering a hot shard into wet clay so the flare died downward",
+      "gesture": "closed fingers scraped down into the palm",
+      "body_posture": "knees bent as the danger was lowered",
+      "danger_if_wrong": "upward flare, clay burst, face burn",
+      "world_response": "downward scrape and deep vowel carry the flare into clay rather than air",
+      "social_role_carriers": ["washer", "cutter", "root_tender"],
+      "semantic_drift_path": ["drop the flare", "release downward", "cool by descent", "settle danger", "buried change"],
+      "proto_neo_mapping": {
+        "primary_bias": "mutation",
+        "secondary_bias": "flow",
+        "early_feature_map": {
+          "gesture": "relational operator",
+          "posture": "activation condition",
+          "ritual_context": "substrate requirement",
+          "sequence": "inscription order"
+        }
+      },
+      "surviving_taboo": "chu is not spoken while lifting a heated shard",
+      "story_fragment": "The clay swallowed the flare because the hands taught it downward."
+    },
+    {
+      "root_id": "root_hu_001",
+      "proto_sound": "hu",
+      "phonogestural_contour": {
+        "breath_shape": "forced vent from the lower chest",
+        "vowel_movement": "u",
+        "consonant_transition": "h",
+        "hand_enactment": "palm opens from the sternum and pushes breath down",
+        "posture_enactment": "knees bend as the chest empties"
+      },
+      "original_pressure": "vent grief / release pressure without speech",
+      "first_context": "mourners standing beside a sealed hollow when names could not be spoken",
+      "gesture": "palm pressed at the sternum, then opened downward",
+      "body_posture": "knees bent, chest emptied",
+      "danger_if_wrong": "name echo, choking grief, hollow answers too soon",
+      "world_response": "forced venting releases grief-pressure without calling the dead voice back",
+      "social_role_carriers": ["rememberer", "hush_keeper", "healer"],
+      "semantic_drift_path": ["vent grief", "empty the chest", "release without name", "safe mourning", "breath offering"],
+      "proto_neo_mapping": {
+        "primary_bias": "resistance",
+        "secondary_bias": "flow",
+        "early_feature_map": {
+          "breath": "activation condition",
+          "posture": "activation condition",
+          "ritual_context": "substrate requirement",
+          "taboo": "constraint rule"
+        }
+      },
+      "surviving_taboo": "hu is used where names cannot be spoken after burial",
+      "story_fragment": "They gave the hollow breath instead of a name."
+    },
+    {
+      "root_id": "root_hea_001",
+      "proto_sound": "hea",
+      "phonogestural_contour": {
+        "breath_shape": "open breath held long at the mouth",
+        "vowel_movement": "ea",
+        "consonant_transition": "h",
+        "hand_enactment": "open palm waits before the lips without touching",
+        "posture_enactment": "head stays lifted but the throat remains open"
+      },
+      "original_pressure": "held breath before answer",
+      "first_context": "waiting for a memory gem to finish showing a face before anyone spoke",
+      "gesture": "open palm held before the lips",
+      "body_posture": "head lifted, throat open",
+      "danger_if_wrong": "answer breaks, face blurs, memory fixes to the speaker",
+      "world_response": "held open breath lets the image finish without being claimed",
+      "social_role_carriers": ["listener", "rememberer", "parent"],
+      "semantic_drift_path": ["hold breath open", "wait for answer", "do not claim the image", "gentle witness", "patient regard"],
+      "proto_neo_mapping": {
+        "primary_bias": "resistance",
+        "secondary_bias": "binding",
+        "early_feature_map": {
+          "breath": "activation condition",
+          "handshape": "relational operator",
+          "distance_from_body": "activation condition",
+          "story_residue": "rune history"
+        }
+      },
+      "surviving_taboo": "hea is broken if the witness reaches for the image",
+      "story_fragment": "The face stayed whole because no one took it too soon."
+    }
+  ]
+}
